@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lines Game</title>
+    <style>
+        :root {
+            --primary-color: #2a4365;
+            --secondary-color: #3182ce;
+            --accent-color: #4299e1;
+            --background-color: #f7fafc;
+            --text-color: #2d3748;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: transparent;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        #game-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: var(--background-color);
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            text-align: center;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        #game-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        h1 {
+            font-size: 1.3rem;
+            margin: 5px 0;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        #board {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 2px;
+            margin: 5px auto;
+            width: 100%;
+            max-width: min(350px, 80vw);
+            aspect-ratio: 1;
+            background-color: var(--border-color);
+            padding: 2px;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px var(--shadow-color);
+        }
+
+        .cell {
+            aspect-ratio: 1;
+            width: 100%;
+            background-color: white;
+            cursor: pointer;
+            position: relative;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        .cell:hover {
+            background-color: #f0f4f8;
+        }
+
+        .ball {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            height: 85%;
+            border-radius: 50%;
+            opacity: 0.9;
+            box-shadow: 0 2px 4px var(--shadow-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .ball:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        /* Обновленные цвета шаров */
+        .red { background: linear-gradient(135deg, #ff6b6b, #ff4757); }
+        .green { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .blue { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .yellow { background: linear-gradient(135deg, #f1c40f, #f39c12); }
+        .purple { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+
+        #controls {
+            margin-top: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 5px;
+        }
+
+        #new-game-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #new-game-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px var(--shadow-color);
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+
+        #new-game-button:active {
+            transform: translateY(0);
+        }
+
+        #lines-removed-label {
+            font-size: 14px;
+            padding: 4px 10px;
+        }
+
+        @media (max-height: 500px) {
+            h1 {
+                font-size: 1rem;
+                margin: 2px 0;
+            }
+            
+            .score-panel {
+                margin: 2px 0;
+                padding: 2px 5px;
+            }
+            
+            .score-item {
+                padding: 2px 5px;
+                font-size: 0.8rem;
+            }
+            
+            #board {
+                max-width: min(300px, 80vw);
+                margin: 3px auto;
+            }
+            
+            #controls {
+                margin-top: 3px;
+            }
+            
+            #new-game-button {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+            
+            #lines-removed-label {
+                font-size: 12px;
+                padding: 3px 8px;
+            }
+        }
+
+        /* Добавляем стили для системы очков и бонусов */
+        .score-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0;
+            padding: 5px 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px var(--shadow-color);
+        }
+
+        .score-item {
+            text-align: center;
+            padding: 3px 8px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .bonus-ball {
+            animation: pulse 1.5s infinite;
+        }
+
+        .combo-text {
+            position: absolute;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.2em;
+            animation: floatUp 1s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-30px); opacity: 0; }
+        }
+
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+            width: 85%;
+            max-width: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .game-over h2 {
+            font-size: 1.5rem;
+            margin: 0 0 15px 0;
+        }
+
+        #restart-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            margin-top: 15px;
+        }
+
+        #restart-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-height: 480px) {
+            .game-over h2 {
+                font-size: 1.2rem;
+                margin: 0 0 10px 0;
+            }
+            
+            .game-over p {
+                margin: 5px 0;
+            }
+            
+            #restart-button {
+                padding: 5px 15px;
+                font-size: 14px;
+                margin-top: 10px;
+            }
+        }
+
+        .high-score {
+            color: gold;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <h1>Игра в линии</h1>
+    <div class="score-panel">
+        <div class="score-item">Очки: <span id="score">0</span></div>
+        <div class="score-item">Рекорд: <span id="high-score">0</span></div>
+        <div class="score-item">Комбо: <span id="combo">x1</span></div>
+    </div>
+    <div id="board"></div>
+    <div id="controls">
+        <button id="new-game-button">Новая игра</button>
+        <label id="lines-removed-label">Удалено линий: <span id="lines-removed-count">0</span></label>
+    </div>
+    <div class="game-over" id="gameOver">
+        <h2>Игра окончена!</h2>
+        <p>Ваш счет: <span id="final-score">0</span></p>
+        <p class="high-score">Рекорд: <span id="final-high-score">0</span></p>
+        <button id="restart-button" style="margin-top: 10px;">Играть снова</button>
+    </div>
+</div>
+
+<script>
+    const board = document.getElementById('board');
+    const newGameButton = document.getElementById('new-game-button');
+    const linesRemovedCountSpan = document.getElementById('lines-removed-count');
+    let linesRemoved = 0;
+
+    const colors = ['red', 'green', 'blue', 'yellow', 'purple'];
+    let grid = [];  // Represents the game board (2D array)
+    let selectedBall = null; // The ball currently selected by the player
+
+    let score = 0;
+    let highScore = localStorage.getItem('highScore') || 0;
+    let comboMultiplier = 1;
+    let lastMoveTime = Date.now();
+    const COMBO_TIMEOUT = 5000; // 5 секунд для поддержания комбо
+
+    function createBoard() {
+        for (let i = 0; i < 10; i++) {
+            grid[i] = [];
+            for (let j = 0; j < 10; j++) {
+                grid[i][j] = null;
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.dataset.row = i;
+                cell.dataset.col = j;
+                cell.addEventListener('click', handleCellClick);
+                board.appendChild(cell);
+            }
+        }
+    }
+
+
+    function getRandomEmptyCell() {
+        let row, col;
+        do {
+            row = Math.floor(Math.random() * 10);
+            col = Math.floor(Math.random() * 10);
+        } while (grid[row][col] !== null); // Find an empty cell
+
+        return { row, col };
+    }
+
+    function placeRandomBall() {
+        const { row, col } = getRandomEmptyCell();
+        const colorIndex = Math.floor(Math.random() * colors.length);
+        const color = colors[colorIndex];
+
+        const ball = document.createElement('div');
+		ball.dataset.row = row;
+		ball.dataset.col = col;
+        ball.classList.add('ball', color);
+        const cell = board.children[row * 10 + col];
+        cell.appendChild(ball);
+        grid[row][col] = { color: color, element: ball };  // Store the ball's info in grid
+    }
+
+    function handleCellClick(event) {
+        const row = parseInt(event.target.dataset.row);
+        const col = parseInt(event.target.dataset.col);
+
+        if (grid[row][col] === null) { // Clicked on an empty cell - potential destination
+            if (selectedBall) {
+                moveSelectedBall(row, col);
+            } else {
+                // No ball selected!
+                console.log("No ball selected");
+            }
+        } else { // Clicked on a ball - select it
+            selectBall(row, col);
+        }
+    }
+
+    function selectBall(row, col) {
+        if (selectedBall) {
+            deselectBall();
+        }
+
+        selectedBall = { row, col };
+        startAnimation(selectedBall.row, selectedBall.col);
+
+    }
+
+
+    function deselectBall() {
+        stopAnimation(selectedBall.row, selectedBall.col);
+        selectedBall = null;
+    }
+
+    let animationTimers = {};
+
+    function startAnimation(row, col) {
+        const ballElement = grid[row][col].element;
+        let angle = 0;  // Start angle for sine wave
+        animationTimers[`${row}-${col}`] = setInterval(() => {
+            angle += 0.1;
+            const brightness = Math.sin(angle) + 1; // Scale to 0-2
+            const sizeScale = 1 + Math.abs(Math.sin(angle)) * 0.2; // Vary size slightly
+
+            ballElement.style.opacity = brightness / 2 ;
+            ballElement.style.transform = `translate(-50%, -50%) scale(${sizeScale})`;
+        }, 30);
+    }
+
+    function stopAnimation(row, col) {
+      clearInterval(animationTimers[`${row}-${col}`]);
+       const ballElement = grid[row][col].element;
+        ballElement.style.opacity = 0.8;
+        ballElement.style.transform = `translate(-50%, -50%) scale(1)`;
+
+    }
+
+    // Pathfinding function (simple Manhattan distance)
+   function findPath(startRow, startCol, endRow, endCol) {
+        const queue = [[startRow, startCol, []]]; // [row, col, path]
+        const visited = new Set();
+
+        while (queue.length > 0) {
+            const [currentRow, currentCol, path] = queue.shift();
+
+            if (currentRow === endRow && currentCol === endCol) {
+                return path.concat([[endRow, endCol]]);
+            }
+
+            visited.add(`${currentRow}-${currentCol}`);
+
+            // Possible moves: up, down, left, right
+            const moves = [
+                [currentRow - 1, currentCol], // Up
+                [currentRow + 1, currentCol], // Down
+                [currentRow, currentCol - 1], // Left
+                [currentRow, currentCol + 1]  // Right
+            ];
+
+            for (const [nextRow, nextCol] of moves) {
+                if (
+                    nextRow >= 0 && nextRow < 10 &&
+                    nextCol >= 0 && nextCol < 10 &&
+                    grid[nextRow][nextCol] === null && // Check if cell is empty
+                    !visited.has(`${nextRow}-${nextCol}`)
+                ) {
+                    queue.push([nextRow, nextCol, path.concat([[currentRow, currentCol]])]);
+                }
+            }
+        }
+
+        return null; // No path found
+    }
+	
+
+    async function moveSelectedBall(newRow, newCol) {
+        if (grid[newRow][newCol] !== null) return;
+
+        const oldRow = selectedBall.row;
+        const oldCol = selectedBall.col;
+        const ballElement = grid[oldRow][oldCol].element;
+        const color = grid[oldRow][oldCol].color;
+        const isBonus = grid[oldRow][oldCol].bonus;
+
+        const path = findPath(oldRow, oldCol, newRow, newCol);
+        if (!path) {
+            console.log("No valid path found.");
+            return;
+        }
+
+        deselectBall();
+        
+        // Анимация движения
+        for (let i = 1; i < path.length; i++) {
+            await delay(50);
+            const [nextRow, nextCol] = path[i];
+            const cellToMoveTo = board.children[nextRow * 10 + nextCol];
+            cellToMoveTo.appendChild(ballElement);
+            grid[nextRow][nextCol] = { color: color, element: ballElement, bonus: isBonus };
+            grid[path[i-1][0]][path[i-1][1]] = null;
+        }
+
+        grid[oldRow][oldCol] = null;
+        
+        const linesRemoved = checkLines();
+        if (linesRemoved > 0) {
+            addScore(linesRemoved * 100); // Базовые очки за линию
+            if (isBonus) addScore(500); // Дополнительные очки за бонусный шар
+        }
+
+        if (!checkGameOver()) {
+            placeRandomBall();
+            createBonusBall();
+        }
+    }
+
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+
+    function checkLines() {
+        // Check horizontal lines
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j <= 7; j++) {
+				if (grid[i][j])	{
+					let count = 1;
+					for (let k = j+1; k < 10; k++) {
+
+						if (grid[i][k] && grid[i][j].color === grid[i][k].color)	{
+							count ++;
+						}
+						else{
+							break;
+						}
+					}
+
+					if (count >= 5){
+						removeLine(i, j, 'horizontal', count);
+						break;
+					}
+				}
+            }
+        }
+        // Check vertical lines
+        for (let j = 0; j < 10; j++) {
+            for (let i = 0; i <= 7; i++) {
+				if (grid[i][j])	{
+					let count = 1;
+					for (let k = i+1; k < 10; k++) {
+
+						if (grid[k][j] && grid[i][j].color === grid[k][j].color)	{
+							count ++;
+						}
+						else{
+							break;
+						}
+					}
+
+					if (count >= 5){
+						removeLine(i, j, 'vertical', count);
+						break;
+					}
+				}
+            }
+        }
+
+        // Check diagonal lines (top-left to bottom-right)
+        for (let i = 0; i <= 6; i++) {
+            for (let j = 0; j <= 6; j++) {
+				if (grid[i][j])	{
+					let count = 1;
+					for (let k = 1; k < 10; k++) {
+
+						if (i+k < 10 && j+k < 10 && grid[i+k][j+k] && grid[i][j].color === grid[i+k][j+k].color)	{
+							count ++;
+						}
+						else{
+							break;
+						}
+					}
+
+					if (count >= 5){
+						removeLine(i, j, 'diagonal_tlbr', count);
+						break;
+					}
+				}
+            }
+        }
+
+        // Check diagonal lines (top-right to bottom-left)
+        for (let i = 0; i <= 6; i++) {
+            for (let j = 9; j >= 4; j--) {
+				if (grid[i][j])	{
+					let count = 1;
+					for (let k = 1; k < 10; k++) {
+
+						if (i+k < 10 && j-k > 0 && grid[i+k][j-k] && grid[i][j].color === grid[i+k][j-k].color)	{
+							count ++;
+						}
+						else{
+							break;
+						}
+					}
+
+					if (count >= 5){
+						removeLine(i, j, 'diagonal_trbl', count);
+						break;
+					}
+				}
+            }
+        }
+    }
+
+
+    function removeLine(row, col, direction, count) {
+        linesRemoved++;
+        linesRemovedCountSpan.textContent = linesRemoved;
+
+        let bonusCount = 0;
+        const removeCell = (r, c) => {
+            const cell = board.children[r * 10 + c];
+            if (grid[r][c].bonus) bonusCount++;
+            cell.removeChild(cell.firstChild);
+            grid[r][c] = null;
+        };
+
+        if (direction === 'horizontal') {
+            for (let k = 0; k < count; k++) removeCell(row, col + k);
+        } else if (direction === 'vertical') {
+            for (let k = 0; k < count; k++) removeCell(row + k, col);
+        } else if (direction === 'diagonal_tlbr') {
+            for (let k = 0; k < count; k++) removeCell(row + k, col + k);
+        } else if (direction === 'diagonal_trbl') {
+            for (let k = 0; k < count; k++) removeCell(row + k, col - k);
+        }
+
+        addScore((count + bonusCount) * 100);
+    }
+
+    function updateScores() {
+        document.getElementById('score').textContent = score;
+        document.getElementById('high-score').textContent = highScore;
+        document.getElementById('combo').textContent = `x${comboMultiplier}`;
+    }
+
+    function addScore(points) {
+        const now = Date.now();
+        if (now - lastMoveTime < COMBO_TIMEOUT) {
+            comboMultiplier++;
+        } else {
+            comboMultiplier = 1;
+        }
+        lastMoveTime = now;
+        
+        const finalPoints = points * comboMultiplier;
+        score += finalPoints;
+        
+        // Показываем анимацию очков
+        const comboText = document.createElement('div');
+        comboText.className = 'combo-text';
+        comboText.textContent = `+${finalPoints}`;
+        board.appendChild(comboText);
+        setTimeout(() => comboText.remove(), 1000);
+
+        if (score > highScore) {
+            highScore = score;
+            localStorage.setItem('highScore', highScore);
+        }
+        updateScores();
+    }
+
+    function createBonusBall() {
+        if (Math.random() < 0.1) { // 10% шанс создания бонусного шара
+            const { row, col } = getRandomEmptyCell();
+            const ball = document.createElement('div');
+            ball.dataset.row = row;
+            ball.dataset.col = col;
+            ball.classList.add('ball', 'bonus-ball', colors[Math.floor(Math.random() * colors.length)]);
+            ball.dataset.bonus = true;
+            const cell = board.children[row * 10 + col];
+            cell.appendChild(ball);
+            grid[row][col] = { color: ball.classList[2], element: ball, bonus: true };
+        }
+    }
+
+    function checkGameOver() {
+        let emptyCells = 0;
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                if (grid[i][j] === null) emptyCells++;
+            }
+        }
+        
+        if (emptyCells < 3) {
+            const gameOver = document.getElementById('gameOver');
+            document.getElementById('final-score').textContent = score;
+            document.getElementById('final-high-score').textContent = highScore;
+            gameOver.style.display = 'block';
+            return true;
+        }
+        return false;
+    }
+
+    function newGame() {
+        score = 0;
+        comboMultiplier = 1;
+        linesRemoved = 0;
+        linesRemovedCountSpan.textContent = 0;
+        grid = [];
+        board.innerHTML = '';
+        document.getElementById('gameOver').style.display = 'none';
+        
+        createBoard();
+        placeRandomBall();
+        placeRandomBall();
+        updateScores();
+    }
+
+    document.getElementById('restart-button').addEventListener('click', newGame);
+    newGameButton.addEventListener('click', newGame);
+    createBoard();
+    placeRandomBall(); // Initial ball placement
+
+
+
+</script>
+
+</body>
+</html>
