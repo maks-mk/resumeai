@@ -686,11 +686,24 @@
 
         .dark-theme .skill-item, 
         .dark-theme .education-item,
-        .dark-theme .achievements-list li,
-        .dark-theme .stat-item {
+        .dark-theme .achievements-list li {
             background: #374151;
             color: var(--dark-theme-text);
             border-color: var(--dark-theme-accent);
+        }
+
+        .dark-theme .stat-item {
+            background: #374151;
+            color: var(--dark-theme-text);
+            border: 1px solid rgba(99, 179, 237, 0.3);
+        }
+
+        .dark-theme .stat-number {
+            color: var(--dark-theme-accent);
+        }
+
+        .dark-theme .stat-label {
+            color: #e2e8f0;
         }
 
         .dark-theme h2,
