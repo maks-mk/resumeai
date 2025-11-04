@@ -498,11 +498,11 @@
             top: 20px;
             right: 20px;
             display: flex;
-            gap: 20px; /* Ещё больше увеличиваем отступ между кнопками */
+            gap: 13px; /* Ещё больше увеличиваем отступ между кнопками */
             z-index: 1050;
             align-items: center;
             background: rgba(0, 0, 0, 0.4); /* Улучшаем контраст фона */
-            padding: 12px 20px; /* Увеличиваем внутренние отступы */
+            padding: 10px 10px; /* Увеличиваем внутренние отступы */
             border-radius: 30px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(5px); /* Добавляем размытие фона для современного вида */
@@ -510,8 +510,8 @@
 
         /* Стили для переработанной панели управления */
         .control-button {
-            width: 35px;
-            height: 35px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
