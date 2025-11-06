@@ -971,9 +971,16 @@
                 max-height: 98vh;
                 margin: 5px auto;
             }
-            
+
             .close-modal {
                 top: 5px;
                 right: 5px;
             }
+        }
+
+        /* Стили для кнопок контактов */
+        #contact a:hover {
+            background: rgba(255, 255, 255, 0.3) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
