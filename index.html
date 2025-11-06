@@ -490,14 +490,14 @@
             const themeToggle = document.getElementById('theme-toggle');
             const body = document.body;
             const icon = themeToggle.querySelector('i');
-            
+
             themeToggle.addEventListener('click', () => {
                 body.classList.toggle('dark-theme');
                 const isDark = body.classList.contains('dark-theme');
                 icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
             });
-            
+
             // Проверяем сохраненную тему
             if (localStorage.getItem('theme') === 'dark') {
                 body.classList.add('dark-theme');

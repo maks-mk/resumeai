@@ -333,6 +333,19 @@
 
         .dark-theme .special-project {
             background: #374151;
+            color: var(--dark-theme-text);
+        }
+
+        .dark-theme .special-project h4 {
+            color: var(--dark-theme-accent);
+        }
+
+        .dark-theme .special-project li {
+            color: var(--dark-theme-text);
+        }
+
+        .dark-theme .special-project li:before {
+            color: var(--dark-theme-accent);
         }
         
         .skill-category {
@@ -575,17 +588,21 @@
         /* Адаптивность для мобильных устройств */
         @media (max-width: 480px) {
             .control-panel {
-                padding: 8px 10px;
-                gap: 10px;
+                padding: 6px 8px;
+                gap: 8px;
             }
-            
+
             .control-button {
-                width: 40px;
-                height: 40px;
+                width: 32px;
+                height: 32px;
+            }
+
+            .control-button i {
+                font-size: 1rem;
             }
 
             .control-divider {
-                height: 20px;
+                height: 16px;
             }
         }
 
@@ -846,29 +863,29 @@
             .game-button {
                 top: 10px;
                 left: 10px;
-                width: 40px;
-                height: 40px;
+                width: 35px;
+                height: 35px;
             }
-            
+
             .game-button i {
-                font-size: 16px;
+                font-size: 14px;
             }
-            
+
             .control-panel {
                 top: 10px;
                 right: 10px;
-                padding: 8px 12px;
-                gap: 8px;
+                padding: 6px 10px;
+                gap: 6px;
             }
-            
+
             .control-button {
-                width: 33px;
-                height: 33px;
-                font-size: 14px;
+                width: 25px;
+                height: 25px;
+                font-size: 12px;
             }
-            
+
             .control-button i {
-                font-size: 16px;
+                font-size: 14px;
             }
         }
 
