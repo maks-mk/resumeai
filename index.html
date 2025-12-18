@@ -6,6 +6,7 @@
     <title>Резюме | Колесников Максим</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="chat-widget.css">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <meta name="description" content="Резюме системного администратора и DevOps инженера с 25-летним опытом работы">
     <meta property="og:title" content="Резюме | Колесников Максим">
@@ -382,7 +383,7 @@
 
     <footer>
         <div class="container">
-            <p>© <span id="currentYear"></span> Колесников Максим | Системный администратор / DevOps инженер</p>
+            <p>&copy; <span id="currentYear"></span> Колесников Максим | Системный администратор / DevOps инженер</p>
             <div class="social-links">
                 <a href="mailto:maks_k77@mail.ru" aria-label="Email"><i class="fas fa-envelope"></i></a>
                 <a href="tel:+79185515207" aria-label="Телефон"><i class="fas fa-phone"></i></a>
@@ -403,19 +404,18 @@
         </div>
     </div>
 
-    <div id="chat-toggle">💬</div>
-    <div id="chat-widget">
+    <button id="chat-toggle" type="button" aria-label="Открыть чат" aria-expanded="false">💬</button>
+    <div id="chat-widget" role="dialog" aria-label="Чат помощника по резюме" aria-hidden="true">
         <div id="chat-header">
             <div>Помощник по резюме</div>
-            <div id="chat-close">✕</div>
+            <button id="chat-close" type="button" aria-label="Закрыть чат">✕</button>
         </div>
-        <div id="chat-messages"></div>
+        <div id="chat-messages" aria-live="polite"></div>
         <div id="chat-input-area">
-            <input id="chat-input" placeholder="Введите вопрос...">
-            <button id="chat-send">Отправить</button>
+            <input id="chat-input" type="text" placeholder="Введите вопрос..." aria-label="Сообщение" maxlength="2000" autocomplete="off">
+            <button id="chat-send" type="button">Отправить</button>
         </div>
     </div>
-    <link rel="stylesheet" href="chat-widget.css">
     <script src="chat-widget.js"></script>
 
     <script>

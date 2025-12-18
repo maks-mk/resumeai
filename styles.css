@@ -486,7 +486,7 @@
         .back-to-top {
             position: fixed;
             bottom: 30px;
-            right: 30px;
+            right: 100px;
             background: var(--primary-color);
             color: white;
             width: 50px;
@@ -503,6 +503,13 @@
         
         .back-to-top.visible {
             opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .back-to-top {
+                right: 20px;
+                bottom: 100px;
+            }
         }
 
         /* Улучшаем панель управления для предотвращения наложения */
@@ -638,6 +645,10 @@
                 display: none;
             }
             
+            #chat-toggle, #chat-widget, .control-panel, .game-button, .progress-bar, .modal {
+                display: none !important;
+            }
+            
             .skill-item {
                 break-inside: avoid;
             }
@@ -645,6 +656,14 @@
             footer {
                 background: none;
                 color: black;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
             }
         }
 
