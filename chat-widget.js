@@ -6,46 +6,52 @@ document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('chat-input');
   const msgs = document.getElementById('chat-messages');
 
-  // Показать/скрыть виджет
+  // Открытие виджета
   toggleBtn.addEventListener('click', () => {
+    // Переключаем видимость (flex/none)
     widget.style.display = widget.style.display === 'flex' ? 'none' : 'flex';
+    // Фокус в поле ввода при открытии
+    if (widget.style.display === 'flex') {
+        input.focus();
+    }
   });
   
-  // Закрыть виджет
+  // Закрытие виджета
   closeBtn.addEventListener('click', () => {
     widget.style.display = 'none';
   });
 
-  // Отправить сообщение
+  // Обработчики отправки
   sendBtn.addEventListener('click', sendMessage);
-  
-  // Отправка сообщения по Enter
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') sendMessage();
   });
 
-  // Функция отправки сообщения
   async function sendMessage() {
     const text = input.value.trim();
     if (!text) return;
     
-    // Добавляем сообщение пользователя в чат
+    // 1. Показываем сообщение пользователя
     appendMessage('Вы', text);
     input.value = '';
     
-    // Добавляем индикатор загрузки
+    // 2. Показываем индикатор загрузки
     const loadingEl = document.createElement('div');
     loadingEl.className = 'loading-message';
-    loadingEl.innerHTML = '<b>Ассистент:</b> ...';
+    loadingEl.innerHTML = '<em>Печатает...</em>';
     msgs.appendChild(loadingEl);
-    msgs.scrollTop = msgs.scrollHeight;
+    scrollToBottom();
     
     try {
-      // Отправляем запрос на сервер
-      const res = await fetch('https://maksresume.onrender.com/chat', {
+      // Автоматическое переключение между локальным и продакшн API
+      const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://127.0.0.1:8000/chat'
+        : 'https://maksresume.onrender.com/chat'; // <-- Убедитесь, что этот адрес верный
+
+      const res = await fetch(API_URL, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({message: text})
+        body: JSON.stringify({ message: text })
       });
       
       if (!res.ok) {
@@ -54,38 +60,56 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const data = await res.json();
       
-      // Удаляем индикатор загрузки
+      // Удаляем "Печатает..."
       msgs.removeChild(loadingEl);
       
-      // Добавляем ответ в чат
+      // 3. Показываем ответ AI
       appendMessage('Ассистент', formatResponse(data.response));
-    } catch (error) {
-      // Удаляем индикатор загрузки
-      msgs.removeChild(loadingEl);
       
-      // Показываем ошибку
-      appendMessage('Система', `Произошла ошибка: ${error.message}`);
+    } catch (error) {
+      if (msgs.contains(loadingEl)) msgs.removeChild(loadingEl);
+      
+      appendMessage(
+        'Система',
+        '<span style="color: red;">Сервер временно недоступен. Попробуйте позже.</span>'
+      );
       console.error(error);
     }
     
-    // Прокручиваем чат вниз
-    msgs.scrollTop = msgs.scrollHeight;
+    scrollToBottom();
   }
 
-  // Добавление сообщения в чат
   function appendMessage(who, text) {
     const el = document.createElement('div');
-    el.className = 'chat-message';
-    el.innerHTML = `<b>${who}:</b> ${text}`;
+    // Добавляем класс в зависимости от того, кто пишет (для стилизации CSS)
+    el.className = who === 'Вы' ? 'chat-message user-msg' : 'chat-message bot-msg';
+    
+    // Простейшая защита от HTML-инъекций для "Вы", но разрешаем HTML для бота
+    if (who === 'Вы') {
+        el.textContent = text;
+        // Можно добавить префикс жирным, если нужно
+        el.innerHTML = `<b>Вы:</b> ${el.innerHTML}`;
+    } else {
+        el.innerHTML = `<b>Максим (AI):</b> ${text}`;
+    }
+    
     msgs.appendChild(el);
   }
   
-  // Форматирование ответа (обработка переносов строк, списков)
+  function scrollToBottom() {
+      msgs.scrollTop = msgs.scrollHeight;
+  }
+  
+  // Простой парсер Markdown для красоты ответов
   function formatResponse(text) {
     return text
-      .replace(/\n\n/g, '<br><br>')
-      .replace(/\n/g, '<br>')
+      // Жирный шрифт (**текст**)
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em>$1</em>');
+      // Курсив (*текст*)
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      // Списки (- пункт)
+      .replace(/^- (.*$)/gim, '• $1')
+      // Переносы строк
+      .replace(/\n/g, '<br>');
   }
 });
