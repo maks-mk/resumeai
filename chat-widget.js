@@ -8,17 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Открытие виджета
   toggleBtn.addEventListener('click', () => {
-    // Переключаем видимость (flex/none)
-    widget.style.display = widget.style.display === 'flex' ? 'none' : 'flex';
-    // Фокус в поле ввода при открытии
-    if (widget.style.display === 'flex') {
+    // Переключаем видимость
+    widget.classList.toggle('active');
+    document.body.classList.toggle('chat-open');
+    if (widget.classList.contains('active')) {
         input.focus();
     }
   });
   
   // Закрытие виджета
   closeBtn.addEventListener('click', () => {
-    widget.style.display = 'none';
+    widget.classList.remove('active');
+    document.body.classList.remove('chat-open');
   });
 
   // Обработчики отправки
@@ -32,21 +33,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!text) return;
     
     // 1. Показываем сообщение пользователя
-    appendMessage('Вы', text);
+    appendMessage('user', text);
     input.value = '';
     
-    // 2. Показываем индикатор загрузки
+    // 2. Показываем начальный индикатор загрузки
     const loadingEl = document.createElement('div');
-    loadingEl.className = 'loading-message';
-    loadingEl.innerHTML = '<em>Печатает...</em>';
+    loadingEl.className = 'chat-message bot-msg terminal-loading';
+    loadingEl.innerHTML = '<span class="prompt bot-prompt">root@ai:~$</span> <span class="blink">█</span>';
     msgs.appendChild(loadingEl);
     scrollToBottom();
     
     try {
-      // Автоматическое переключение между локальным и продакшн API
       const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://127.0.0.1:8000/chat'
-        : 'https://maksresume.onrender.com/chat'; // <-- Убедитесь, что этот адрес верный
+        : 'https://maksresume.onrender.com/chat';
 
       const res = await fetch(API_URL, {
         method: 'POST',
@@ -54,43 +54,61 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({ message: text })
       });
       
-      if (!res.ok) {
-        throw new Error(`Ошибка сервера: ${res.status}`);
-      }
+      if (!res.ok) throw new Error(`Ошибка сервера: ${res.status}`);
       
-      const data = await res.json();
-      
-      // Удаляем "Печатает..."
+      // Удаляем "мигающий" начальный блок загрузки
       msgs.removeChild(loadingEl);
       
-      // 3. Показываем ответ AI
-      appendMessage('Ассистент', formatResponse(data.response));
+      // 3. Создаем пустой элемент для ответа бота, который будем пополнять
+      const botMsgEl = document.createElement('div');
+      botMsgEl.className = 'chat-message bot-msg';
+      msgs.appendChild(botMsgEl);
+      
+      // Настраиваем чтение потока
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let fullResponse = "";
+      const promptHtml = '<span class="prompt bot-prompt">root@ai:~$</span> ';
+
+      // 4. Читаем данные по мере их поступления
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break; // Поток завершен
+        
+        // Декодируем байты в текст ({stream: true} важно для корректной обработки кириллицы)
+        fullResponse += decoder.decode(value, { stream: true });
+        
+        // Обновляем HTML на лету (и добавляем каретку в конец для красоты)
+        botMsgEl.innerHTML = promptHtml + formatResponse(fullResponse) + '<span class="blink">█</span>';
+        scrollToBottom();
+      }
+      
+      // 5. Когда поток завершен, убираем мигающую каретку в конце
+      botMsgEl.innerHTML = promptHtml + formatResponse(fullResponse);
       
     } catch (error) {
       if (msgs.contains(loadingEl)) msgs.removeChild(loadingEl);
       
-      appendMessage(
-        'Система',
-        '<span style="color: red;">Сервер временно недоступен. Попробуйте позже.</span>'
-      );
+      appendMessage('system', '<span style="color: #ff5f56;">[ERROR] Connection refused. Server offline.</span>');
       console.error(error);
     }
     
     scrollToBottom();
   }
 
-  function appendMessage(who, text) {
+  function appendMessage(role, text) {
     const el = document.createElement('div');
-    // Добавляем класс в зависимости от того, кто пишет (для стилизации CSS)
-    el.className = who === 'Вы' ? 'chat-message user-msg' : 'chat-message bot-msg';
+    el.className = `chat-message ${role}-msg`;
     
-    // Простейшая защита от HTML-инъекций для "Вы", но разрешаем HTML для бота
-    if (who === 'Вы') {
-        el.textContent = text;
-        // Можно добавить префикс жирным, если нужно
-        el.innerHTML = `<b>Вы:</b> ${el.innerHTML}`;
+    let prompt = '';
+    if (role === 'user') {
+        prompt = '<span class="prompt user-prompt">guest@local:~$</span> ';
+        el.innerHTML = `${prompt}${text}`;
+    } else if (role === 'bot') {
+        prompt = '<span class="prompt bot-prompt">root@ai:~$</span> ';
+        el.innerHTML = `${prompt}${text}`;
     } else {
-        el.innerHTML = `<b>Максим (AI):</b> ${text}`;
+        el.innerHTML = text; // Для системных ошибок
     }
     
     msgs.appendChild(el);
@@ -100,16 +118,11 @@ document.addEventListener('DOMContentLoaded', () => {
       msgs.scrollTop = msgs.scrollHeight;
   }
   
-  // Простой парсер Markdown для красоты ответов
   function formatResponse(text) {
     return text
-      // Жирный шрифт (**текст**)
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      // Курсив (*текст*)
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="neon-text">$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      // Списки (- пункт)
-      .replace(/^- (.*$)/gim, '• $1')
-      // Переносы строк
+      .replace(/^- (.*$)/gim, '<span class="list-bullet">></span> $1')
       .replace(/\n/g, '<br>');
   }
 });
