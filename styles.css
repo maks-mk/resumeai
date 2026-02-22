@@ -296,17 +296,19 @@ h3 {
     letter-spacing: 1px;
     position: relative;
     z-index: 1;
+    word-wrap: break-word; /* Перенос длинных слов */
+    hyphens: auto;         /* Расстановка переносов */
+    line-height: 1.2;      /* Более плотный интерлиньяж */
 }
 
 /* Списки */
 .achievements-list li {
-    padding: 15px 20px;
+    padding: 15px 20px 15px 45px;
     background: var(--card-bg);
     border-radius: 8px;
     margin-bottom: 12px;
     border: 1px solid var(--glass-border);
-    display: flex;
-    align-items: flex-start;
+    position: relative;
     transition: all 0.2s;
 }
 
@@ -317,8 +319,11 @@ h3 {
 
 .achievements-list li::before {
     content: "⚡";
-    margin-right: 15px;
+    position: absolute;
+    left: 15px;
+    top: 15px;
     font-size: 1.1rem;
+    color: var(--accent-color);
 }
 
 /* Скиллы (Код-блоки) */
@@ -855,6 +860,9 @@ footer {
 @media (max-width: 480px) {
     section { padding: 20px 15px; }
     .stat-number { font-size: 2.5rem; }
+    .stat-label { font-size: 0.75rem; letter-spacing: 0; } /* Уменьшаем шрифт и межбуквенный интервал */
+    .stat-item { padding: 15px 5px; min-width: 100px; } /* Уменьшаем отступы и мин. ширину */
+    
     .control-panel { top: 10px; right: 10px; padding: 5px; }
     .game-button { top: 10px; left: 10px; }
     
