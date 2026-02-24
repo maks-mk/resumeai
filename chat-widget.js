@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
   toggleBtn.addEventListener('click', () => {
     // Переключаем видимость
     widget.classList.toggle('active');
-    document.body.classList.toggle('chat-open');
     if (widget.classList.contains('active')) {
         input.focus();
     }
@@ -19,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Закрытие виджета
   closeBtn.addEventListener('click', () => {
     widget.classList.remove('active');
-    document.body.classList.remove('chat-open');
   });
 
   // Обработчики отправки
@@ -39,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Показываем начальный индикатор загрузки
     const loadingEl = document.createElement('div');
     loadingEl.className = 'chat-message bot-msg terminal-loading';
-    loadingEl.innerHTML = '<span class="prompt bot-prompt">root@ai:~$</span> <span class="blink">█</span>';
+    loadingEl.innerHTML = '<span class="prompt bot-prompt">[AI_CORE] //></span> <span class="blink">█</span>';
     msgs.appendChild(loadingEl);
     scrollToBottom();
     
@@ -68,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const reader = res.body.getReader();
       const decoder = new TextDecoder("utf-8");
       let fullResponse = "";
-      const promptHtml = '<span class="prompt bot-prompt">root@ai:~$</span> ';
+      const promptHtml = '<span class="prompt bot-prompt">[AI_CORE] //></span> ';
 
       // 4. Читаем данные по мере их поступления
       while (true) {
@@ -89,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       if (msgs.contains(loadingEl)) msgs.removeChild(loadingEl);
       
-      appendMessage('system', '<span style="color: #ff5f56;">[ERROR] Connection refused. Server offline.</span>');
+      appendMessage('system', '<span style="color: #ff2a6d; text-shadow: 0 0 8px #ff2a6d;">[SYS_ERROR] Connection refused. Server offline.</span>');
       console.error(error);
     }
     
@@ -102,10 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let prompt = '';
     if (role === 'user') {
-        prompt = '<span class="prompt user-prompt">guest@local:~$</span> ';
+        prompt = '<span class="prompt user-prompt">[USER_AUTH] //></span> ';
         el.innerHTML = `${prompt}${text}`;
     } else if (role === 'bot') {
-        prompt = '<span class="prompt bot-prompt">root@ai:~$</span> ';
+        prompt = '<span class="prompt bot-prompt">[AI_CORE] //></span> ';
         el.innerHTML = `${prompt}${text}`;
     } else {
         el.innerHTML = text; // Для системных ошибок
@@ -122,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return text
       .replace(/\*\*(.*?)\*\*/g, '<strong class="neon-text">$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/^- (.*$)/gim, '<span class="list-bullet">></span> $1')
+      .replace(/^- (.*$)/gim, '<span class="list-bullet">>></span> $1')
       .replace(/\n/g, '<br>');
   }
 });
