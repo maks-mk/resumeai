@@ -2,258 +2,184 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Cyber Nodes Game</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Nodes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #030712;
-            --panel-bg: rgba(17, 24, 39, 0.75);
-            --grid-line: rgba(0, 243, 255, 0.15);
-            --text-color: #e2e8f0;
-            --accent-cyan: #00f3ff;
-            --accent-pink: #bc13fe;
-            --accent-green: #22c55e;
-            --accent-yellow: #eab308;
-            --accent-alert: #ff2a6d;
-            --shadow-glow: rgba(0, 243, 255, 0.4);
-            --clip-panel: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
-            --clip-btn: polygon(0 8px, 8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+            --bg-color: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-primary: #6366f1; /* Индиго */
+            --accent-secondary: #0ea5e9; /* Бирюза */
+            --cell-bg: rgba(255, 255, 255, 0.03);
+            --cell-border: rgba(255, 255, 255, 0.08);
+            
+            /* Цвета шариков */
+            --color-1: #38bdf8; /* Голубой */
+            --color-2: #c084fc; /* Фиолетовый */
+            --color-3: #4ade80; /* Зеленый */
+            --color-4: #facc15; /* Желтый */
+            --color-5: #fb7185; /* Розовый/Красный */
         }
 
         body {
-            font-family: 'Fira Code', monospace;
-            background-color: transparent;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: var(--text-color);
-            box-sizing: border-box;
-            overflow: hidden;
+            margin: 0; padding: 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background: transparent;
+            display: flex; align-items: center; justify-content: center;
+            height: 100vh; overflow: hidden;
         }
 
-        #game-container {
+        #game-wrapper {
             width: 100%;
-            /* Ключевое изменение: ширина не превышает 70% от высоты экрана, чтобы поле масштабировалось */
-            max-width: min(380px, 90vw, 70vh);
+            max-width: min(400px, 95vw);
             margin: 0 auto;
-            background: var(--panel-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--accent-cyan);
-            padding: 15px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 243, 255, 0.1);
             text-align: center;
             position: relative;
-            clip-path: var(--clip-panel);
         }
 
-        h1 {
-            font-size: 1.2rem;
-            margin: 0 0 12px 0;
-            color: var(--text-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--accent-cyan);
-            position: relative;
-            display: inline-block;
-        }
-
-        h1::before, h1::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            opacity: 0.8;
-        }
-        h1::before { left: 2px; text-shadow: -2px 0 var(--accent-alert); clip: rect(24px, 550px, 36px, 0); animation: glitch 3s infinite linear alternate-reverse; }
-        h1::after { left: -2px; text-shadow: -2px 0 var(--accent-cyan); clip: rect(10px, 550px, 20px, 0); animation: glitch2 2.5s infinite linear alternate-reverse; }
-
-        @keyframes glitch { 0% { clip: rect(10px, 9999px, 30px, 0); } 100% { clip: rect(0, 0, 0, 0); } }
-        @keyframes glitch2 { 0% { clip: rect(5px, 9999px, 20px, 0); } 100% { clip: rect(0, 0, 0, 0); } }
-
-        .score-panel {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding: 8px 12px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--grid-line);
-            clip-path: var(--clip-btn);
-        }
-
-        .score-item {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            letter-spacing: 1px;
-        }
+        .header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; }
         
-        .score-item span {
-            color: var(--accent-cyan);
-            font-weight: bold;
-            font-size: 1.1rem;
-            text-shadow: 0 0 8px var(--accent-cyan);
-            display: block;
-            margin-top: 3px;
-        }
+        .title { font-weight: 600; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; margin: 0; }
+        .title i { color: var(--accent-primary); }
+
+        .score-board { display: flex; gap: 15px; }
+        .score-box { text-align: right; }
+        .score-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .score-value { font-family: 'Fira Code', monospace; font-size: 1.2rem; font-weight: 500; color: var(--text-main); }
+        .score-value.highlight { color: var(--accent-secondary); }
 
         #board {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
-            gap: 2px;
-            margin: 0 auto;
-            width: 100%;
-            aspect-ratio: 1; /* Сохраняет поле квадратным */
-            background: rgba(0, 0, 0, 0.6);
-            padding: 4px;
-            border: 1px solid var(--accent-cyan);
-            box-shadow: 0 0 20px rgba(0,243,255,0.1), inset 0 0 30px rgba(0,0,0,0.9);
+            gap: 4px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px;
+            border-radius: 16px;
+            border: 1px solid var(--cell-border);
+            aspect-ratio: 1;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.3);
             position: relative;
         }
 
-        #board::after {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 10px;
-            background: linear-gradient(to bottom, rgba(0,243,255,0.5), transparent);
-            animation: scan 4s linear infinite;
-            pointer-events: none; opacity: 0.5; z-index: 10;
-        }
-        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
-
         .cell {
-            aspect-ratio: 1;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px dotted rgba(0, 243, 255, 0.2);
+            background: var(--cell-bg);
+            border-radius: 6px;
             cursor: pointer;
             position: relative;
             transition: all 0.2s ease;
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.02);
         }
-
-        .cell:hover {
-            background: rgba(0, 243, 255, 0.2);
-            border: 1px solid var(--accent-cyan);
-        }
+        .cell:hover { background: rgba(255, 255, 255, 0.08); }
 
         .ball {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 60%; height: 60%;
+            width: 65%; height: 65%;
             border-radius: 50%;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: inset -4px -4px 8px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .cyan { background: radial-gradient(circle, #fff 10%, var(--accent-cyan) 60%); box-shadow: 0 0 10px var(--accent-cyan); }
-        .pink { background: radial-gradient(circle, #fff 10%, var(--accent-pink) 60%); box-shadow: 0 0 10px var(--accent-pink); }
-        .green { background: radial-gradient(circle, #fff 10%, var(--accent-green) 60%); box-shadow: 0 0 10px var(--accent-green); }
-        .yellow { background: radial-gradient(circle, #fff 10%, var(--accent-yellow) 60%); box-shadow: 0 0 10px var(--accent-yellow); }
-        .alert { background: radial-gradient(circle, #fff 10%, var(--accent-alert) 60%); box-shadow: 0 0 10px var(--accent-alert); }
+        .c1 { background: radial-gradient(circle at 30% 30%, #bae6fd, var(--color-1)); }
+        .c2 { background: radial-gradient(circle at 30% 30%, #e9d5ff, var(--color-2)); }
+        .c3 { background: radial-gradient(circle at 30% 30%, #bbf7d0, var(--color-3)); }
+        .c4 { background: radial-gradient(circle at 30% 30%, #fef08a, var(--color-4)); }
+        .c5 { background: radial-gradient(circle at 30% 30%, #fecdd3, var(--color-5)); }
 
-        .bonus-ball {
-            border: 2px solid #fff;
-            animation: pulse-bonus 0.8s infinite alternate;
+        .bonus-ball::after {
+            content: '★'; position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 10px; color: rgba(255,255,255,0.9); text-shadow: 0 0 5px white;
         }
 
-        @keyframes pulse-bonus {
-            0% { transform: translate(-50%, -50%) scale(0.9); filter: brightness(1.2); }
-            100% { transform: translate(-50%, -50%) scale(1.2); filter: brightness(2); box-shadow: 0 0 20px #fff; }
+        .controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+        
+        .btn {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-primary);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem;
+            cursor: pointer; transition: all 0.3s;
+            display: flex; align-items: center; gap: 8px;
         }
-
-        #controls {
-            margin-top: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        button {
-            background: transparent;
-            border: 1px solid var(--accent-cyan);
-            color: var(--accent-cyan);
-            padding: 8px 16px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
-            cursor: pointer;
-            clip-path: var(--clip-btn);
-            transition: all 0.4s;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-        }
-
-        button::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,243,255,0.4), transparent);
-            transition: 0.4s;
-        }
-
-        button:hover {
-            background: var(--accent-cyan); color: #000;
-            box-shadow: 0 0 15px var(--shadow-glow);
-        }
-        button:hover::before { left: 100%; }
+        .btn:hover { background: var(--accent-primary); color: #fff; transform: translateY(-2px); }
 
         .combo-text {
-            position: absolute; color: #fff; font-weight: bold; font-size: 1.2em;
-            text-shadow: 0 0 10px var(--accent-pink);
+            position: absolute; color: var(--accent-secondary); font-weight: 600; font-family: 'Fira Code', monospace;
             animation: floatUp 1s ease-out forwards; pointer-events: none; z-index: 20;
         }
+        @keyframes floatUp { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-30px); opacity: 0; } }
 
-        @keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-40px) scale(1.5); opacity: 0; } }
-
-        .game-over {
+        /* Окно окончания игры */
+        .overlay {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(3, 7, 18, 0.95);
-            backdrop-filter: blur(8px);
+            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px);
+            border-radius: 16px;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 100;
         }
-        .game-over.show { opacity: 1; pointer-events: auto; }
+        .overlay.show { opacity: 1; pointer-events: auto; }
+        
+        .overlay h2 { margin: 0 0 5px; font-size: 1.8rem; color: var(--text-main); }
+        .overlay p { color: var(--text-muted); margin-bottom: 25px; }
+        .final-score { font-size: 3rem; font-family: 'Fira Code', monospace; font-weight: bold; color: var(--accent-secondary); margin-bottom: 25px;}
 
-        .game-over h2 {
-            color: var(--accent-alert); font-size: 1.8rem;
-            text-shadow: 0 0 20px rgba(255, 42, 109, 0.8);
-            margin-bottom: 10px; letter-spacing: 2px;
-            animation: glitch2 0.5s infinite linear alternate-reverse;
-        }
-
-        .high-score { color: var(--accent-yellow); margin-bottom: 20px; text-shadow: 0 0 10px var(--accent-yellow); font-size: 0.9rem;}
     </style>
 </head>
 <body>
 
-<div id="game-container">
-    <h1 data-text="SYSTEM NODES">SYSTEM NODES</h1>
-    <div class="score-panel">
-        <div class="score-item">SCORE<span id="score">0</span></div>
-        <div class="score-item">COMBO<span id="combo">x1</span></div>
-        <div class="score-item">BEST<span id="high-score">0</span></div>
+<div id="game-wrapper">
+    <div class="header">
+        <h1 class="title"><i class="fas fa-project-diagram"></i> Nodes</h1>
+        <div class="score-board">
+            <div class="score-box">
+                <div class="score-label">Комбо</div>
+                <div class="score-value" id="combo">x1</div>
+            </div>
+            <div class="score-box">
+                <div class="score-label">Рекорд</div>
+                <div class="score-value" id="high-score">0</div>
+            </div>
+            <div class="score-box">
+                <div class="score-label">Очки</div>
+                <div class="score-value highlight" id="score">0</div>
+            </div>
+        </div>
     </div>
     
-    <div id="board"></div>
-    
-    <div id="controls">
-        <div class="score-item" style="text-align: left;">LINES<br><span id="lines-removed-count" style="display:inline; margin-top:0;">0</span></div>
-        <button id="new-game-button">REBOOT_SYS()</button>
+    <div id="board">
+        <div class="overlay" id="gameOver">
+            <h2>Игра окончена</h2>
+            <p>Нет свободных узлов сети</p>
+            <div class="final-score" id="final-score">0</div>
+            <button class="btn" id="restart-button"><i class="fas fa-redo"></i> Начать заново</button>
+        </div>
     </div>
-
-    <div class="game-over" id="gameOver">
-        <h2>SYSTEM FAILURE</h2>
-        <div class="score-item" style="margin-bottom: 10px; font-size: 1rem; color: #fff;">FINAL SCORE: <span id="final-score" style="color: var(--accent-cyan);">0</span></div>
-        <div class="high-score">RECORD: <span id="final-high-score">0</span></div>
-        <button id="restart-button" style="border-color: var(--accent-alert); color: var(--accent-alert);">RETRY_CONNECTION</button>
+    
+    <div class="controls">
+        <div class="score-box" style="text-align: left;">
+            <div class="score-label">Собрано линий</div>
+            <div class="score-value" id="lines-removed" style="font-size: 1rem;">0</div>
+        </div>
+        <button class="btn" id="new-game-button"><i class="fas fa-sync-alt"></i> Рестарт</button>
     </div>
 </div>
 
 <script>
     const board = document.getElementById('board');
-    const colors = ['cyan', 'pink', 'green', 'yellow', 'alert'];
+    const overlay = document.getElementById('gameOver');
+    const colors = ['c1', 'c2', 'c3', 'c4', 'c5'];
     let grid = [];
     let selectedBall = null;
     let score = 0;
-    let highScore = localStorage.getItem('linesHighScore') || 0;
+    let highScore = localStorage.getItem('nodesHighScore') || 0;
     let comboMultiplier = 1;
     let linesRemoved = 0;
     let lastMoveTime = Date.now();
@@ -267,7 +193,9 @@
     }
 
     function createBoard() {
-        board.innerHTML = '';
+        // Удаляем старые ячейки, но оставляем overlay
+        Array.from(board.children).forEach(child => { if(child.id !== 'gameOver') child.remove(); });
+        
         for (let i = 0; i < 10; i++) {
             grid[i] = [];
             for (let j = 0; j < 10; j++) {
@@ -284,11 +212,7 @@
 
     function getRandomEmptyCell() {
         let emptyCells = [];
-        for (let r=0; r<10; r++) {
-            for (let c=0; c<10; c++) {
-                if(!grid[r][c]) emptyCells.push({row:r, col:c});
-            }
-        }
+        for (let r=0; r<10; r++) for (let c=0; c<10; c++) if(!grid[r][c]) emptyCells.push({row:r, col:c});
         if(emptyCells.length === 0) return null;
         return emptyCells[Math.floor(Math.random() * emptyCells.length)];
     }
@@ -301,7 +225,8 @@
         const ball = document.createElement('div');
         ball.className = `ball ${color} ${isBonus ? 'bonus-ball' : ''}`;
         
-        const cell = board.children[cellInfo.row * 10 + cellInfo.col];
+        // Индекс с учетом overlay (+1)
+        const cell = board.children[cellInfo.row * 10 + cellInfo.col + 1];
         cell.appendChild(ball);
         grid[cellInfo.row][cellInfo.col] = { color, element: ball, bonus: isBonus };
     }
@@ -324,10 +249,10 @@
         
         const el = grid[r][c].element;
         let scale = 1;
-        let dir = 0.05;
+        let dir = 0.03;
         animInterval = setInterval(() => {
             scale += dir;
-            if(scale > 1.2 || scale < 0.8) dir = -dir;
+            if(scale > 1.15 || scale < 0.85) dir = -dir;
             el.style.transform = `translate(-50%, -50%) scale(${scale})`;
         }, 50);
     }
@@ -370,8 +295,8 @@
         grid[sr][sc] = null;
 
         for (let i = 1; i < path.length; i++) {
-            await new Promise(res => setTimeout(res, 25));
-            board.children[path[i][0] * 10 + path[i][1]].appendChild(data.element);
+            await new Promise(res => setTimeout(res, 20));
+            board.children[path[i][0] * 10 + path[i][1] + 1].appendChild(data.element);
         }
         grid[nr][nc] = data;
 
@@ -383,11 +308,9 @@
             document.getElementById('combo').textContent = `x${comboMultiplier}`;
             
             if(!checkGameOver()) {
-                placeRandomBall();
-                placeRandomBall();
+                placeRandomBall(); placeRandomBall();
                 if(Math.random() < 0.1) placeRandomBall(true);
-                checkLines();
-                checkGameOver();
+                checkLines(); checkGameOver();
             }
         }
         lastMoveTime = Date.now();
@@ -395,7 +318,6 @@
 
     function checkLines() {
         let toRemove = new Set();
-        
         const checkDir = (r, c, dr, dc) => {
             if(!grid[r][c]) return;
             let line = [`${r}-${c}`];
@@ -411,10 +333,8 @@
 
         for(let r=0; r<10; r++) {
             for(let c=0; c<10; c++) {
-                checkDir(r, c, 0, 1);
-                checkDir(r, c, 1, 0);
-                checkDir(r, c, 1, 1);
-                checkDir(r, c, 1, -1);
+                checkDir(r, c, 0, 1); checkDir(r, c, 1, 0);
+                checkDir(r, c, 1, 1); checkDir(r, c, 1, -1);
             }
         }
 
@@ -423,11 +343,11 @@
             toRemove.forEach(p => {
                 const [r, c] = p.split('-').map(Number);
                 if(grid[r][c].bonus) bonusPoints += 300;
-                board.children[r * 10 + c].innerHTML = '';
+                board.children[r * 10 + c + 1].innerHTML = ''; // +1 due to overlay
                 grid[r][c] = null;
             });
             linesRemoved++;
-            document.getElementById('lines-removed-count').textContent = linesRemoved;
+            document.getElementById('lines-removed').textContent = linesRemoved;
             return toRemove.size + bonusPoints/100;
         }
         return 0;
@@ -443,12 +363,13 @@
         const floatText = document.createElement('div');
         floatText.className = 'combo-text';
         floatText.textContent = `+${finalPts}`;
+        floatText.style.top = '50%'; floatText.style.left = '50%';
         board.appendChild(floatText);
         setTimeout(() => floatText.remove(), 1000);
 
         if(score > highScore) {
             highScore = score;
-            localStorage.setItem('linesHighScore', highScore);
+            localStorage.setItem('nodesHighScore', highScore);
         }
         
         document.getElementById('score').textContent = score;
@@ -462,25 +383,23 @@
         
         if (empty < 3) {
             document.getElementById('final-score').textContent = score;
-            document.getElementById('final-high-score').textContent = highScore;
-            document.getElementById('gameOver').classList.add('show');
+            overlay.classList.add('show');
             return true;
         }
         return false;
     }
 
     function newGame() {
-        document.getElementById('gameOver').classList.remove('show');
+        overlay.classList.remove('show');
         score = 0; comboMultiplier = 1; linesRemoved = 0;
         document.getElementById('score').textContent = 0;
         document.getElementById('combo').textContent = 'x1';
-        document.getElementById('lines-removed-count').textContent = 0;
+        document.getElementById('lines-removed').textContent = 0;
         createBoard();
         for(let i=0; i<3; i++) placeRandomBall();
     }
 
     window.onload = init;
 </script>
-
 </body>
 </html>

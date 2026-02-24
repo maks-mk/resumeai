@@ -1,208 +1,131 @@
-#chat-toggle {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 65px;
-  height: 65px;
-  background: rgba(3, 7, 18, 0.85);
-  backdrop-filter: blur(10px);
-  border: 2px solid #00f3ff;
-  color: #00f3ff;
-  /* Форма шестиугольника */
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.5));
-  z-index: 1000;
-  transition: all 0.3s ease;
-}
-
-#chat-toggle:hover {
-  transform: scale(1.1) rotate(30deg);
-  background: rgba(0, 243, 255, 0.2);
-  filter: drop-shadow(0 0 20px #00f3ff);
-}
-
 #chat-widget {
-  position: fixed;
-  bottom: 110px;
-  right: 30px;
-  width: 380px;
-  height: 500px;
-  background: rgba(17, 24, 39, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  /* Скошенные углы в стиле Sci-Fi панели */
-  clip-path: polygon(0 20px, 20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
-  border: 1px solid rgba(0, 243, 255, 0.4);
-  display: flex;
-  flex-direction: column;
-  z-index: 2100;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(20px);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  font-family: 'Fira Code', monospace;
-}
-
-#chat-widget::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none;
-  box-shadow: inset 0 0 20px rgba(0, 243, 255, 0.15);
-  z-index: -1;
+    position: fixed;
+    bottom: 95px;
+    right: 25px;
+    width: 360px; /* Сделали чуть уже */
+    height: 450px; /* Чуть ниже */
+    display: flex;
+    flex-direction: column;
+    z-index: 2100;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px) scale(0.95);
+    transform-origin: bottom right;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
 #chat-widget.active {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
 }
 
 #chat-header {
-  background: rgba(0, 243, 255, 0.1);
-  border-bottom: 1px solid rgba(0, 243, 255, 0.3);
-  color: #e2e8f0;
-  padding: 12px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-  position: relative;
-  text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 10px; /* Еще меньше отступ */
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.02);
 }
-
-/* Декоративные элементы HUD */
-#chat-header::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 4px;
-  background: #00f3ff;
-  box-shadow: 0 0 10px #00f3ff;
+.chat-title {
+    font-weight: 600; font-size: 0.95rem; color: var(--text-main);
+    display: flex; align-items: center; gap: 8px;
 }
-
-#chat-header div:first-child {
-  color: #00f3ff;
-  text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
-}
+.chat-title i { color: var(--accent-primary); }
 
 #chat-close {
-  cursor: pointer;
-  color: #00f3ff;
-  transition: all 0.2s ease;
-  font-size: 1.4rem;
-  line-height: 1;
+    background: none; border: none; color: var(--text-muted);
+    font-size: 1.1rem; cursor: pointer; transition: var(--transition);
 }
-
-#chat-close:hover {
-  color: #ff2a6d;
-  text-shadow: 0 0 10px #ff2a6d;
-  transform: scale(1.2);
-}
+#chat-close:hover { color: var(--text-main); }
 
 #chat-messages {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-  font-size: 13px;
-  color: #e2e8f0;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    flex: 1;
+    padding: 8px; /* Уменьшен отступ (было 12px) */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Уменьшено расстояние между сообщениями (было 8px) */
+    scroll-behavior: smooth;
+}
+#chat-messages::-webkit-scrollbar { width: 5px; }
+#chat-messages::-webkit-scrollbar-track { background: transparent; }
+#chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
+
+/* Пузыри сообщений */
+.msg-wrapper { display: flex; flex-direction: column; max-width: 88%; }
+.msg-wrapper.user { align-self: flex-end; align-items: flex-end; }
+.msg-wrapper.bot { align-self: flex-start; align-items: flex-start; }
+
+.chat-bubble {
+    padding: 6px 10px; /* Уплотнили пузыри (было 8px 12px) */
+    border-radius: 14px;
+    font-size: 0.85rem; /* Чуть меньше шрифт (было 0.9rem) */
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+.user-bubble {
+    background: var(--accent-gradient);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+.bot-bubble {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-bottom-left-radius: 4px;
 }
 
-/* Кастомный кибер-скроллбар */
-#chat-messages::-webkit-scrollbar { width: 4px; }
-#chat-messages::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
-#chat-messages::-webkit-scrollbar-thumb { background: #00f3ff; border-radius: 0; }
-#chat-messages::-webkit-scrollbar-thumb:hover { background: #bc13fe; }
-
-.chat-message {
-  line-height: 1.6;
-  word-wrap: break-word;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 10px;
-  border-left: 2px solid transparent;
+/* Индикатор печатания */
+.typing-indicator { display: flex; gap: 4px; padding: 12px 14px; align-items: center; }
+.typing-indicator span {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--text-muted);
+    animation: bounce 1.4s infinite ease-in-out both;
 }
+.typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+.typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+@keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
 
-.user-msg { border-left-color: #bc13fe; }
-.bot-msg { border-left-color: #00f3ff; }
-
-.prompt { font-weight: 700; margin-right: 5px; letter-spacing: 1px; }
-.user-prompt { color: #bc13fe; text-shadow: 0 0 5px rgba(188, 19, 254, 0.5); }
-.bot-prompt { color: #00f3ff; text-shadow: 0 0 5px rgba(0, 243, 255, 0.5); }
-
-.neon-text { color: #fff; text-shadow: 0 0 8px #bc13fe, 0 0 15px #bc13fe; }
-.list-bullet { color: #ff2a6d; font-weight: bold; }
-
-.blink {
-  animation: blinker 1s linear infinite;
-  color: #00f3ff;
-}
-
-@keyframes blinker { 50% { opacity: 0; } }
-
+/* Ввод текста */
 #chat-input-area {
-  display: flex;
-  border-top: 1px solid rgba(0, 243, 255, 0.3);
-  background: rgba(0, 0, 0, 0.5);
-  position: relative;
+    display: flex; align-items: center; gap: 4px;
+    padding: 4px; /* Максимально компактно */
+    border-top: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.15);
 }
-
-#chat-input-area::before {
-  content: '';
-  position: absolute;
-  top: -1px; left: 0; width: 30px; height: 1px;
-  background: #bc13fe;
-  box-shadow: 0 0 10px #bc13fe;
-}
-
 #chat-input {
-  flex: 1;
-  padding: 15px 15px 15px 20px;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #00f3ff;
-  font-family: 'Fira Code', monospace;
-  font-size: 13px;
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 10px 14px; /* Компактнее */
+    border-radius: 20px;
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    outline: none; transition: var(--transition);
 }
-
-#chat-input::placeholder { color: rgba(0, 243, 255, 0.3); }
+#chat-input:focus { border-color: var(--accent-primary); background: rgba(255,255,255,0.08); }
+#chat-input::placeholder { color: var(--text-muted); }
 
 #chat-send {
-  padding: 0 20px;
-  background: transparent;
-  color: #00f3ff;
-  border: none;
-  border-left: 1px dashed rgba(0, 243, 255, 0.3);
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
+    width: 38px; height: 38px; /* Уменьшили кнопку отправки */
+    border-radius: 50%;
+    background: var(--accent-primary);
+    border: none; color: #fff;
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer; transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+    font-size: 0.9rem;
 }
-
-#chat-send:hover {
-  background: rgba(0, 243, 255, 0.15);
-  color: #fff;
-  text-shadow: 0 0 15px #00f3ff;
-}
+#chat-send:hover { transform: scale(1.05); background: #4f46e5; }
 
 @media (max-width: 480px) {
-  #chat-widget {
-    bottom: 0; left: 0; right: 0; top: 0;
-    width: 100%; height: 100dvh;
-    clip-path: none; border: none;
-  }
-  #chat-toggle {
-    bottom: 20px; right: 20px;
-    width: 55px; height: 55px; font-size: 22px;
-  }
+    #chat-widget {
+        bottom: 0; right: 0; width: 100%; height: 100dvh;
+        border-radius: 0; border: none; transform: translateY(100%);
+        background: var(--bg-color); /* Непрозрачный фон на мобильных */
+    }
 }

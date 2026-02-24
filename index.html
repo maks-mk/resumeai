@@ -5,303 +5,260 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Резюме | Колесников Максим</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <meta name="description" content="Резюме: IT-специалист / Системный администратор с 25+ летним опытом">
 </head>
 <body>
-    <!-- Экран загрузки (Boot Sequence) -->
-    <div id="boot-screen">
-        <div class="boot-line">INIT SYSTEM KERNEL... OK</div>
-        <div class="boot-line">LOADING MODULES: SYSD, NET, SEC... OK</div>
-        <div class="boot-line">ESTABLISHING SECURE CONNECTION... OK</div>
-        <div class="boot-line">DECRYPTING PROFILE DATA...</div>
-        <div class="boot-line">ACCESS GRANTED. WELCOME, ADMIN.</div>
-    </div>
-
-    <!-- 3D Анимированный фон -->
-    <div class="cyber-grid-wrapper">
-        <div class="cyber-grid"></div>
+    <!-- Фоновые градиентные сферы (Ambient Glow) -->
+    <div class="ambient-bg">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
     </div>
 
     <!-- Панель управления -->
     <div class="control-panel">
-        <a href="resume.pdf" download="resume.pdf" class="control-button" aria-label="Скачать PDF" title="Скачать PDF">
+        <button class="control-btn" id="openGame" aria-label="Мини-игра" title="Мини-игра">
+            <i class="fas fa-gamepad"></i>
+        </button>
+        <div class="control-divider"></div>
+        <a href="resume.pdf" download="resume.pdf" class="control-btn" aria-label="Скачать PDF" title="Скачать PDF">
             <i class="fas fa-download"></i>
         </a>
         <div class="control-divider"></div>
-        <button class="control-button" id="theme-toggle" aria-label="Сменить тему" title="Сменить тему">
+        <button class="control-btn icon-btn" id="theme-toggle" aria-label="Сменить тему" title="Сменить тему">
             <i class="fas fa-moon"></i>
         </button>
     </div>
 
     <header itemscope itemtype="http://schema.org/Person">
         <div class="container">
-            <div class="header-content">
+            <div class="header-content glass-card">
                 <div class="avatar-wrapper">
-                    <div class="hud-ring-1"></div>
-                    <div class="hud-ring-2"></div>
                     <img itemprop="image" class="profile-pic" src="myface1.jpg" alt="Колесников Максим">
                 </div>
-                <div class="glitch-wrapper">
-                    <h1 itemprop="name" data-text="КОЛЕСНИКОВ МАКСИМ">КОЛЕСНИКОВ МАКСИМ</h1>
-                </div>
-                <div><div itemprop="jobTitle" class="job-title">IT-специалист / Системный администратор</div></div>
-                <div class="subtitle-text">47 лет | Инфраструктура | Linux/Windows | Безопасность | Автоматизация</div>
-                <div class="contact-info">
-                    <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                        <i class="fas fa-map-marker-alt"></i> <span itemprop="addressLocality">г. Шахты, обл. Ростовская</span>
-                    </div>
-                    <div><i class="fas fa-phone"></i> +7 (918) 551-52-07</div>
-                    <div><i class="fas fa-envelope"></i> maks_k77@mail.ru</div>
-                    <div><i class="fas fa-globe"></i> <a href="https://maks-mk.github.io/resumeai/" target="_blank">Личный сайт</a></div>
-                    <div><i class="fab fa-github"></i> <a href="https://github.com/maks-mk" target="_blank">github.com/maks-mk</a></div>
+                <h1 itemprop="name" class="gradient-text">Колесников Максим</h1>
+                <div itemprop="jobTitle" class="job-title-badge">IT-специалист / Системный администратор</div>
+                <p class="subtitle-text">47 лет • Инфраструктура • Linux/Windows • Безопасность • Автоматизация</p>
+                
+                <div class="contact-badges">
+                    <a href="#" itemprop="address" class="badge"><i class="fas fa-map-marker-alt"></i> г. Шахты, Ростовская обл.</a>
+                    <a href="tel:+79185515207" class="badge"><i class="fas fa-phone"></i> +7 (918) 551-52-07</a>
+                    <a href="mailto:maks_k77@mail.ru" class="badge"><i class="fas fa-envelope"></i> maks_k77@mail.ru</a>
+                    <a href="https://github.com/maks-mk" target="_blank" class="badge"><i class="fab fa-github"></i> github.com/maks-mk</a>
                 </div>
             </div>
         </div>
     </header>
 
     <main class="container">
-        <section id="profile" class="highlight-section">
-            <h2 class="decrypt-text" data-target="ПРОФЕССИОНАЛЬНЫЙ ПРОФИЛЬ">#&^@*&!^@</h2>
-            <p>Системный администратор с <strong>25+ лет опыта</strong>. Специализация: IT-инфраструктура, Linux/Windows, информационная безопасность, автоматизация процессов. Имею обширный опыт работы как в государственном секторе, так и во фрилансе. Отличные навыки поддержки пользователей, технического обслуживания и внедрения сложных IT-систем. Специалист технической поддержки.</p>
-            <div class="quick-contact-grid" style="margin-top: 25px;">
-                <div>
-                    <strong>Условия работы:</strong><br>
-                    <i class="fas fa-check-square"></i> Полная / Частичная занятость<br>
-                    <i class="fas fa-check-square"></i> Удаленная работа / Гибкий график<br>
-                    <i class="fas fa-check-square"></i> Готов к командировкам / переезду
-                </div>
+        <!-- Статистика -->
+        <section id="key-achievements" class="stats-grid">
+            <div class="stat-card glass-card">
+                <div class="stat-number" data-count="25">0</div>
+                <div class="stat-label">Лет опыта</div>
+            </div>
+            <div class="stat-card glass-card">
+                <div class="stat-number" data-count="100">0</div>
+                <div class="stat-label">Рабочих станций (ЛВС)</div>
+            </div>
+            <div class="stat-card glass-card">
+                <div class="stat-number" data-count="3">0</div>
+                <div class="stat-label">Языка скриптинга</div>
+            </div>
+            <div class="stat-card glass-card">
+                <div class="stat-number" data-count="100">0</div>
+                <div class="stat-label">Надежность & SLA (%)</div>
             </div>
         </section>
 
-        <section id="key-achievements">
-            <h2 class="decrypt-text" data-target="КЛЮЧЕВЫЕ ПОКАЗАТЕЛИ">1011001...</h2>
-            <div class="stats-container">
-                <div class="hex-stat">
-                    <div class="stat-number" data-count="25">0</div>
-                    <div class="stat-label">лет опыта</div>
-                </div>
-                <div class="hex-stat">
-                    <div class="stat-number" data-count="100">0</div>
-                    <div class="stat-label">рабочих станций<br>в сети (ЛВС)</div>
-                </div>
-                <div class="hex-stat">
-                    <div class="stat-number" data-count="3">0</div>
-                    <div class="stat-label">языка<br>скриптинга</div>
-                </div>
-                <div class="hex-stat">
-                    <div class="stat-number" data-count="100">0</div>
-                    <div class="stat-label">надежность<br>и SLA (%)</div>
-                </div>
-            </div>
-        </section>
+        <div class="layout-grid">
+            <!-- Левая колонка -->
+            <div class="main-column">
+                <section id="profile" class="glass-card">
+                    <h2 class="section-title"><i class="fas fa-user-astronaut"></i> Профессиональный профиль</h2>
+                    <p class="text-body">Системный администратор с <strong>25+ годами опыта</strong>. Специализация: IT-инфраструктура, Linux/Windows, информационная безопасность, автоматизация процессов. Имею обширный опыт работы как в государственном секторе, так и во фрилансе. Отличные навыки поддержки пользователей, технического обслуживания и внедрения сложных IT-систем.</p>
+                    
+                    <div class="conditions-box">
+                        <strong>Условия работы:</strong>
+                        <ul class="checklist">
+                            <li><i class="fas fa-check"></i> Полная / Частичная занятость</li>
+                            <li><i class="fas fa-check"></i> Удаленная работа / Гибкий график</li>
+                            <li><i class="fas fa-check"></i> Готов к командировкам / переезду</li>
+                        </ul>
+                    </div>
+                </section>
 
-        <section id="skills">
-            <h2 class="decrypt-text" data-target="ТЕХНИЧЕСКИЕ КОМПЕТЕНЦИИ">SYS.SKILLS()</h2>
-            <div class="skill-category">
-                <ul class="skill-list">
-                    <li class="skill-item"><strong><i class="fas fa-server"></i> Операционные системы:</strong> Linux (SLES, Alt Linux СПТ, Ubuntu, Debian), Windows Server (AD, DNS, DHCP, GPO).</li>
-                    <li class="skill-item"><strong><i class="fas fa-network-wired"></i> Сети & Инфраструктура:</strong> Проектирование и монтаж СКС/ЛВС, маршрутизаторы, коммутаторы, Kerio Control.</li>
-                    <li class="skill-item"><strong><i class="fas fa-shield-alt"></i> Безопасность:</strong> 152-ФЗ, «Панцирь-К», ruToken, CryptoPro, ЭЦП, VipNet.</li>
-                    <li class="skill-item"><strong><i class="fas fa-cloud"></i> Виртуализация & БД:</strong> Hyper-V, VMware, администрирование PostgreSQL.</li>
-                    <li class="skill-item"><strong><i class="fas fa-code"></i> Автоматизация & AI:</strong> Python, Bash, разработка скриптов, ИИ-агенты (LangGraph, MCP), разработка ТЗ.</li>
-                    <li class="skill-item"><strong><i class="fas fa-tools"></i> Оборудование:</strong> Сборка, ремонт ПК, монтаж и настройка IP-видеонаблюдения, поддержка слаботочных систем.</li>
-                </ul>
-            </div>
-        </section>
+                <section id="experience" class="glass-card">
+                    <h2 class="section-title"><i class="fas fa-briefcase"></i> Опыт работы</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">12.2018 — Наст. время</div>
+                            <h3 class="timeline-title">ИП / Частная практика / Фриланс</h3>
+                            <ul class="timeline-list">
+                                <li>Развертывание, настройка и сопровождение серверной инфраструктуры (Windows Server, Linux).</li>
+                                <li>Проектирование, монтаж и настройка СКС и ЛВС, конфигурирование сетевого оборудования.</li>
+                                <li>Разработка и внедрение скриптов автоматизации на Python и Bash, внедрение ИИ.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">11.2021 — 03.2022</div>
+                            <h3 class="timeline-title">Администрация города Шахты</h3>
+                            <div class="timeline-subtitle">Главный специалист отдела ИС и технологий</div>
+                            <ul class="timeline-list">
+                                <li>Комплексное обслуживание IT-инфраструктуры (Windows, Linux), своевременное обновление ОС.</li>
+                                <li>Администрирование систем видеоконференцсвязи (ВКС).</li>
+                            </ul>
+                        </div>
 
-        <section id="experience">
-            <h2 class="decrypt-text" data-target="ОПЫТ РАБОТЫ">/VAR/LOG/EXPERIENCE</h2>
-            <div class="job">
-                <div class="job-header">
-                    <div class="job-title-company">ИП / Частная практика / Фриланс</div>
-                    <div class="job-duration">12.2018 - настоящее время</div>
-                </div>
-                <ul>
-                    <li>Развертывание, настройка и сопровождение серверной инфраструктуры (Windows Server, Linux).</li>
-                    <li>Проектирование, монтаж и настройка СКС и ЛВС, конфигурирование сетевого оборудования.</li>
-                    <li>Разработка и внедрение скриптов автоматизации на Python и Bash, автоматизация задач с использованием ИИ.</li>
-                    <li>Инсталляция и поддержка систем IP-видеонаблюдения, техническая поддержка ПО.</li>
-                </ul>
-            </div>
-            
-            <div class="job">
-                <div class="job-header">
-                    <div class="job-title-company">Администрация города Шахты<br><span style="font-size: 0.9rem; color: var(--text-muted); font-weight: normal;">Главный специалист отдела ИС и технологий</span></div>
-                    <div class="job-duration">11.2021 - 03.2022</div>
-                </div>
-                <ul>
-                    <li>Комплексное обслуживание IT-инфраструктуры (Windows, Linux), своевременное обновление ОС и прикладного ПО.</li>
-                    <li>Оперативное решение аппаратных и программных проблем, минимизация простоев.</li>
-                    <li>Мониторинг сети, обеспечение безопасности, администрирование систем видеоконференцсвязи (ВКС).</li>
-                </ul>
-            </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">10.2017 — 04.2018</div>
+                            <h3 class="timeline-title">ГУП РО "УРСВ" (Водоснабжение)</h3>
+                            <div class="timeline-subtitle">Инженер-программист</div>
+                            <ul class="timeline-list">
+                                <li>Системное администрирование Windows Server (AD, DNS, DHCP, GPO, WSUS) и Linux.</li>
+                                <li>Обслуживание ЛВС, настройка маршрутизаторов, коммутаторов (Kerio, VipNet).</li>
+                            </ul>
+                        </div>
 
-            <div class="job">
-                <div class="job-header">
-                    <div class="job-title-company">ГУП РО "УРСВ" (Водоснабжение г. Шахты)<br><span style="font-size: 0.9rem; color: var(--text-muted); font-weight: normal;">Инженер-программист</span></div>
-                    <div class="job-duration">10.2017 - 04.2018</div>
-                </div>
-                <ul>
-                    <li>Системное администрирование Windows Server (AD, DNS, DHCP, GPO, WSUS) и Linux-серверов.</li>
-                    <li>Обслуживание ЛВС, настройка маршрутизаторов, коммутаторов и межсетевых экранов.</li>
-                    <li>Техническое обслуживание офисной техники и IP-видеонаблюдения, поддержка стабильности ПО.</li>
-                </ul>
-            </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">07.1996 — 09.2017 (21 год)</div>
+                            <h3 class="timeline-title">Департамент труда и соц. развития г. Шахты</h3>
+                            <div class="timeline-subtitle">Заместитель начальника ИТ отдела / Системный администратор</div>
+                            <ul class="timeline-list">
+                                <li>Полный цикл обслуживания IT-инфраструктуры. Руководство IT-отделом.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
 
-            <div class="job">
-                <div class="job-header">
-                    <div class="job-title-company">Департамент труда и соц. развития (Администрация г. Шахты)<br><span style="font-size: 0.9rem; color: var(--text-muted); font-weight: normal;">Заместитель начальника ИТ отдела / Системный администратор</span></div>
-                    <div class="job-duration">07.1996 - 09.2017 (21 год)</div>
-                </div>
-                <ul>
-                    <li>Полный цикл обслуживания IT-инфраструктуры: установка, настройка, мониторинг и поддержка ПК и оргтехники.</li>
-                    <li>Эффективное руководство IT-отделом, планирование и координация работы.</li>
-                    <li>Техническая поддержка пользователей, устранение неисправностей, обслуживание систем IP-видеонаблюдения.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="projects">
-            <h2 class="decrypt-text" data-target="ПРОЕКТЫ & РАЗРАБОТКА">EXEC.PROJECTS()</h2>
-            
-            <div class="project-item">
-                <h3><i class="fab fa-python"></i> Smart AI Agent (Pet-проект)</h3>
-                <p class="project-link"><a href="https://github.com/maks-mk/simple-ai-agent" target="_blank">github.com/maks-mk/simple-ai-agent</a></p>
-                <ul class="project-features">
-                    <li>Автономный CLI-агент на Python с поддержкой инструментов, самокоррекции и интеграции через MCP.</li>
-                    <li>Спроектировал архитектуру «LLM как мозг, инструменты как исполнители» (агент сам планирует шаги и исправляет ошибки).</li>
-                    <li>Реализован граф состояний (LangGraph): <code>reasoning → tool call → validation → retry</code>.</li>
-                    <li>Интеграция с файловой системой, веб-поиском и внешними MCP-серверами без изменения кода.</li>
-                    <li>Асинхронная архитектура, долгосрочная память, стриминговый CLI (Rich UI).</li>
-                </ul>
+                <section id="projects" class="glass-card">
+                    <h2 class="section-title"><i class="fas fa-code-branch"></i> Проекты & Разработка</h2>
+                    <div class="project-grid">
+                        <div class="project-card">
+                            <div class="project-header">
+                                <h3>Smart AI Agent</h3>
+                                <a href="https://github.com/maks-mk/simple-ai-agent" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                            <p class="text-body text-sm">Автономный CLI-агент на Python с поддержкой инструментов, самокоррекции и интеграции через MCP. Архитектура «LLM как мозг, инструменты как исполнители».</p>
+                            <div class="tech-stack">
+                                <span>Python</span><span>LangGraph</span><span>MCP</span><span>AI</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-header">
+                                <h3>ОДЦ "Город будущего"</h3>
+                            </div>
+                            <p class="text-body text-sm">Проектирование IT-инфраструктуры центра «с нуля». Развертывание серверов, сети, видеонаблюдения и защищенных каналов связи.</p>
+                            <div class="tech-stack">
+                                <span>Инфраструктура</span><span>СКС</span><span>CCTV</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
 
-            <div class="project-item">
-                <h3><i class="fas fa-building"></i> ОДЦ "Город будущего"</h3>
-                <ul class="project-features">
-                    <li>Проектирование IT-инфраструктуры центра «с нуля».</li>
-                    <li>Развертывание серверной инфраструктуры и настройка сетевого оборудования.</li>
-                    <li>Внедрение комплексной системы видеонаблюдения и контроля доступа.</li>
-                    <li>Организация защищенных каналов связи между объектами, координация работ подрядчиков.</li>
-                </ul>
-            </div>
-        </section>
+            <!-- Правая колонка -->
+            <div class="side-column">
+                <section id="skills" class="glass-card">
+                    <h2 class="section-title"><i class="fas fa-laptop-code"></i> Компетенции</h2>
+                    <div class="skill-group">
+                        <h4><i class="fas fa-server"></i> ОС & Сети</h4>
+                        <div class="tech-stack">
+                            <span>Linux (Debian, Ubuntu)</span><span>Alt Linux</span><span>Windows Server (AD, GPO)</span><span>СКС/ЛВС</span><span>Kerio Control</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h4><i class="fas fa-shield-alt"></i> Безопасность</h4>
+                        <div class="tech-stack">
+                            <span>152-ФЗ</span><span>VipNet</span><span>CryptoPro</span><span>ruToken</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h4><i class="fas fa-cloud"></i> Виртуализация & БД</h4>
+                        <div class="tech-stack">
+                            <span>Hyper-V</span><span>VMware</span><span>PostgreSQL</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h4><i class="fas fa-code"></i> Автоматизация</h4>
+                        <div class="tech-stack">
+                            <span>Python</span><span>Bash</span><span>LangGraph</span>
+                        </div>
+                    </div>
+                </section>
 
-        <section id="education">
-            <h2 class="decrypt-text" data-target="ОБРАЗОВАНИЕ И КУРСЫ">SYS.EDUCATION</h2>
-            <div class="job">
-                <div class="job-header">
-                    <div class="job-title-company">Южно-Российский государственный технический университет (НПИ)</div>
-                    <div class="job-duration">2006</div>
-                </div>
-                <ul><li>Прикладная информатика (Высшее образование)</li></ul>
-            </div>
-            <div class="job">
-                <div class="job-header">
-                    <div class="job-title-company">Шахтинский горнотехнический колледж им. академика Степанова П. И.</div>
-                    <div class="job-duration">1996</div>
-                </div>
-                <ul><li>Электромеханическое оборудование и автоматические устройства (СПО)</li></ul>
-            </div>
-            <div class="job" style="margin-bottom: 0;">
-                <div class="job-header">
-                    <div class="job-title-company">НОЧУ ДПО УЦ Сетевая академия (г. Москва)</div>
-                    <div class="job-duration">2018</div>
-                </div>
-                <ul><li>Курс: Размещение информации в ГИС ЖКХ для сотрудников ресурсоснабжающих организаций</li></ul>
-            </div>
-        </section>
+                <section id="education" class="glass-card">
+                    <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Образование</h2>
+                    <div class="edu-item">
+                        <div class="edu-year">2006</div>
+                        <div class="edu-title">Прикладная информатика (Высшее)</div>
+                        <div class="edu-school">ЮРГТУ (НПИ)</div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-year">1996</div>
+                        <div class="edu-title">Электромеханика (СПО)</div>
+                        <div class="edu-school">Шахтинский горнотехнический колледж</div>
+                    </div>
+                </section>
 
-        <section id="about">
-            <h2 class="decrypt-text" data-target="ОБО МНЕ">USER.INFO()</h2>
-            <div style="display: flex; flex-wrap: wrap; gap: 30px;">
-                <div style="flex: 1; min-width: 250px;">
-                    <h3 style="color: var(--accent-secondary); margin-bottom: 15px; font-family: var(--font-mono); font-size: 1.1rem;"><i class="fas fa-id-card"></i> Личные качества</h3>
-                    <ul class="achievements-list">
-                        <li>Аналитическое мышление и системный подход.</li>
-                        <li>Способность быстро решать сложные проблемы.</li>
-                        <li>Высокая ответственность за конечный результат.</li>
-                        <li>Постоянное самообразование в сфере IT.</li>
+                <section id="about" class="glass-card">
+                    <h2 class="section-title"><i class="fas fa-info-circle"></i> Обо мне</h2>
+                    <ul class="checklist">
+                        <li><i class="fas fa-check"></i> Аналитическое мышление</li>
+                        <li><i class="fas fa-check"></i> Системный подход</li>
+                        <li><i class="fas fa-check"></i> Английский: B1 (Чтение тех. док.)</li>
                     </ul>
-                </div>
-                <div style="flex: 1; min-width: 250px;">
-                    <h3 style="color: var(--accent-secondary); margin-bottom: 15px; font-family: var(--font-mono); font-size: 1.1rem;"><i class="fas fa-language"></i> Знание языков</h3>
-                    <ul class="achievements-list">
-                        <li><strong>Русский:</strong> Родной</li>
-                        <li><strong>Английский:</strong> B1 — Средний (Чтение технической документации, профессиональная коммуникация).</li>
-                    </ul>
-                </div>
+                </section>
             </div>
-        </section>
-
-        <section id="contact" style="border-color: var(--accent-secondary)">
-            <h2 class="decrypt-text" data-target="СВЯЗЬ">INIT.CONTACT()</h2>
-            <div class="contact-buttons">
-                <a href="tel:+79185515207" class="btn-contact"><i class="fas fa-phone"></i> Вызов</a>
-                <a href="mailto:maks_k77@mail.ru" class="btn-contact"><i class="fas fa-envelope"></i> Email</a>
-                <a href="https://github.com/maks-mk" target="_blank" class="btn-contact"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-        </section>
+        </div>
     </main>
-
-    <footer style="text-align: center; padding: 20px; font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-muted)">
-        <p>SYSTEM.EXIT() // © <span id="currentYear"></span> Колесников Максим</p>
-    </footer>
-
-    <!-- Мини-игра и элементы чата -->
-    <button class="game-button" id="openGame" title="Мини-игра"><i class="fas fa-terminal"></i></button>
+<!-- Модалка игры (сама кнопка теперь вверху) -->
     <div class="modal" id="gameModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeModal">&times;</span>
-            <iframe id="gameFrame" src="game.html" style="width: 100%; height: 600px; border: none; background: #000;"></iframe>
+        <div class="modal-content glass-card">
+            <button class="close-modal" id="closeModal"><i class="fas fa-times"></i></button>
+            <iframe id="gameFrame" src="game.html" title="Мини-игра"></iframe>
         </div>
     </div>
 
-    <div id="chat-toggle"><i class="fas fa-comment-dots"></i></div>
-    <div id="chat-widget">
-        <div id="chat-header"><div>AI Помощник</div><div id="chat-close">✕</div></div>
+    <!-- Кнопка вызова чата (Иконка заменена на 100% рабочую) -->
+    <button id="chat-toggle" class="action-fab chat-fab" title="AI Ассистент">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+    
+    <div id="chat-widget" class="glass-card">
+        <div id="chat-header">
+            <div class="chat-title"><i class="fas fa-robot"></i> AI Ассистент</div>
+            <button id="chat-close"><i class="fas fa-chevron-down"></i></button>
+        </div>
         <div id="chat-messages"></div>
         <div id="chat-input-area">
-            <input id="chat-input" placeholder="Введите команду...">
+            <input type="text" id="chat-input" placeholder="Спросите о моем опыте...">
             <button id="chat-send"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
+
     <link rel="stylesheet" href="chat-widget.css">
     <script src="chat-widget.js"></script>
+	
+    <footer class="container">
+        <p>© <span id="currentYear"></span> Колесников Максим. Системный администратор.</p>
+    </footer>
+
+    <!-- Прогресс бар -->
+    <div class="progress-bar" id="progressBar"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Эффект расшифровки текста для заголовков
-            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
-            const decryptObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-                        const targetText = el.getAttribute('data-target');
-                        if(!el.dataset.decrypted) {
-                            el.dataset.decrypted = "true";
-                            let iterations = 0;
-                            const interval = setInterval(() => {
-                                el.innerText = targetText.split("").map((letter, index) => {
-                                    if(index < iterations) return targetText[index];
-                                    return letters[Math.floor(Math.random() * letters.length)];
-                                }).join("");
-                                if(iterations >= targetText.length) clearInterval(interval);
-                                iterations += 1 / 2;
-                            }, 30);
-                        }
-                    }
-                });
-            }, { threshold: 0.8 });
-
-            document.querySelectorAll('.decrypt-text').forEach(el => decryptObserver.observe(el));
-
-            // Базовые скрипты
+            // Год в футере
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             
-            // Тема
+            // Смена темы (Dark/Light)
             const themeToggle = document.getElementById('theme-toggle');
             const icon = themeToggle.querySelector('i');
             if (localStorage.getItem('theme') === 'light') {
@@ -315,73 +272,54 @@
                 localStorage.setItem('theme', isLight ? 'light' : 'dark');
             });
 
-            // Статистика (Анимация чисел)
+            // Плавная анимация чисел
             const statsObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const el = entry.target;
                         const finalValue = parseInt(el.getAttribute('data-count'));
                         let currentValue = 0;
+                        const duration = 1500; // 1.5 сек
+                        const stepTime = Math.abs(Math.floor(duration / finalValue));
+                        
                         const timer = setInterval(() => {
-                            currentValue += Math.ceil(finalValue / 30);
-                            if(currentValue >= finalValue) {
-                                currentValue = finalValue;
-                                clearInterval(timer);
-                            }
+                            currentValue += 1;
                             el.textContent = (finalValue === 100 || finalValue === 25) ? currentValue + "+" : currentValue;
-                        }, 40);
+                            if(currentValue >= finalValue) clearInterval(timer);
+                        }, stepTime);
                         statsObserver.unobserve(el);
                     }
                 });
             });
             document.querySelectorAll('.stat-number').forEach(item => statsObserver.observe(item));
 
-            // Прогресс бар
-            const progressBar = document.createElement('div');
-            progressBar.classList.add('progress-bar');
-            document.body.appendChild(progressBar);
+            // Прогресс бар скролла
+            const progressBar = document.getElementById('progressBar');
             window.addEventListener('scroll', () => {
                 const scrollPercentage = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
                 progressBar.style.width = scrollPercentage + '%';
             });
 
-            // Навигация (Spy)
-            const sections = document.querySelectorAll('section[id]');
-            const nav = document.createElement('nav');
-            nav.classList.add('resume-nav');
-            const ul = document.createElement('ul');
-            sections.forEach(section => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = `#${section.id}`;
-                a.setAttribute('data-title', section.querySelector('h2').getAttribute('data-target'));
-                li.appendChild(a); ul.appendChild(li);
-            });
-            nav.appendChild(ul); document.body.appendChild(nav);
+            // Логика модального окна игры
+            const gameModal = document.getElementById('gameModal');
+            const openGameBtn = document.getElementById('openGame');
+            const closeGameBtn = document.getElementById('closeModal');
 
-            window.addEventListener('scroll', () => {
-                let current = "";
-                sections.forEach(section => {
-                    if (window.pageYOffset >= section.offsetTop - 200) current = section.getAttribute("id");
+            if (openGameBtn && gameModal && closeGameBtn) {
+                openGameBtn.addEventListener('click', () => {
+                    gameModal.style.display = 'block';
                 });
-                document.querySelectorAll('.resume-nav a').forEach(a => {
-                    a.classList.remove('active');
-                    if (a.getAttribute('href').includes(current) && current !== "") a.classList.add('active');
+
+                closeGameBtn.addEventListener('click', () => {
+                    gameModal.style.display = 'none';
                 });
-            });
 
-            // Кнопка Вверх
-            const btnTop = document.createElement('div');
-            btnTop.classList.add('back-to-top');
-            btnTop.innerHTML = '<i class="fas fa-chevron-up"></i>';
-            document.body.appendChild(btnTop);
-            window.addEventListener('scroll', () => btnTop.classList.toggle('visible', window.pageYOffset > 400));
-            btnTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-            // Модалка Игры
-            const modal = document.getElementById('gameModal');
-            document.getElementById('openGame').addEventListener('click', () => modal.style.display = 'block');
-            document.getElementById('closeModal').addEventListener('click', () => modal.style.display = 'none');
+                window.addEventListener('click', (e) => {
+                    if (e.target === gameModal) {
+                        gameModal.style.display = 'none';
+                    }
+                });
+            }
         });
     </script>
 </body>
