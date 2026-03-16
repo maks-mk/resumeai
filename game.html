@@ -63,6 +63,7 @@
             aspect-ratio: 1;
             box-shadow: inset 0 4px 20px rgba(0,0,0,0.3);
             position: relative;
+            overflow: hidden;
         }
 
         .cell {
@@ -243,11 +244,14 @@
 	}
     
 	let animInterval;
-    function selectBall(r, c) {
-        if (selectedBall) stopAnim(selectedBall.row, selectedBall.col);
-        selectedBall = { row: r, col: c };
-        
-        const el = grid[r][c].element;
+	function selectBall(r, c) {
+	if (selectedBall) stopAnim(selectedBall.row, selectedBall.col);
+	selectedBall = { row: r, col: c };
+	
+	const el = grid[r][c].element;
+	// Отключаем CSS-transition на время JS-анимации — иначе cubic-bezier
+	// с overshoot (1.56) временно раздувает шарик далеко за пределы ячейки
+        el.style.transition = 'none';
         let scale = 1;
         let dir = 0.03;
         animInterval = setInterval(() => {
@@ -260,6 +264,8 @@
     function stopAnim(r, c) {
         clearInterval(animInterval);
         if(grid[r] && grid[r][c]) {
+            // Восстанавливаем CSS-transition перед сбросом масштаба
+            grid[r][c].element.style.transition = '';
             grid[r][c].element.style.transform = `translate(-50%, -50%) scale(1)`;
         }
         selectedBall = null;
