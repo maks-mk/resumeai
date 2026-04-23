@@ -12,54 +12,66 @@ document.addEventListener('DOMContentLoaded', () => {
         input.focus();
     });
     closeBtn.addEventListener('click', () => widget.classList.remove('active'));
-  
+
+    // Добавляем статус-индикатор в заголовок
+    const header = document.getElementById('chat-header');
+    const title = header.querySelector('.chat-title');
+    const status = document.createElement('div');
+    status.className = 'status-indicator';
+    status.innerHTML = `<span class="status-dot"></span> Онлайн`;
+    title.appendChild(status);
+
     // Отправка
     sendBtn.addEventListener('click', sendMessage);
     input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') sendMessage();
     });
-  
+
     async function sendMessage() {
         const text = input.value.trim();
         if (!text) return;
-      
+
         appendMessage('user', text);
         input.value = '';
-      
+
         // Индикатор набора текста
         const loadingEl = document.createElement('div');
         loadingEl.className = 'msg-wrapper bot';
-        loadingEl.innerHTML = `<div class="chat-bubble bot-bubble typing-indicator"><span></span><span></span><span></span></div>`;
+        loadingEl.innerHTML = `
+            <div class="avatar bot-avatar"><i class="fas fa-robot"></i></div>
+            <div class="chat-bubble bot-bubble typing-indicator"><span></span><span></span><span></span></div>
+        `;
         msgs.appendChild(loadingEl);
         scrollToBottom();
-      
+
         try {
             const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
                 ? 'http://127.0.0.1:8000/chat'
                 : 'https://maksresume.onrender.com/chat';
-  
+
             const res = await fetch(API_URL, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ message: text })
             });
-            
+
             if (!res.ok) throw new Error(`Ошибка сервера: ${res.status}`);
-            
+
             msgs.removeChild(loadingEl);
-            
+
             // Создаем блок для стриминга ответа
             const wrapperEl = document.createElement('div');
             wrapperEl.className = 'msg-wrapper bot';
+            wrapperEl.innerHTML = `<div class="avatar bot-avatar"><i class="fas fa-robot"></i></div>`;
             const bubbleEl = document.createElement('div');
             bubbleEl.className = 'chat-bubble bot-bubble';
             wrapperEl.appendChild(bubbleEl);
             msgs.appendChild(wrapperEl);
-            
+
             const reader = res.body.getReader();
             const decoder = new TextDecoder("utf-8");
             let fullResponse = "";
-  
+
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break; 
@@ -74,15 +86,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         scrollToBottom();
     }
-  
+
     function appendMessage(role, text) {
         const wrapper = document.createElement('div');
         wrapper.className = `msg-wrapper ${role}`;
-        
+
+        const avatar = document.createElement('div');
+        avatar.className = `avatar ${role}-avatar`;
+        avatar.innerHTML = role === 'bot' ? '<i class="fas fa-robot"></i>' : '<i class="fas fa-user"></i>';
+
         const bubble = document.createElement('div');
         bubble.className = `chat-bubble ${role}-bubble`;
         bubble.innerHTML = formatResponse(text);
-        
+
+        wrapper.appendChild(avatar);
         wrapper.appendChild(bubble);
         msgs.appendChild(wrapper);
     }
