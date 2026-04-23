@@ -24,21 +24,36 @@
             --color-5: #fb7185; /* Розовый/Красный */
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
         body {
-            margin: 0; padding: 0;
             font-family: 'Inter', sans-serif;
             color: var(--text-main);
             background: transparent;
-            display: flex; align-items: center; justify-content: center;
-            height: 100vh; overflow: hidden;
+            position: relative;
         }
-
+          
         #game-wrapper {
             width: 100%;
-            max-width: min(400px, 95vw);
-            margin: 0 auto;
+            max-width: 400px;
             text-align: center;
-            position: relative;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            box-sizing: border-box;
         }
 
         .header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; }
@@ -63,6 +78,8 @@
             aspect-ratio: 1;
             box-shadow: inset 0 4px 20px rgba(0,0,0,0.3);
             position: relative;
+            width: 100%;
+            max-width: 100%;
             overflow: hidden;
         }
 
@@ -71,8 +88,12 @@
             border-radius: 6px;
             cursor: pointer;
             position: relative;
-            transition: all 0.2s ease;
+            transition: background 0.2s ease;
             box-shadow: inset 0 2px 4px rgba(255,255,255,0.02);
+            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 1;
+            touch-action: manipulation;
         }
         .cell:hover { background: rgba(255, 255, 255, 0.08); }
 
@@ -83,7 +104,7 @@
             width: 65%; height: 65%;
             border-radius: 50%;
             box-shadow: inset -4px -4px 8px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: none;
         }
 
         .c1 { background: radial-gradient(circle at 30% 30%, #bae6fd, var(--color-1)); }
@@ -107,7 +128,7 @@
             padding: 10px 20px;
             border-radius: 100px;
             font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem;
-            cursor: pointer; transition: all 0.3s;
+            cursor: pointer; transition: background 0.3s, color 0.3s, transform 0.3s;
             display: flex; align-items: center; gap: 8px;
         }
         .btn:hover { background: var(--accent-primary); color: #fff; transform: translateY(-2px); }
@@ -131,6 +152,65 @@
         .overlay h2 { margin: 0 0 5px; font-size: 1.8rem; color: var(--text-main); }
         .overlay p { color: var(--text-muted); margin-bottom: 25px; }
         .final-score { font-size: 3rem; font-family: 'Fira Code', monospace; font-weight: bold; color: var(--accent-secondary); margin-bottom: 25px;}
+
+        /* Мобильная адаптация */
+        @media (max-width: 600px) {
+            body {
+                padding: 5px;
+            }
+                
+            #game-wrapper {
+                max-width: 100%;
+            }
+                
+            .header {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+                
+            .title {
+                font-size: 1rem;
+            }
+                
+            .score-board {
+                gap: 10px;
+            }
+                
+            .score-label {
+                font-size: 0.65rem;
+            }
+                
+            .score-value {
+                font-size: 1rem;
+            }
+                
+            #board {
+                gap: 2px;
+                padding: 4px;
+            }
+              
+            .ball {
+                width: 70%;
+                height: 70%;
+            }
+                
+            .controls {
+                margin-top: 15px;
+                flex-direction: column;
+                gap: 10px;
+            }
+                
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+                
+            .final-score {
+                font-size: 2rem;
+            }
+        }
 
     </style>
 </head>
@@ -174,6 +254,32 @@
 </div>
 
 <script>
+    const SoundManager = {
+        ctx: null,
+        init() {
+            if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            if (this.ctx.state === 'suspended') this.ctx.resume();
+        },
+        play(freq, type, duration, volume = 0.1) {
+            this.init();
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+            gain.gain.setValueAtTime(volume, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start();
+            osc.stop(this.ctx.currentTime + duration);
+        },
+        select() { this.play(440, 'sine', 0.1); },
+        match() { this.play(880, 'sine', 0.2); },
+        combo() { this.play(1200, 'sine', 0.15); },
+        gameOver() { this.play(220, 'sawtooth', 0.5, 0.05); },
+        restart() { this.play(660, 'sine', 0.2); }
+    };
+
     const board = document.getElementById('board');
     const overlay = document.getElementById('gameOver');
     const colors = ['c1', 'c2', 'c3', 'c4', 'c5'];
@@ -221,13 +327,13 @@
     function placeRandomBall(isBonus = false) {
         const cellInfo = getRandomEmptyCell();
         if(!cellInfo) return;
-        
+          
         const color = colors[Math.floor(Math.random() * colors.length)];
         const ball = document.createElement('div');
         ball.className = `ball ${color} ${isBonus ? 'bonus-ball' : ''}`;
-        
-        // Индекс с учетом overlay (+1)
-        const cell = board.children[cellInfo.row * 10 + cellInfo.col + 1];
+          
+        // Находим ячейку по dataset
+        const cell = board.querySelector(`[data-row="${cellInfo.row}"][data-col="${cellInfo.col}"]`);
         cell.appendChild(ball);
         grid[cellInfo.row][cellInfo.col] = { color, element: ball, bonus: isBonus };
     }
@@ -247,25 +353,22 @@
 	function selectBall(r, c) {
 	if (selectedBall) stopAnim(selectedBall.row, selectedBall.col);
 	selectedBall = { row: r, col: c };
+	SoundManager.select();
 	
 	const el = grid[r][c].element;
-	// Отключаем CSS-transition на время JS-анимации — иначе cubic-bezier
-	// с overshoot (1.56) временно раздувает шарик далеко за пределы ячейки
-        el.style.transition = 'none';
-        let scale = 1;
-        let dir = 0.03;
-        animInterval = setInterval(() => {
-            scale += dir;
-            if(scale > 1.15 || scale < 0.85) dir = -dir;
-            el.style.transform = `translate(-50%, -50%) scale(${scale})`;
-        }, 50);
-    }
+	el.style.transition = 'none';
+	let scale = 1;
+	let dir = 0.008;
+	animInterval = setInterval(() => {
+	    scale += dir;
+	    if(scale > 1.04 || scale < 0.96) dir = -dir;
+	    el.style.transform = `translate(-50%, -50%) scale(${scale})`;
+	}, 50);
+	}
 
     function stopAnim(r, c) {
         clearInterval(animInterval);
         if(grid[r] && grid[r][c]) {
-            // Восстанавливаем CSS-transition перед сбросом масштаба
-            grid[r][c].element.style.transition = '';
             grid[r][c].element.style.transform = `translate(-50%, -50%) scale(1)`;
         }
         selectedBall = null;
@@ -302,12 +405,14 @@
 
         for (let i = 1; i < path.length; i++) {
             await new Promise(res => setTimeout(res, 20));
-            board.children[path[i][0] * 10 + path[i][1] + 1].appendChild(data.element);
+            const cell = board.querySelector(`[data-row="${path[i][0]}"][data-col="${path[i][1]}"]`);
+            cell.appendChild(data.element);
         }
         grid[nr][nc] = data;
 
         const removed = checkLines();
         if (removed > 0) {
+            SoundManager.match();
             addScore(removed * 100 + (data.bonus ? 500 : 0));
         } else {
             if(Date.now() - lastMoveTime > COMBO_TIMEOUT) comboMultiplier = 1;
@@ -349,7 +454,8 @@
             toRemove.forEach(p => {
                 const [r, c] = p.split('-').map(Number);
                 if(grid[r][c].bonus) bonusPoints += 300;
-                board.children[r * 10 + c + 1].innerHTML = ''; // +1 due to overlay
+                const cell = board.querySelector(`[data-row="${r}"][data-col="${c}"]`);
+                cell.innerHTML = '';
                 grid[r][c] = null;
             });
             linesRemoved++;
@@ -362,6 +468,8 @@
     function addScore(pts) {
         if(Date.now() - lastMoveTime < COMBO_TIMEOUT) comboMultiplier++;
         else comboMultiplier = 1;
+        
+        if(comboMultiplier > 1) SoundManager.combo();
         
         const finalPts = pts * comboMultiplier;
         score += finalPts;
@@ -388,6 +496,7 @@
         for(let r=0; r<10; r++) for(let c=0; c<10; c++) if(!grid[r][c]) empty++;
         
         if (empty < 3) {
+            SoundManager.gameOver();
             document.getElementById('final-score').textContent = score;
             overlay.classList.add('show');
             return true;
@@ -396,6 +505,7 @@
     }
 
     function newGame() {
+        SoundManager.restart();
         overlay.classList.remove('show');
         score = 0; comboMultiplier = 1; linesRemoved = 0;
         document.getElementById('score').textContent = 0;

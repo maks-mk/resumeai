@@ -39,7 +39,7 @@
                 </div>
                 <h1 itemprop="name" class="gradient-text">Колесников Максим</h1>
                 <div itemprop="jobTitle" class="job-title-badge">IT-специалист / Системный администратор</div>
-                <p class="subtitle-text">47 лет • Инфраструктура • Linux/Windows • Безопасность • Автоматизация</p>
+                <p class="subtitle-text">Инфраструктура • Linux/Windows • Безопасность • Автоматизация</p>
                 
                 <div class="contact-badges">
                     <a href="#" itemprop="address" class="badge"><i class="fas fa-map-marker-alt"></i> г. Шахты, Ростовская обл.</a>
@@ -308,15 +308,18 @@
             if (openGameBtn && gameModal && closeGameBtn) {
                 openGameBtn.addEventListener('click', () => {
                     gameModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
                 });
 
                 closeGameBtn.addEventListener('click', () => {
                     gameModal.style.display = 'none';
+                    document.body.style.overflow = '';
                 });
 
-                window.addEventListener('click', (e) => {
+                gameModal.addEventListener('click', (e) => {
                     if (e.target === gameModal) {
                         gameModal.style.display = 'none';
+                        document.body.style.overflow = '';
                     }
                 });
             }
