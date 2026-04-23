@@ -95,9 +95,9 @@ body {
 }
 
 /* Панель управления */
-.control-panel {
+.control-panel-left, .control-panel-right {
     position: fixed;
-    top: 20px; left: 20px;
+    top: 20px;
     display: flex; gap: 8px;
     background: var(--surface-color);
     backdrop-filter: blur(10px);
@@ -107,6 +107,8 @@ body {
     z-index: 100;
     box-shadow: var(--shadow-soft);
 }
+.control-panel-left { left: 20px; }
+.control-panel-right { right: 20px; }
 .control-btn {
     background: transparent;
     color: var(--text-main);
