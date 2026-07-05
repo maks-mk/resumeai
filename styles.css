@@ -327,7 +327,8 @@ header { padding: 60px 0 30px; }
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    row-gap: 24px;
+    column-gap: 48px;
     margin-bottom: 30px;
 }
 .stat-card {
