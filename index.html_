@@ -6,7 +6,7 @@
     <title>Резюме | Колесников Максим</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="stylesheet" href="styles.css">
     <meta name="description" content="Резюме: IT-специалист / Системный администратор с 25+ летним опытом">
 </head>
 <body>
@@ -23,89 +23,53 @@
         </button>
     </div>
     <div class="control-panel-right">
+        <a href="resume.pdf" download="resume.pdf" class="control-btn" aria-label="Скачать PDF" title="Скачать PDF">
+            <i class="fas fa-download"></i>
+        </a>
+        <div class="control-divider"></div>
         <button class="control-btn icon-btn" id="theme-toggle" aria-label="Сменить тему" title="Сменить тему">
             <i class="fas fa-moon"></i>
         </button>
     </div>
 
-    <header class="hero" itemscope itemtype="http://schema.org/Person">
+    <header itemscope itemtype="http://schema.org/Person">
         <div class="container">
-            <div class="hero-shell glass-card">
-                <div class="hero-copy">
-                    <div class="eyebrow"><i class="fas fa-satellite-dish"></i> IT-инфраструктура под ключ</div>
-                    <h1 itemprop="name" class="gradient-text">Колесников Максим</h1>
-                    <div itemprop="jobTitle" class="job-title-badge">IT-специалист / Системный администратор</div>
-                    <p class="hero-lead">25+ лет строю, поддерживаю и защищаю IT-системы: от рабочих мест и серверов до сетей, автоматизации и AI-инструментов.</p>
-
-                    <div class="hero-actions" aria-label="Основные действия">
-                        <a href="resume.pdf" download="resume.pdf" class="primary-action"><i class="fas fa-file-arrow-down"></i> Скачать резюме PDF</a>
-                        <a href="mailto:maks_k77@mail.ru" class="secondary-action"><i class="fas fa-envelope"></i> Связаться</a>
-                    </div>
-
-                    <div class="contact-badges" aria-label="Контакты">
-                        <a href="#" itemprop="address" class="badge"><i class="fas fa-map-marker-alt"></i> г. Шахты, Ростовская обл.</a>
-                        <a href="tel:+79185515207" class="badge"><i class="fas fa-phone"></i> +7 (918) 551-52-07</a>
-                        <a href="https://github.com/maks-mk" target="_blank" rel="noopener" class="badge"><i class="fab fa-github"></i> github.com/maks-mk</a>
-                    </div>
+            <div class="header-content glass-card">
+                <div class="avatar-wrapper">
+                    <img itemprop="image" class="profile-pic" src="myface1.jpg" alt="Колесников Максим">
                 </div>
-
-                <div class="hero-visual" aria-label="Профиль специалиста">
-                    <div class="avatar-wrapper">
-                        <img itemprop="image" class="profile-pic" src="myface1.jpg" alt="Колесников Максим">
-                    </div>
-                    <div class="profile-orbit-card orbit-card-top">
-                        <span>25+</span>
-                        <small>лет надежной поддержки</small>
-                    </div>
-                    <div class="profile-orbit-card orbit-card-bottom">
-                        <span>AI + Infra</span>
-                        <small>автоматизация процессов</small>
-                    </div>
+                <h1 itemprop="name" class="gradient-text">Колесников Максим</h1>
+                <div itemprop="jobTitle" class="job-title-badge">IT-специалист / Системный администратор</div>
+                <p class="subtitle-text">Инфраструктура • Linux/Windows • Безопасность • Автоматизация</p>
+                
+                <div class="contact-badges">
+                    <a href="#" itemprop="address" class="badge"><i class="fas fa-map-marker-alt"></i> г. Шахты, Ростовская обл.</a>
+                    <a href="tel:+79185515207" class="badge"><i class="fas fa-phone"></i> +7 (918) 551-52-07</a>
+                    <a href="mailto:maks_k77@mail.ru" class="badge"><i class="fas fa-envelope"></i> maks_k77@mail.ru</a>
+                    <a href="https://github.com/maks-mk" target="_blank" class="badge"><i class="fab fa-github"></i> github.com/maks-mk</a>
                 </div>
             </div>
         </div>
     </header>
 
     <main class="container">
-        <section class="expertise-strip" aria-label="Ключевые направления">
-            <article class="expertise-card glass-card">
-                <i class="fas fa-network-wired"></i>
-                <h3>Инфраструктура</h3>
-                <p>Серверы, рабочие станции, СКС, ЛВС и отказоустойчивая поддержка пользователей.</p>
-            </article>
-            <article class="expertise-card glass-card">
-                <i class="fas fa-shield-halved"></i>
-                <h3>Безопасность</h3>
-                <p>Защищенные каналы, регламенты, CryptoPro, VipNet и практики защиты данных.</p>
-            </article>
-            <article class="expertise-card glass-card">
-                <i class="fas fa-terminal"></i>
-                <h3>Автоматизация</h3>
-                <p>Python, Bash, LangGraph и AI-инструменты для ускорения повторяемых процессов.</p>
-            </article>
-        </section>
-
         <!-- Статистика -->
         <section id="key-achievements" class="stats-grid">
             <div class="stat-card glass-card">
                 <div class="stat-number" data-count="25">0</div>
                 <div class="stat-label">Лет опыта</div>
-                <p>От госструктур до частной практики и проектной работы.</p>
             </div>
             <div class="stat-card glass-card">
                 <div class="stat-number" data-count="100">0</div>
-                <div class="stat-label">Рабочих станций</div>
-                <p>Поддержка ЛВС, пользователей, серверов и сетевого оборудования.</p>
+                <div class="stat-label">Рабочих станций (ЛВС)</div>
             </div>
             <div class="stat-card glass-card">
                 <div class="stat-number" data-count="3">0</div>
                 <div class="stat-label">Языка скриптинга</div>
-                <p>Python, Bash и практическая автоматизация административных задач.</p>
             </div>
             <div class="stat-card glass-card">
                 <div class="stat-number" data-count="100">0</div>
-                <div class="stat-label">Фокус на надежность</div>
-                <p>Стабильность, документирование и предсказуемая поддержка систем.</p>
+                <div class="stat-label">Надежность & SLA (%)</div>
             </div>
         </section>
 
@@ -168,7 +132,7 @@
                             <h3 class="timeline-title">Департамент труда и социального развития г. Шахты</h3>
                             <div class="timeline-subtitle">Заместитель начальника ИТ отдела / Системный администратор</div>
                             <ul class="timeline-list">
-                                <li>Полный цикл обслуживания IT-инфраструктуры. Руководство IT-отделом. </li>
+                                <li>Полный цикл обслуживания IT-инфраструктуры. Руководство IT-отделом.</li>
                             </ul>
                         </div>
                     </div>
