@@ -3,29 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Nodes</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>System Nodes — MK Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Fira+Code:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #0f172a;
+            --bg-color: #07080c;
+            --surface-bg: #0e121a;
+            --board-bg: #151a24;
+            --cell-bg: #0b0f17;
+            --cell-border: rgba(255, 255, 255, 0.12);
+            --cell-hover: #1e2636;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --accent-primary: #6366f1; /* Индиго */
-            --accent-secondary: #0ea5e9; /* Бирюза */
-            --cell-bg: rgba(255, 255, 255, 0.03);
-            --cell-border: rgba(255, 255, 255, 0.08);
+            --accent-primary: #ff9d00;
+            --accent-secondary: #ffb700;
             
-            /* Цвета шариков */
-            --color-1: #38bdf8; /* Голубой */
-            --color-2: #c084fc; /* Фиолетовый */
+            /* Цвета шариков для темной темы */
+            --color-1: #ff9d00; /* Янтарный */
+            --color-2: #38bdf8; /* Голубой */
             --color-3: #4ade80; /* Зеленый */
-            --color-4: #facc15; /* Желтый */
-            --color-5: #fb7185; /* Розовый/Красный */
+            --color-4: #c084fc; /* Фиолетовый */
+            --color-5: #fb7185; /* Розовый */
+        }
+
+        /* Светлая тема */
+        body.light-theme {
+            --bg-color: #f8fafc;
+            --surface-bg: #ffffff;
+            --board-bg: #e2e8f0;
+            --cell-bg: #ffffff;
+            --cell-border: rgba(15, 23, 42, 0.18);
+            --cell-hover: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #d97706;
+            --accent-secondary: #f59e0b;
+            
+            /* Яркие, контрастные цвета шариков для светлой темы */
+            --color-1: #d97706; /* Янтарный */
+            --color-2: #0284c7; /* Синий */
+            --color-3: #16a34a; /* Зеленый */
+            --color-4: #9333ea; /* Фиолетовый */
+            --color-5: #e11d48; /* Красный */
         }
 
         * {
             box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         html, body {
@@ -35,16 +61,18 @@
             height: 100%;
             overflow: hidden;
         }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             color: var(--text-main);
-            background: transparent;
+            background: var(--bg-color);
             position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
           
         #game-wrapper {
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             text-align: center;
             position: absolute;
             top: 50%;
@@ -52,173 +80,183 @@
             transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
-            padding: 10px;
+            padding: 20px;
             box-sizing: border-box;
+            background: var(--surface-bg);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--cell-border);
         }
 
-        .header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; }
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 14px; 
+        }
         
-        .title { font-weight: 600; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; margin: 0; }
+        .title { 
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800; 
+            font-size: 1.15rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            margin: 0; 
+            color: var(--text-main);
+            letter-spacing: 1px;
+        }
         .title i { color: var(--accent-primary); }
 
-        .score-board { display: flex; gap: 15px; }
+        .score-board { display: flex; gap: 14px; }
         .score-box { text-align: right; }
-        .score-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-        .score-value { font-family: 'Fira Code', monospace; font-size: 1.2rem; font-weight: 500; color: var(--text-main); }
-        .score-value.highlight { color: var(--accent-secondary); }
+        .score-label { 
+            font-size: 0.72rem; 
+            color: var(--text-muted); 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .score-value { 
+            font-family: 'Fira Code', monospace; 
+            font-size: 1.15rem; 
+            font-weight: 700; 
+            color: var(--text-main); 
+        }
+        .score-value.highlight { color: var(--accent-primary); }
 
         #board {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
             gap: 4px;
-            background: rgba(0, 0, 0, 0.2);
+            background: var(--board-bg);
             padding: 8px;
             border-radius: 16px;
             border: 1px solid var(--cell-border);
             aspect-ratio: 1;
-            box-shadow: inset 0 4px 20px rgba(0,0,0,0.3);
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.2);
             position: relative;
             width: 100%;
             max-width: 100%;
             overflow: hidden;
+            transition: background-color 0.3s ease;
         }
 
         .cell {
             background: var(--cell-bg);
+            border: 1px solid var(--cell-border);
             border-radius: 6px;
             cursor: pointer;
             position: relative;
-            transition: background 0.2s ease;
-            box-shadow: inset 0 2px 4px rgba(255,255,255,0.02);
+            transition: background 0.15s ease, border-color 0.15s ease;
             overflow: hidden;
             width: 100%;
             aspect-ratio: 1;
             touch-action: manipulation;
         }
-        .cell:hover { background: rgba(255, 255, 255, 0.08); }
+        .cell:hover { background: var(--cell-hover); }
 
         .ball {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 65%; height: 65%;
+            width: 68%; height: 68%;
             border-radius: 50%;
-            box-shadow: inset -4px -4px 8px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), 0 3px 6px rgba(0,0,0,0.25);
             transition: none;
         }
 
-        .c1 { background: radial-gradient(circle at 30% 30%, #bae6fd, var(--color-1)); }
-        .c2 { background: radial-gradient(circle at 30% 30%, #e9d5ff, var(--color-2)); }
-        .c3 { background: radial-gradient(circle at 30% 30%, #bbf7d0, var(--color-3)); }
-        .c4 { background: radial-gradient(circle at 30% 30%, #fef08a, var(--color-4)); }
-        .c5 { background: radial-gradient(circle at 30% 30%, #fecdd3, var(--color-5)); }
+        .c1 { background: radial-gradient(circle at 30% 30%, #fef3c7, var(--color-1)); }
+        .c2 { background: radial-gradient(circle at 30% 30%, #e0f2fe, var(--color-2)); }
+        .c3 { background: radial-gradient(circle at 30% 30%, #dcfce7, var(--color-3)); }
+        .c4 { background: radial-gradient(circle at 30% 30%, #f3e8ff, var(--color-4)); }
+        .c5 { background: radial-gradient(circle at 30% 30%, #ffe4e6, var(--color-5)); }
 
         .bonus-ball::after {
             content: '★'; position: absolute;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 10px; color: rgba(255,255,255,0.9); text-shadow: 0 0 5px white;
+            font-size: 11px; color: #ffffff; text-shadow: 0 0 4px rgba(0,0,0,0.6);
         }
 
-        .controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+        .controls { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-top: 16px; 
+        }
         
         .btn {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--accent-primary);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            padding: 10px 20px;
-            border-radius: 100px;
-            font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem;
-            cursor: pointer; transition: background 0.3s, color 0.3s, transform 0.3s;
-            display: flex; align-items: center; gap: 8px;
+            background: var(--accent-primary);
+            color: #ffffff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif; 
+            font-weight: 700; 
+            font-size: 0.9rem;
+            cursor: pointer; 
+            transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+            display: flex; 
+            align-items: center; 
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(217, 119, 6, 0.3);
         }
-        .btn:hover { background: var(--accent-primary); color: #fff; transform: translateY(-2px); }
+        .btn:hover { 
+            transform: translateY(-2px); 
+            opacity: 0.95;
+            box-shadow: 0 6px 18px rgba(217, 119, 6, 0.4);
+        }
 
         .combo-text {
-            position: absolute; color: var(--accent-secondary); font-weight: 600; font-family: 'Fira Code', monospace;
-            animation: floatUp 1s ease-out forwards; pointer-events: none; z-index: 20;
+            position: absolute; 
+            color: var(--accent-primary); 
+            font-weight: 800; 
+            font-family: 'Fira Code', monospace;
+            animation: floatUp 1s ease-out forwards; 
+            pointer-events: none; 
+            z-index: 20;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         @keyframes floatUp { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-30px); opacity: 0; } }
 
         /* Окно окончания игры */
         .overlay {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px);
+            background: var(--surface-bg);
             border-radius: 16px;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 100;
         }
-        .overlay.show { opacity: 1; pointer-events: auto; }
+        .overlay.show { opacity: 0.96; pointer-events: auto; }
         
-        .overlay h2 { margin: 0 0 5px; font-size: 1.8rem; color: var(--text-main); }
-        .overlay p { color: var(--text-muted); margin-bottom: 25px; }
-        .final-score { font-size: 3rem; font-family: 'Fira Code', monospace; font-weight: bold; color: var(--accent-secondary); margin-bottom: 25px;}
+        .overlay h2 { margin: 0 0 6px; font-size: 1.7rem; color: var(--text-main); font-weight: 700; }
+        .overlay p { color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem; }
+        .final-score { font-size: 2.8rem; font-family: 'Fira Code', monospace; font-weight: 700; color: var(--accent-primary); margin-bottom: 24px;}
 
         /* Мобильная адаптация */
-        @media (max-width: 600px) {
-            body {
-                padding: 5px;
-            }
-                
+        @media (max-width: 500px) {
             #game-wrapper {
-                max-width: 100%;
+                padding: 12px;
+                max-width: 96%;
             }
-                
-            .header {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-                margin-bottom: 10px;
-            }
-                
-            .title {
-                font-size: 1rem;
-            }
-                
-            .score-board {
-                gap: 10px;
-            }
-                
-            .score-label {
-                font-size: 0.65rem;
-            }
-                
-            .score-value {
-                font-size: 1rem;
-            }
-                
-            #board {
-                gap: 2px;
-                padding: 4px;
-            }
-              
-            .ball {
-                width: 70%;
-                height: 70%;
-            }
-                
-            .controls {
-                margin-top: 15px;
-                flex-direction: column;
-                gap: 10px;
-            }
-                
-            .btn {
-                padding: 8px 16px;
-                font-size: 0.85rem;
-            }
-                
-            .final-score {
-                font-size: 2rem;
-            }
+            .header { margin-bottom: 10px; }
+            .title { font-size: 1rem; }
+            .score-board { gap: 10px; }
+            .score-label { font-size: 0.65rem; }
+            .score-value { font-size: 1rem; }
+            #board { gap: 2px; padding: 4px; }
+            .controls { margin-top: 12px; }
+            .btn { padding: 8px 16px; font-size: 0.82rem; }
+            .final-score { font-size: 2.2rem; }
         }
-
     </style>
 </head>
 <body>
 
 <div id="game-wrapper">
     <div class="header">
-        <h1 class="title"><i class="fas fa-project-diagram"></i> Nodes</h1>
+        <h1 class="title"><i class="fas fa-project-diagram"></i> MK Nodes</h1>
         <div class="score-board">
             <div class="score-box">
                 <div class="score-label">Комбо</div>
@@ -234,7 +272,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="board">
         <div class="overlay" id="gameOver">
             <h2>Игра окончена</h2>
@@ -254,6 +292,38 @@
 </div>
 
 <script>
+    function syncTheme() {
+        try {
+            let isLight = false;
+            if (localStorage.getItem('theme') === 'light') {
+                isLight = true;
+            } else if (window.parent && window.parent.document && window.parent.document.body) {
+                isLight = window.parent.document.body.classList.contains('light-theme');
+            }
+            if (isLight) {
+                document.body.classList.add('light-theme');
+            } else {
+                document.body.classList.remove('light-theme');
+            }
+        } catch (e) {
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-theme');
+            } else {
+                document.body.classList.remove('light-theme');
+            }
+        }
+    }
+
+    syncTheme();
+    setInterval(syncTheme, 500);
+    window.addEventListener('storage', syncTheme);
+    window.addEventListener('message', (e) => {
+        if (e.data && e.data.theme) {
+            if (e.data.theme === 'light') document.body.classList.add('light-theme');
+            else document.body.classList.remove('light-theme');
+        }
+    });
+
     const SoundManager = {
         ctx: null,
         init() {
@@ -286,10 +356,11 @@
     let grid = [];
     let selectedBall = null;
     let score = 0;
-    let highScore = localStorage.getItem('nodesHighScore') || 0;
+    let highScore = Number(localStorage.getItem('nodesHighScore')) || 0;
     let comboMultiplier = 1;
     let linesRemoved = 0;
     let lastMoveTime = Date.now();
+    let isMoving = false;
     const COMBO_TIMEOUT = 5000;
 
     function init() {
@@ -300,7 +371,6 @@
     }
 
     function createBoard() {
-        // Удаляем старые ячейки, но оставляем overlay
         Array.from(board.children).forEach(child => { if(child.id !== 'gameOver') child.remove(); });
         
         for (let i = 0; i < 10; i++) {
@@ -332,39 +402,39 @@
         const ball = document.createElement('div');
         ball.className = `ball ${color} ${isBonus ? 'bonus-ball' : ''}`;
           
-        // Находим ячейку по dataset
         const cell = board.querySelector(`[data-row="${cellInfo.row}"][data-col="${cellInfo.col}"]`);
         cell.appendChild(ball);
         grid[cellInfo.row][cellInfo.col] = { color, element: ball, bonus: isBonus };
     }
 
     function handleCellClick(e) {
-		const r = parseInt(e.currentTarget.dataset.row);
-		const c = parseInt(e.currentTarget.dataset.col);
+        if (isMoving) return;
+        const r = parseInt(e.currentTarget.dataset.row);
+        const c = parseInt(e.currentTarget.dataset.col);
 
-		if (!grid[r][c]) {
-			if (selectedBall) moveSelectedBall(r, c);
-		} else {
-			selectBall(r, c);
-		}
-	}
+        if (!grid[r][c]) {
+            if (selectedBall) moveSelectedBall(r, c);
+        } else {
+            selectBall(r, c);
+        }
+    }
     
-	let animInterval;
-	function selectBall(r, c) {
-	if (selectedBall) stopAnim(selectedBall.row, selectedBall.col);
-	selectedBall = { row: r, col: c };
-	SoundManager.select();
-	
-	const el = grid[r][c].element;
-	el.style.transition = 'none';
-	let scale = 1;
-	let dir = 0.008;
-	animInterval = setInterval(() => {
-	    scale += dir;
-	    if(scale > 1.04 || scale < 0.96) dir = -dir;
-	    el.style.transform = `translate(-50%, -50%) scale(${scale})`;
-	}, 50);
-	}
+    let animInterval;
+    function selectBall(r, c) {
+        if (selectedBall) stopAnim(selectedBall.row, selectedBall.col);
+        selectedBall = { row: r, col: c };
+        SoundManager.select();
+        
+        const el = grid[r][c].element;
+        el.style.transition = 'none';
+        let scale = 1;
+        let dir = 0.008;
+        animInterval = setInterval(() => {
+            scale += dir;
+            if(scale > 1.04 || scale < 0.96) dir = -dir;
+            el.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        }, 50);
+    }
 
     function stopAnim(r, c) {
         clearInterval(animInterval);
@@ -399,7 +469,9 @@
         const path = findPath(sr, sc, nr, nc);
         if (!path) return;
 
+        isMoving = true;
         stopAnim(sr, sc);
+
         const data = grid[sr][sc];
         grid[sr][sc] = null;
 
@@ -410,21 +482,26 @@
         }
         grid[nr][nc] = data;
 
-        const removed = checkLines();
-        if (removed > 0) {
+        const linePoints = checkLines();
+        if (linePoints > 0) {
             SoundManager.match();
-            addScore(removed * 100 + (data.bonus ? 500 : 0));
+            addScore(linePoints + (data.bonus ? 500 : 0));
         } else {
             if(Date.now() - lastMoveTime > COMBO_TIMEOUT) comboMultiplier = 1;
             document.getElementById('combo').textContent = `x${comboMultiplier}`;
-            
-            if(!checkGameOver()) {
-                placeRandomBall(); placeRandomBall();
-                if(Math.random() < 0.1) placeRandomBall(true);
-                checkLines(); checkGameOver();
+
+            placeRandomBall(); placeRandomBall();
+            if(Math.random() < 0.1) placeRandomBall(true);
+
+            const autoPoints = checkLines();
+            if (autoPoints > 0) {
+                SoundManager.match();
+                addScore(autoPoints);
             }
+            checkGameOver();
         }
         lastMoveTime = Date.now();
+        isMoving = false;
     }
 
     function checkLines() {
@@ -460,7 +537,7 @@
             });
             linesRemoved++;
             document.getElementById('lines-removed').textContent = linesRemoved;
-            return toRemove.size + bonusPoints/100;
+            return toRemove.size * 100 + bonusPoints;
         }
         return 0;
     }

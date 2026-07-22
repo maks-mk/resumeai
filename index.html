@@ -3,121 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Резюме | Колесников Максим</title>
+    <title>Резюме | Колесников Максим — MK Style</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=2">
-    <meta name="description" content="Резюме: IT-специалист / Системный администратор с 25+ летним опытом">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=4">
+    <meta name="description" content="Резюме MK Style: Колесников Максим — IT-специалист / Системный администратор с 25+ летним опытом">
 </head>
-<body>
-    <!-- Фоновые градиентные сферы (Ambient Glow) -->
-    <div class="ambient-bg">
-        <div class="glow-orb orb-1"></div>
-        <div class="glow-orb orb-2"></div>
+<body class="spacex-body">
+    <!-- Фоновый контекст космического запуска -->
+    <div class="space-bg">
+        <div class="stars-layer"></div>
+        <div class="rocket-glow"></div>
+        <div class="ambient-glow orb-1"></div>
+        <div class="ambient-glow orb-2"></div>
     </div>
 
-    <!-- Панель управления -->
-    <div class="control-panel-left">
-        <button class="control-btn" id="openGame" aria-label="Мини-игра" title="Мини-игра">
-            <i class="fas fa-gamepad"></i>
-        </button>
-    </div>
-    <div class="control-panel-right">
-        <button class="control-btn icon-btn" id="theme-toggle" aria-label="Сменить тему" title="Сменить тему">
-            <i class="fas fa-moon"></i>
-        </button>
-    </div>
+    <!-- Верхний бар (Логотип MK + Панель управления) -->
+    <header class="spacex-header">
+        <div class="header-container">
+            <a href="#hero" class="spacex-logo" aria-label="MK / Колесников Максим">
+                <span class="logo-mk-badge">MK</span>
+                <span class="logo-divider"></span>
+                <span class="logo-sub">KOLESNIKOV</span>
+            </a>
 
-    <header class="hero" itemscope itemtype="http://schema.org/Person">
-        <div class="container">
-            <div class="hero-shell glass-card">
-                <div class="hero-copy">
-                    <div class="eyebrow"><i class="fas fa-satellite-dish"></i> IT-инфраструктура под ключ</div>
-                    <h1 itemprop="name" class="gradient-text">Колесников Максим</h1>
-                    <div itemprop="jobTitle" class="job-title-badge">IT-специалист / Системный администратор</div>
-                    <p class="hero-lead">25+ лет строю, поддерживаю и защищаю IT-системы: от рабочих мест и серверов до сетей, автоматизации и AI-инструментов.</p>
-
-                    <div class="hero-actions" aria-label="Основные действия">
-                        <a href="resume.pdf" download="resume.pdf" class="primary-action"><i class="fas fa-file-arrow-down"></i> Скачать резюме PDF</a>
-                        <a href="mailto:maks_k77@mail.ru" class="secondary-action"><i class="fas fa-envelope"></i> Связаться</a>
-                    </div>
-
-                    <div class="contact-badges" aria-label="Контакты">
-                        <a href="#" itemprop="address" class="badge"><i class="fas fa-map-marker-alt"></i> г. Шахты, Ростовская обл.</a>
-                        <a href="tel:+79185515207" class="badge"><i class="fas fa-phone"></i> +7 (918) 551-52-07</a>
-                        <a href="https://github.com/maks-mk" target="_blank" rel="noopener" class="badge"><i class="fab fa-github"></i> github.com/maks-mk</a>
-                    </div>
-                </div>
-
-                <div class="hero-visual" aria-label="Профиль специалиста">
-                    <div class="avatar-wrapper">
-                        <img itemprop="image" class="profile-pic" src="myface1.jpg" alt="Колесников Максим">
-                    </div>
-                    <div class="profile-orbit-card orbit-card-top">
-                        <span>25+</span>
-                        <small>лет надежной поддержки</small>
-                    </div>
-                    <div class="profile-orbit-card orbit-card-bottom">
-                        <span>AI + Infra</span>
-                        <small>автоматизация процессов</small>
-                    </div>
-                </div>
+            <div class="header-controls">
+                <button class="control-btn" id="openGame" aria-label="Мини-игра" data-tooltip="Мини-игра" title="Мини-игра">
+                    <i class="fas fa-gamepad"></i>
+                </button>
+                <a href="resume.pdf" download="resume.pdf" class="control-btn" id="download-resume-btn" aria-label="Скачать резюме PDF" data-tooltip="Скачать резюме PDF" title="Скачать резюме PDF">
+                    <i class="fas fa-file-arrow-down"></i>
+                </a>
+                <button class="control-btn icon-btn" id="theme-toggle" aria-label="Сменить тему" data-tooltip="Сменить тему" title="Сменить тему">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
         </div>
     </header>
 
-    <main class="container">
+    <!-- Боковая левая вертикальная навигация в стиле MK / SpaceX -->
+    <nav class="spacex-sidebar" aria-label="Главное меню">
+        <div class="sidebar-inner">
+            <a href="#hero" class="nav-item active" data-slide="0">
+                <span class="nav-text">Главная</span>
+                <span class="active-bar"></span>
+            </a>
+            <a href="#profile" class="nav-item">
+                <span class="nav-text">Профиль</span>
+                <span class="active-bar"></span>
+            </a>
+            <a href="#experience" class="nav-item">
+                <span class="nav-text">Опыт</span>
+                <span class="active-bar"></span>
+            </a>
+            <a href="#projects" class="nav-item">
+                <span class="nav-text">Проекты</span>
+                <span class="active-bar"></span>
+            </a>
+            <a href="#skills" class="nav-item">
+                <span class="nav-text">Навыки</span>
+                <span class="active-bar"></span>
+            </a>
+            <a href="#contacts" class="nav-item">
+                <span class="nav-text">Контакты</span>
+                <span class="active-bar"></span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <main class="spacex-app-wrapper">
+        <!-- Главная плашка-карточка в стиле MK / Elon Musk -->
+        <section id="hero" class="spacex-hero-section">
+            <div class="spacex-hero-card" itemscope itemtype="http://schema.org/Person">
+                <!-- Левый блок с фотографией и желтым угловым акцентом -->
+                <div class="photo-column">
+                    <div class="photo-wrapper">
+                        <!-- Желтый/оранжевый срезанный плашка-акцент вверху слева -->
+                        <div class="photo-accent-ribbon"></div>
+                        
+                        <img itemprop="image" class="spacex-profile-img" src="myface1.jpg" alt="Колесников Максим">
+                        
+                        <!-- Темная скошенная тень снизу фотографии -->
+                        <div class="photo-bottom-wedge"></div>
+                    </div>
+                </div>
+
+                <!-- Правый блок с описанием и контактами -->
+                <div class="info-column">
+                    <!-- Слайд 1: Основная информация -->
+                    <div class="spacex-slide active" id="slide-0">
+                        <div class="title-dash"></div>
+                        <h1 itemprop="name" class="spacex-person-name">Колесников Максим</h1>
+                        <div itemprop="jobTitle" class="spacex-person-role">IT-Специалист / Системный Администратор</div>
+                        
+                        <p class="spacex-bio-text">
+                            25+ лет в сфере IT-инфраструктуры, системного администрирования и безопасности. Специализируюсь на проектировании, защите и поддержке серверов, ЛВС/СКС, а также на разработке автономных AI-агентов и скриптов автоматизации.
+                        </p>
+
+                        <div class="spacex-cta-row">
+                            <a href="#profile" class="spacex-more-btn">Подробнее <i class="fas fa-angle-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Слайд 2: Ключевые компетенции -->
+                    <div class="spacex-slide" id="slide-1">
+                        <div class="title-dash"></div>
+                        <h2 class="spacex-person-name">Инфраструктура & AI</h2>
+                        <div class="spacex-person-role">Ключевой фокус и стек</div>
+                        
+                        <p class="spacex-bio-text">
+                            Комплексный контроль IT-систем: Linux (Debian, Ubuntu, Alt Linux), Windows Server (AD, GPO, DNS, DHCP), виртуализация Hyper-V/VMware, защита данных по 152-ФЗ, VipNet, CryptoPro. Автоматизация на Python, Bash, LangGraph.
+                        </p>
+
+                        <div class="spacex-cta-row">
+                            <a href="#experience" class="spacex-more-btn">Смотреть опыт <i class="fas fa-angle-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Нижняя строка: Подпись + Группа со ссылками и стрелками (БЕЗ НАЛЕЗАНИЯ) -->
+                    <div class="spacex-footer-row">
+                        <!-- Подпись -->
+                        <div class="spacex-signature-wrapper" aria-label="Подпись">
+                            <svg class="spacex-signature-svg" viewBox="0 0 240 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 45 C 25 15, 35 12, 48 42 C 55 58, 62 50, 70 28 C 82 10, 95 18, 105 38 C 115 20, 125 15, 138 35 C 148 22, 160 20, 172 38 Q 185 10, 200 32 T 225 28" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M 45 42 Q 85 46, 180 36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+                            </svg>
+                        </div>
+
+                        <!-- Правый блок: соцсети + навигация слайдера рядом -->
+                        <div class="spacex-actions-group">
+                            <div class="spacex-social-links">
+                                <a href="tel:+79185515207" aria-label="Телефон" title="+7 (918) 551-52-07"><i class="fas fa-phone"></i></a>
+                                <a href="mailto:maks_k77@mail.ru" aria-label="Email" title="maks_k77@mail.ru"><i class="fas fa-envelope"></i></a>
+                                <a href="https://github.com/maks-mk" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="https://t.me/Maxinik" target="_blank" rel="noopener" aria-label="Telegram @Maxinik" title="@Maxinik"><i class="fab fa-telegram"></i></a>
+                            </div>
+
+                            <div class="spacex-slider-nav">
+                                <button class="slider-arrow prev-slide" aria-label="Предыдущий слайд" title="Назад"><i class="fas fa-chevron-left"></i></button>
+                                <button class="slider-arrow next-slide" aria-label="Следующий слайд" title="Вперед"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Карточки ключевых направлений -->
         <section class="expertise-strip" aria-label="Ключевые направления">
-            <article class="expertise-card glass-card">
-                <i class="fas fa-network-wired"></i>
+            <article class="expertise-card spacex-card">
+                <div class="card-glow"></div>
+                <i class="fas fa-network-wired card-icon"></i>
                 <h3>Инфраструктура</h3>
                 <p>Серверы, рабочие станции, СКС, ЛВС и отказоустойчивая поддержка пользователей.</p>
             </article>
-            <article class="expertise-card glass-card">
-                <i class="fas fa-shield-halved"></i>
+            <article class="expertise-card spacex-card">
+                <div class="card-glow"></div>
+                <i class="fas fa-shield-halved card-icon"></i>
                 <h3>Безопасность</h3>
-                <p>Защищенные каналы, регламенты, CryptoPro, VipNet и практики защиты данных.</p>
+                <p>Защищенные каналы, регламенты, CryptoPro, VipNet и практики защиты данных (152-ФЗ).</p>
             </article>
-            <article class="expertise-card glass-card">
-                <i class="fas fa-terminal"></i>
-                <h3>Автоматизация</h3>
-                <p>Python, Bash, LangGraph и AI-инструменты для ускорения повторяемых процессов.</p>
+            <article class="expertise-card spacex-card">
+                <div class="card-glow"></div>
+                <i class="fas fa-terminal card-icon"></i>
+                <h3>Автоматизация & AI</h3>
+                <p>Python, Bash, LangGraph и AI-инструменты для ускорения системных процессов.</p>
             </article>
         </section>
 
         <!-- Статистика -->
         <section id="key-achievements" class="stats-grid">
-            <div class="stat-card glass-card">
+            <div class="stat-card spacex-card">
                 <div class="stat-number" data-count="25">0</div>
                 <div class="stat-label">Лет опыта</div>
-                <p>От госструктур до частной практики и проектной работы.</p>
+                <p>От госструктур до частной практики и проектирования IT-сетей.</p>
             </div>
-            <div class="stat-card glass-card">
+            <div class="stat-card spacex-card">
                 <div class="stat-number" data-count="100">0</div>
                 <div class="stat-label">Рабочих станций</div>
-                <p>Поддержка ЛВС, пользователей, серверов и сетевого оборудования.</p>
+                <p>Поддержка ЛВС, серверов, маршрутизаторов и пользователей.</p>
             </div>
-            <div class="stat-card glass-card">
+            <div class="stat-card spacex-card">
                 <div class="stat-number" data-count="3">0</div>
                 <div class="stat-label">Языка скриптинга</div>
-                <p>Python, Bash и практическая автоматизация административных задач.</p>
+                <p>Python, Bash и автоматизация административных рутин.</p>
             </div>
-            <div class="stat-card glass-card">
+            <div class="stat-card spacex-card">
                 <div class="stat-number" data-count="100">0</div>
                 <div class="stat-label">Фокус на надежность</div>
-                <p>Стабильность, документирование и предсказуемая поддержка систем.</p>
+                <p>Стабильность, регламенты и предсказуемая поддержка систем.</p>
             </div>
         </section>
 
         <div class="layout-grid">
             <!-- Левая колонка -->
             <div class="main-column">
-                <section id="profile" class="glass-card">
+                <section id="profile" class="spacex-card">
                     <h2 class="section-title"><i class="fas fa-user-astronaut"></i> Профессиональный профиль</h2>
-                    <p class="text-body">Системный администратор с <strong>25+ годами опыта</strong>. Специализация: IT-инфраструктура, Linux/Windows, информационная безопасность, автоматизация процессов. Имею обширный опыт работы как в государственном секторе, так и во фрилансе. Отличные навыки поддержки пользователей, технического обслуживания и внедрения сложных IT-систем.</p>
+                    <p class="text-body">Системный администратор с <strong>25+ годами опыта</strong>. Специализация: IT-инфраструктура, Linux/Windows, информационная безопасность, автоматизация процессов. Имею обширный опыт работы как в государственном секторе, так и в проектной практике. Отличные навыки поддержки пользователей, технического обслуживания и внедрения современных IT-решений.</p>
                     
                     <div class="conditions-box">
-                        <strong>Условия работы:</strong>
+                        <strong><i class="fas fa-sliders"></i> Условия работы:</strong>
                         <ul class="checklist">
                             <li><i class="fas fa-check"></i> Полная / Частичная занятость</li>
                             <li><i class="fas fa-check"></i> Удаленная работа / Гибкий график</li>
@@ -126,7 +213,7 @@
                     </div>
                 </section>
 
-                <section id="experience" class="glass-card">
+                <section id="experience" class="spacex-card">
                     <h2 class="section-title"><i class="fas fa-briefcase"></i> Опыт работы</h2>
                     <div class="timeline">
                         <div class="timeline-item">
@@ -168,26 +255,26 @@
                             <h3 class="timeline-title">Департамент труда и социального развития г. Шахты</h3>
                             <div class="timeline-subtitle">Заместитель начальника ИТ отдела / Системный администратор</div>
                             <ul class="timeline-list">
-                                <li>Полный цикл обслуживания IT-инфраструктуры. Руководство IT-отделом. </li>
+                                <li>Полный цикл обслуживания IT-инфраструктуры. Руководство IT-отделом.</li>
                             </ul>
                         </div>
                     </div>
                 </section>
 
-                <section id="projects" class="glass-card">
+                <section id="projects" class="spacex-card">
                     <h2 class="section-title"><i class="fas fa-code-branch"></i> Проекты & Разработка</h2>
                     <div class="project-grid">
-                        <div class="project-card">
+                        <div class="project-card spacex-inner-card">
                             <div class="project-header">
                                 <h3>Portable Autonomous AI Agent</h3>
-                                <a href="https://github.com/maks-mk/desktop-ai-agent" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="https://github.com/maks-mk/desktop-ai-agent" target="_blank" rel="noopener" class="project-link"><i class="fab fa-github"></i> GitHub</a>
                             </div>
                             <p class="text-body text-sm">Десктопный AI-агент с GUI на PySide6 и runtime на LangGraph. Работает как единый portable-файл без зависимостей. Поддерживает работу с файлами, shell, веб-поиск, MCP-серверы и имеет встроенный контроль безопасности (approvals).</p>
                             <div class="tech-stack">
                                 <span>Python</span><span>LangGraph</span><span>PySide6</span><span>MCP</span><span>PyInstaller</span>
                             </div>
                         </div>
-                        <div class="project-card">
+                        <div class="project-card spacex-inner-card">
                             <div class="project-header">
                                 <h3>ОДЦ "Город будущего"</h3>
                             </div>
@@ -202,7 +289,7 @@
 
             <!-- Правая колонка -->
             <div class="side-column">
-                <section id="skills" class="glass-card">
+                <section id="skills" class="spacex-card">
                     <h2 class="section-title"><i class="fas fa-laptop-code"></i> Компетенции</h2>
                     <div class="skill-group">
                         <h4><i class="fas fa-server"></i> ОС & Сети</h4>
@@ -230,7 +317,7 @@
                     </div>
                 </section>
 
-                <section id="education" class="glass-card">
+                <section id="education" class="spacex-card">
                     <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Образование</h2>
                     <div class="edu-item">
                         <div class="edu-year">2006</div>
@@ -244,7 +331,7 @@
                     </div>
                 </section>
 
-                <section id="about" class="glass-card">
+                <section id="about" class="spacex-card">
                     <h2 class="section-title"><i class="fas fa-info-circle"></i> Обо мне</h2>
                     <ul class="checklist">
                         <li><i class="fas fa-check"></i> Аналитическое мышление</li>
@@ -252,23 +339,35 @@
                         <li><i class="fas fa-check"></i> Английский: B1 (Чтение тех. док.)</li>
                     </ul>
                 </section>
+
+                <section id="contacts" class="spacex-card">
+                    <h2 class="section-title"><i class="fas fa-address-card"></i> Контакты</h2>
+                    <div class="contact-list">
+                        <a href="tel:+79185515207" class="contact-item"><i class="fas fa-phone"></i> +7 (918) 551-52-07</a>
+                        <a href="mailto:maks_k77@mail.ru" class="contact-item"><i class="fas fa-envelope"></i> maks_k77@mail.ru</a>
+                        <a href="https://t.me/Maxinik" target="_blank" rel="noopener" class="contact-item"><i class="fab fa-telegram"></i> @Maxinik</a>
+                        <div class="contact-item"><i class="fas fa-location-dot"></i> г. Шахты, Ростовская обл.</div>
+                        <a href="https://github.com/maks-mk" target="_blank" rel="noopener" class="contact-item"><i class="fab fa-github"></i> github.com/maks-mk</a>
+                    </div>
+                </section>
             </div>
         </div>
     </main>
-<!-- Модалка игры (сама кнопка теперь вверху) -->
+
+    <!-- Модалка игры -->
     <div class="modal" id="gameModal">
-        <div class="modal-content glass-card">
-            <button class="close-modal" id="closeModal"><i class="fas fa-times"></i></button>
+        <div class="modal-content spacex-card">
+            <button class="close-modal" id="closeModal" aria-label="Закрыть"><i class="fas fa-times"></i></button>
             <iframe id="gameFrame" src="game.html" title="Мини-игра"></iframe>
         </div>
     </div>
 
-    <!-- Кнопка вызова чата (Иконка заменена на 100% рабочую) -->
+    <!-- Кнопка вызова чата -->
     <button id="chat-toggle" class="action-fab chat-fab" title="AI Ассистент">
         <i class="fas fa-comment-dots"></i>
     </button>
     
-    <div id="chat-widget" class="glass-card">
+    <div id="chat-widget" class="spacex-card">
         <div id="chat-header">
             <div class="chat-title"><i class="fas fa-robot"></i> AI Ассистент</div>
             <button id="chat-close"><i class="fas fa-chevron-down"></i></button>
@@ -283,11 +382,14 @@
     <link rel="stylesheet" href="chat-widget.css">
     <script src="chat-widget.js"></script>
 	
-    <footer class="container">
-        <p>© <span id="currentYear"></span> Колесников Максим. Системный администратор.</p>
+    <footer class="spacex-footer">
+        <div class="footer-container">
+            <p>© <span id="currentYear"></span> Колесников Максим. Системный администратор / IT-Специалист.</p>
+            <div class="footer-brand">MK RESUME EDITION</div>
+        </div>
     </footer>
 
-    <!-- Прогресс бар -->
+    <!-- Прогресс бар скролла -->
     <div class="progress-bar" id="progressBar"></div>
 
     <script>
@@ -295,18 +397,29 @@
             // Год в футере
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             
-            // Смена темы (Dark/Light)
+            // Переключение темы
             const themeToggle = document.getElementById('theme-toggle');
             const icon = themeToggle.querySelector('i');
+            const gameFrame = document.getElementById('gameFrame');
+
+            function syncGameTheme() {
+                if (gameFrame && gameFrame.contentWindow) {
+                    const isLight = document.body.classList.contains('light-theme');
+                    gameFrame.contentWindow.postMessage({ theme: isLight ? 'light' : 'dark' }, '*');
+                }
+            }
+
             if (localStorage.getItem('theme') === 'light') {
                 document.body.classList.add('light-theme');
                 icon.className = 'fas fa-sun';
             }
+            
             themeToggle.addEventListener('click', () => {
                 document.body.classList.toggle('light-theme');
                 const isLight = document.body.classList.contains('light-theme');
                 icon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
                 localStorage.setItem('theme', isLight ? 'light' : 'dark');
+                syncGameTheme();
             });
 
             // Плавная анимация чисел
@@ -316,7 +429,7 @@
                         const el = entry.target;
                         const finalValue = parseInt(el.getAttribute('data-count'));
                         let currentValue = 0;
-                        const duration = 1500; // 1.5 сек
+                        const duration = 1500;
                         const stepTime = Math.abs(Math.floor(duration / finalValue));
                         
                         const timer = setInterval(() => {
@@ -327,15 +440,64 @@
                         statsObserver.unobserve(el);
                     }
                 });
-            });
+            }, { threshold: 0.3 });
+
             document.querySelectorAll('.stat-number').forEach(item => statsObserver.observe(item));
 
             // Прогресс бар скролла
             const progressBar = document.getElementById('progressBar');
             window.addEventListener('scroll', () => {
-                const scrollPercentage = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
+                const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercentage = totalHeight > 0 ? (document.documentElement.scrollTop / totalHeight) * 100 : 0;
                 progressBar.style.width = scrollPercentage + '%';
             });
+
+            // Переключение слайдов на карточке Hero
+            const slides = document.querySelectorAll('.spacex-slide');
+            const prevBtn = document.querySelector('.prev-slide');
+            const nextBtn = document.querySelector('.next-slide');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach((s, idx) => {
+                    s.classList.toggle('active', idx === index);
+                });
+            }
+
+            if (prevBtn && nextBtn && slides.length > 0) {
+                prevBtn.addEventListener('click', () => {
+                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    showSlide(currentSlide);
+                });
+                nextBtn.addEventListener('click', () => {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                });
+            }
+
+            // Подсветка активного пункта меню при скролле
+            const navItems = document.querySelectorAll('.spacex-sidebar .nav-item');
+            const sections = [...navItems]
+                .map(item => document.querySelector(item.getAttribute('href')))
+                .filter(Boolean);
+
+            function updateActiveNavItem() {
+                let current = 'hero';
+                const scrollPosition = window.scrollY + 200;
+
+                sections.forEach(section => {
+                    if (scrollPosition >= section.offsetTop) {
+                        current = section.id;
+                    }
+                });
+
+                navItems.forEach(item => {
+                    item.classList.toggle('active', item.getAttribute('href') === '#' + current);
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveNavItem);
+            updateActiveNavItem();
 
             // Логика модального окна игры
             const gameModal = document.getElementById('gameModal');
@@ -346,6 +508,7 @@
                 openGameBtn.addEventListener('click', () => {
                     gameModal.style.display = 'block';
                     document.body.style.overflow = 'hidden';
+                    syncGameTheme();
                 });
 
                 closeGameBtn.addEventListener('click', () => {
