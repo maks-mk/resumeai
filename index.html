@@ -186,13 +186,13 @@
             </div>
             <div class="stat-card spacex-card">
                 <div class="stat-number" data-count="3">0</div>
-                <div class="stat-label">Языка скриптинга</div>
-                <p>Python, Bash и автоматизация административных рутин.</p>
+                <div class="stat-label">Инструмента автоматизации</div>
+                <p>Python, Bash и LangGraph для автоматизации административных рутин.</p>
             </div>
             <div class="stat-card spacex-card">
                 <div class="stat-number" data-count="100">0</div>
-                <div class="stat-label">Фокус на надежность</div>
-                <p>Стабильность, регламенты и предсказуемая поддержка систем.</p>
+                <div class="stat-label">Фокус на стабильность</div>
+                <p>Регламенты, предсказуемая поддержка и надежная работа систем.</p>
             </div>
         </section>
 
@@ -293,26 +293,26 @@
                     <h2 class="section-title"><i class="fas fa-laptop-code"></i> Компетенции</h2>
                     <div class="skill-group">
                         <h4><i class="fas fa-server"></i> ОС & Сети</h4>
-                        <div class="tech-stack">
-                            <span>Linux (Debian, Ubuntu)</span><span>Alt Linux</span><span>Windows Server (AD, GPO)</span><span>СКС/ЛВС</span><span>Kerio Control</span>
+                        <div class="tech-stack skill-tags">
+                            <span><i class="fab fa-linux" aria-hidden="true"></i> Linux (Debian, Ubuntu)</span><span><i class="fas fa-terminal" aria-hidden="true"></i> Alt Linux</span><span><i class="fab fa-windows" aria-hidden="true"></i> Windows Server (AD, GPO)</span><span><i class="fas fa-network-wired" aria-hidden="true"></i> СКС/ЛВС</span><span><i class="fas fa-router" aria-hidden="true"></i> Kerio Control</span>
                         </div>
                     </div>
                     <div class="skill-group">
                         <h4><i class="fas fa-shield-alt"></i> Безопасность</h4>
-                        <div class="tech-stack">
-                            <span>152-ФЗ</span><span>VipNet</span><span>CryptoPro</span><span>ruToken</span>
+                        <div class="tech-stack skill-tags">
+                            <span><i class="fas fa-scale-balanced" aria-hidden="true"></i> 152-ФЗ</span><span><i class="fas fa-shield-halved" aria-hidden="true"></i> VipNet</span><span><i class="fas fa-key" aria-hidden="true"></i> CryptoPro</span><span><i class="fas fa-usb" aria-hidden="true"></i> ruToken</span>
                         </div>
                     </div>
                     <div class="skill-group">
                         <h4><i class="fas fa-cloud"></i> Виртуализация & БД</h4>
-                        <div class="tech-stack">
-                            <span>Hyper-V</span><span>VMware</span><span>PostgreSQL</span>
+                        <div class="tech-stack skill-tags">
+                            <span><i class="fas fa-cubes" aria-hidden="true"></i> Hyper-V</span><span><i class="fas fa-cubes" aria-hidden="true"></i> VMware</span><span><i class="fas fa-database" aria-hidden="true"></i> PostgreSQL</span>
                         </div>
                     </div>
                     <div class="skill-group">
                         <h4><i class="fas fa-code"></i> Автоматизация</h4>
-                        <div class="tech-stack">
-                            <span>Python</span><span>Bash</span><span>LangGraph</span>
+                        <div class="tech-stack skill-tags">
+                            <span><i class="fab fa-python" aria-hidden="true"></i> Python</span><span><i class="fas fa-terminal" aria-hidden="true"></i> Bash</span><span><i class="fas fa-diagram-project" aria-hidden="true"></i> LangGraph</span>
                         </div>
                     </div>
                 </section>
@@ -366,7 +366,8 @@
     <button id="chat-toggle" class="action-fab chat-fab" title="AI Ассистент">
         <i class="fas fa-comment-dots"></i>
     </button>
-    
+
+    <div id="chat-backdrop" aria-hidden="true"></div>
     <div id="chat-widget" class="spacex-card">
         <div id="chat-header">
             <div class="chat-title"><i class="fas fa-robot"></i> AI Ассистент</div>

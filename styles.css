@@ -983,6 +983,22 @@ body.spacex-body {
     color: #334155;
 }
 
+.skill-tags span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.skill-tags span i {
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    opacity: 0.9;
+}
+
+.light-theme .skill-tags span i {
+    color: #64748b;
+}
+
 /* КОМПЕТЕНЦИИ & НАВЫКИ */
 .skill-group {
     margin-bottom: 22px;

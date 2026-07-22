@@ -1,17 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.getElementById('chat-toggle');
     const widget = document.getElementById('chat-widget');
+    const backdrop = document.getElementById('chat-backdrop');
     const closeBtn = document.getElementById('chat-close');
     const sendBtn = document.getElementById('chat-send');
     const input = document.getElementById('chat-input');
     const msgs = document.getElementById('chat-messages');
   
     // Открытие/закрытие
+    function closeChat() {
+        widget.classList.remove('active');
+        backdrop.classList.remove('active');
+    }
+
     toggleBtn.addEventListener('click', () => {
         widget.classList.add('active');
+        backdrop.classList.add('active');
         input.focus();
     });
-    closeBtn.addEventListener('click', () => widget.classList.remove('active'));
+    closeBtn.addEventListener('click', closeChat);
+    backdrop.addEventListener('click', closeChat);
 
     // Добавляем статус-индикатор в заголовок
     const header = document.getElementById('chat-header');

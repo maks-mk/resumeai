@@ -2,6 +2,23 @@
    MK CHAT WIDGET STYLES (Light & Dark High Contrast)
    ========================================================================== */
 
+#chat-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(7, 8, 12, 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#chat-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 #chat-widget {
     position: fixed;
     bottom: 95px;
