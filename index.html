@@ -409,16 +409,10 @@
                 }
             }
 
-            if (localStorage.getItem('theme') === 'light') {
-                document.body.classList.add('light-theme');
-                icon.className = 'fas fa-sun';
-            }
-            
             themeToggle.addEventListener('click', () => {
                 document.body.classList.toggle('light-theme');
                 const isLight = document.body.classList.contains('light-theme');
                 icon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
-                localStorage.setItem('theme', isLight ? 'light' : 'dark');
                 syncGameTheme();
             });
 
