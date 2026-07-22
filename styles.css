@@ -225,13 +225,13 @@ body.spacex-body {
     gap: 12px;
 }
 
-/* Высококонтрастные кнопки управления */
+/* Полупрозрачные кнопки управления */
 .control-btn {
     width: 44px;
     height: 44px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--border-dark);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     color: var(--text-main);
     display: flex;
     align-items: center;
@@ -243,12 +243,12 @@ body.spacex-body {
     position: relative;
 }
 
-/* Кнопки в Светлой теме — Чётко видны! */
+/* Полупрозрачные кнопки в светлой теме */
 .light-theme .control-btn {
-    background: #ffffff;
-    border: 1px solid rgba(15, 23, 42, 0.2);
+    background: rgba(15, 23, 42, 0.05);
+    border: 1px solid rgba(15, 23, 42, 0.14);
     color: #0f172a;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    box-shadow: none;
 }
 
 .control-btn:hover {
@@ -1123,9 +1123,9 @@ a.contact-item:hover {
     width: 58px;
     height: 58px;
     border-radius: 50%;
-    background: var(--accent-gold);
-    color: #ffffff;
-    border: none;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
     font-size: 1.5rem;
     cursor: pointer;
     box-shadow: 0 8px 25px var(--accent-gold-glow);
