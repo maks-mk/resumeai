@@ -10,17 +10,17 @@
     --bg-dark-subtle: rgba(22, 28, 40, 0.65);
     
     --border-dark: rgba(255, 255, 255, 0.12);
-    --border-accent: rgba(255, 157, 0, 0.45);
+    --border-accent: rgba(200, 138, 42, 0.32);
     
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
     --text-dim: #64748b;
 
     /* MK Gold / Amber Accents */
-    --accent-gold: #ff9d00;
-    --accent-gold-bright: #ffb700;
-    --accent-gold-glow: rgba(255, 157, 0, 0.3);
-    --accent-gold-soft: rgba(255, 157, 0, 0.14);
+    --accent-gold: #c98a2d;
+    --accent-gold-bright: #e0ab4f;
+    --accent-gold-glow: rgba(200, 138, 42, 0.18);
+    --accent-gold-soft: rgba(200, 138, 42, 0.10);
 
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     --font-brand: 'Orbitron', 'Inter', sans-serif;
@@ -34,7 +34,7 @@
 
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
-    --shadow-hover: 0 25px 60px rgba(255, 157, 0, 0.2), 0 0 0 1px var(--accent-gold);
+    --shadow-hover: 0 25px 60px rgba(200, 138, 42, 0.16), 0 0 0 1px var(--accent-gold);
 }
 
 /* Светлая тема (Высокий контраст кнопок и элементов) */
@@ -44,19 +44,19 @@
     --bg-dark-subtle: #f1f5f9;
     
     --border-dark: rgba(15, 23, 42, 0.15);
-    --border-accent: rgba(217, 119, 6, 0.5);
+    --border-accent: rgba(184, 116, 18, 0.35);
     
     --text-main: #0f172a;
     --text-muted: #475569;
     --text-dim: #64748b;
 
-    --accent-gold: #d97706;
-    --accent-gold-bright: #f59e0b;
-    --accent-gold-glow: rgba(217, 119, 6, 0.25);
-    --accent-gold-soft: rgba(217, 119, 6, 0.12);
+    --accent-gold: #b87412;
+    --accent-gold-bright: #d89b3d;
+    --accent-gold-glow: rgba(184, 116, 18, 0.18);
+    --accent-gold-soft: rgba(184, 116, 18, 0.08);
 
     --shadow-card: 0 15px 35px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.1);
-    --shadow-hover: 0 20px 45px rgba(217, 119, 6, 0.2), 0 0 0 1px var(--accent-gold);
+    --shadow-hover: 0 20px 45px rgba(184, 116, 18, 0.16), 0 0 0 1px var(--accent-gold);
 }
 
 * {
@@ -104,7 +104,7 @@ body.spacex-body {
         radial-gradient(1px 1px at 30% 60%, rgba(255, 255, 255, 0.6), transparent),
         radial-gradient(1.5px 1.5px at 70% 30%, rgba(255, 255, 255, 0.7), transparent),
         radial-gradient(1px 1px at 85% 75%, rgba(255, 255, 255, 0.5), transparent),
-        radial-gradient(2px 2px at 50% 90%, rgba(255, 157, 0, 0.5), transparent);
+        radial-gradient(2px 2px at 50% 90%, rgba(200, 138, 42, 0.28), transparent);
     background-size: 1000px 1000px;
     opacity: 0.65;
 }
@@ -119,7 +119,7 @@ body.spacex-body {
     right: -100px;
     width: 800px;
     height: 800px;
-    background: radial-gradient(circle, rgba(255, 157, 0, 0.12) 0%, rgba(255, 115, 0, 0.04) 50%, transparent 80%);
+    background: radial-gradient(circle, rgba(200, 138, 42, 0.08) 0%, rgba(184, 116, 18, 0.03) 50%, transparent 80%);
     border-radius: 50%;
     filter: blur(80px);
 }
@@ -144,7 +144,7 @@ body.spacex-body {
     height: 600px;
     bottom: 10%;
     left: 40%;
-    background: radial-gradient(circle, rgba(255, 157, 0, 0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(200, 138, 42, 0.05) 0%, transparent 70%);
 }
 
 /* --- Верхняя панель (Header) --- */
@@ -190,17 +190,17 @@ body.spacex-body {
     font-size: 1.6rem;
     font-weight: 900;
     letter-spacing: 2px;
-    background: linear-gradient(135deg, #ffb700 0%, #ff7300 100%);
+    background: linear-gradient(135deg, #d6a44a 0%, #b87412 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 10px rgba(255, 157, 0, 0.5));
+    filter: drop-shadow(0 0 10px rgba(200, 138, 42, 0.28));
 }
 
 .light-theme .logo-mk-badge {
-    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+    background: linear-gradient(135deg, #b87412 0%, #b45309 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 4px rgba(217, 119, 6, 0.3));
+    filter: drop-shadow(0 2px 4px rgba(184, 116, 18, 0.18));
 }
 
 .logo-divider {
@@ -423,7 +423,7 @@ body.spacex-body {
     background: var(--accent-gold);
     clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
     z-index: 15;
-    box-shadow: 0 4px 15px rgba(255, 157, 0, 0.4);
+    box-shadow: 0 4px 15px rgba(200, 138, 42, 0.22);
 }
 
 .spacex-profile-img {
@@ -610,9 +610,9 @@ body.spacex-body {
 }
 
 .light-theme .spacex-social-links a {
-    background: rgba(217, 119, 6, 0.12);
-    border: 1px solid rgba(217, 119, 6, 0.3);
-    color: #d97706;
+    background: rgba(184, 116, 18, 0.08);
+    border: 1px solid rgba(184, 116, 18, 0.18);
+    color: #b87412;
 }
 
 .spacex-social-links a:hover {
@@ -649,7 +649,7 @@ body.spacex-body {
 .light-theme .slider-arrow {
     background: #ffffff;
     border: 1px solid rgba(15, 23, 42, 0.2);
-    color: #d97706;
+    color: #b87412;
     box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
 }
 
@@ -996,7 +996,7 @@ body.spacex-body {
     top: 12px;
     width: 34px;
     height: 34px;
-    border: 1px solid rgba(255, 157, 0, 0.38);
+    border: 1px solid rgba(200, 138, 42, 0.22);
     border-radius: 50%;
     background: rgba(7, 8, 12, 0.62);
     color: var(--accent-gold);
