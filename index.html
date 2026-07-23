@@ -6,7 +6,7 @@
     <title>Резюме | Колесников Максим — MK Style</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=6">
     <meta name="description" content="Резюме MK Style: Колесников Максим — IT-специалист / Системный администратор с 25+ летним опытом">
 </head>
 <body class="spacex-body">
@@ -252,7 +252,7 @@
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
                             <div class="timeline-date">07.1996 — 09.2017 (21 год)</div>
-                            <h3 class="timeline-title">Департамент труда и социального развития г. Шахты</h3>
+                            <h3 class="timeline-title">Департамент труда и социального развития города Шахты</h3>
                             <div class="timeline-subtitle">Заместитель начальника ИТ отдела / Системный администратор</div>
                             <ul class="timeline-list">
                                 <li>Полный цикл обслуживания IT-инфраструктуры. Руководство IT-отделом.</li>
@@ -270,6 +270,9 @@
                                 <a href="https://github.com/maks-mk/desktop-ai-agent" target="_blank" rel="noopener" class="project-link"><i class="fab fa-github"></i> GitHub</a>
                             </div>
                             <p class="text-body text-sm">Десктопный AI-агент с GUI на PySide6 и runtime на LangGraph. Работает как единый portable-файл без зависимостей. Поддерживает работу с файлами, shell, веб-поиск, MCP-серверы и имеет встроенный контроль безопасности (approvals).</p>
+                            <button class="project-screenshot" type="button" id="openAgentScreenshot" aria-label="Увеличить скриншот интерфейса Portable Autonomous AI Agent">
+                                <img src="ui.jpg" alt="Скриншот интерфейса Portable Autonomous AI Agent" loading="lazy">
+                            </button>
                             <div class="tech-stack">
                                 <span>Python</span><span>LangGraph</span><span>PySide6</span><span>MCP</span><span>PyInstaller</span>
                             </div>
@@ -359,6 +362,14 @@
         <div class="modal-content spacex-card">
             <button class="close-modal" id="closeModal" aria-label="Закрыть"><i class="fas fa-times"></i></button>
             <iframe id="gameFrame" src="game.html" title="Мини-игра"></iframe>
+        </div>
+    </div>
+
+    <!-- Модалка скриншота Portable Autonomous AI Agent -->
+    <div class="modal screenshot-modal" id="agentScreenshotModal" aria-hidden="true">
+        <div class="screenshot-modal-content spacex-card" role="dialog" aria-modal="true" aria-label="Скриншот интерфейса Portable Autonomous AI Agent">
+            <button class="close-modal" id="closeAgentScreenshot" aria-label="Закрыть"><i class="fas fa-times"></i></button>
+            <img src="ui.jpg" alt="Увеличенный скриншот интерфейса Portable Autonomous AI Agent">
         </div>
     </div>
 
@@ -515,6 +526,33 @@
                     if (e.target === gameModal) {
                         gameModal.style.display = 'none';
                         document.body.style.overflow = '';
+                    }
+                });
+            }
+
+            // Увеличение скриншота проекта Portable Autonomous AI Agent
+            const agentScreenshotBtn = document.getElementById('openAgentScreenshot');
+            const agentScreenshotModal = document.getElementById('agentScreenshotModal');
+            const closeAgentScreenshotBtn = document.getElementById('closeAgentScreenshot');
+
+            function closeAgentScreenshot() {
+                agentScreenshotModal.style.display = 'none';
+                agentScreenshotModal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            if (agentScreenshotBtn && agentScreenshotModal && closeAgentScreenshotBtn) {
+                agentScreenshotBtn.addEventListener('click', () => {
+                    agentScreenshotModal.style.display = 'flex';
+                    agentScreenshotModal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                });
+
+                closeAgentScreenshotBtn.addEventListener('click', closeAgentScreenshot);
+
+                agentScreenshotModal.addEventListener('click', (e) => {
+                    if (e.target === agentScreenshotModal) {
+                        closeAgentScreenshot();
                     }
                 });
             }
