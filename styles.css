@@ -15,6 +15,8 @@
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
     --text-dim: #64748b;
+    --text-heading: #ffffff; /* Добавлено для оптимизации */
+    --text-body: #cbd5e1;    /* Добавлено для оптимизации */
 
     /* MK Gold / Amber Accents */
     --accent-gold: #c98a2d;
@@ -48,7 +50,8 @@
     
     --text-main: #0f172a;
     --text-muted: #475569;
-    --text-dim: #64748b;
+    --text-heading: #0f172a; /* Автоматически меняет цвет заголовков */
+    --text-body: #334155;    /* Автоматически меняет цвет текста */
 
     --accent-gold: #b87412;
     --accent-gold-bright: #d89b3d;
@@ -184,7 +187,6 @@ body.spacex-body {
     text-decoration: none;
 }
 
-/* Стилизованный логотип MK */
 .logo-mk-badge {
     font-family: var(--font-brand);
     font-size: 1.6rem;
@@ -225,7 +227,6 @@ body.spacex-body {
     gap: 12px;
 }
 
-/* Полупрозрачные кнопки управления */
 .control-btn {
     width: 44px;
     height: 44px;
@@ -243,11 +244,9 @@ body.spacex-body {
     position: relative;
 }
 
-/* Полупрозрачные кнопки в светлой теме */
 .light-theme .control-btn {
     background: rgba(15, 23, 42, 0.05);
     border: 1px solid rgba(15, 23, 42, 0.14);
-    color: #0f172a;
     box-shadow: none;
 }
 
@@ -260,12 +259,9 @@ body.spacex-body {
 }
 
 .light-theme .control-btn:hover {
-    background: var(--accent-gold);
-    border-color: var(--accent-gold);
     color: #ffffff !important;
 }
 
-/* Tooltip для кнопок управления */
 .control-btn[data-tooltip]::before {
     content: attr(data-tooltip);
     position: absolute;
@@ -274,7 +270,6 @@ body.spacex-body {
     background: #0f172a;
     color: #ffffff;
     font-size: 0.75rem;
-    font-family: var(--font-sans);
     font-weight: 600;
     padding: 6px 10px;
     border-radius: 6px;
@@ -330,7 +325,6 @@ body.spacex-body {
     align-items: flex-start;
     text-decoration: none;
     color: var(--text-muted);
-    font-family: var(--font-sans);
     font-size: 0.85rem;
     font-weight: 500;
     letter-spacing: 1px;
@@ -398,7 +392,6 @@ body.spacex-body {
     border-color: var(--border-accent);
 }
 
-/* Левая колонка с фото */
 .photo-column {
     width: 44%;
     position: relative;
@@ -457,7 +450,6 @@ body.spacex-body {
     background: linear-gradient(to top, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.5) 60%, transparent 100%);
 }
 
-/* Правая колонка с информацией */
 .info-column {
     width: 56%;
     padding: 45px 50px;
@@ -492,21 +484,15 @@ body.spacex-body {
 }
 
 .spacex-person-name {
-    font-family: var(--font-sans);
     font-size: 2.8rem;
     font-weight: 800;
     line-height: 1.1;
-    color: #ffffff;
+    color: var(--text-heading);
     letter-spacing: -0.5px;
     margin-bottom: 8px;
 }
 
-.light-theme .spacex-person-name {
-    color: #0f172a;
-}
-
 .spacex-person-role {
-    font-family: var(--font-sans);
     font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 2px;
@@ -518,14 +504,10 @@ body.spacex-body {
 .spacex-bio-text {
     font-size: 1.02rem;
     line-height: 1.7;
-    color: #cbd5e1;
+    color: var(--text-body);
     font-weight: 400;
     margin-bottom: 24px;
     max-width: 580px;
-}
-
-.light-theme .spacex-bio-text {
-    color: #334155;
 }
 
 .spacex-cta-row {
@@ -552,7 +534,6 @@ body.spacex-body {
     gap: 12px;
 }
 
-/* === НИЖНЯЯ СТРОКА: Подпись + Контакты + Стрелки (БЕЗ НАЛЕЗАНИЯ) === */
 .spacex-footer-row {
     display: flex;
     align-items: center;
@@ -580,7 +561,6 @@ body.spacex-body {
     color: rgba(15, 23, 42, 0.65);
 }
 
-/* Группа соцсетей и стрелок слайдера */
 .spacex-actions-group {
     display: flex;
     align-items: center;
@@ -623,12 +603,11 @@ body.spacex-body {
     box-shadow: 0 6px 15px var(--accent-gold-glow);
 }
 
-/* Навигационные стрелки слайдера (БЕЗ ABSOLUTE, РЕДОМ С СОЦСЕТЯМИ!) */
 .spacex-slider-nav {
     display: flex;
     align-items: center;
     gap: 8px;
-    position: static; /* Фикс наложения! */
+    position: static;
 }
 
 .slider-arrow {
@@ -684,10 +663,9 @@ body.spacex-body {
 }
 
 .section-title {
-    font-family: var(--font-sans);
     font-size: 1.4rem;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text-heading);
     margin-bottom: 22px;
     display: flex;
     align-items: center;
@@ -696,15 +674,10 @@ body.spacex-body {
     padding-bottom: 14px;
 }
 
-.light-theme .section-title {
-    color: #0f172a;
-}
-
 .section-title i {
     color: var(--accent-gold);
 }
 
-/* Направления */
 .expertise-strip {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -727,12 +700,8 @@ body.spacex-body {
 .expertise-card h3 {
     font-size: 1.2rem;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text-heading);
     margin-bottom: 10px;
-}
-
-.light-theme .expertise-card h3 {
-    color: #0f172a;
 }
 
 .expertise-card p {
@@ -741,7 +710,6 @@ body.spacex-body {
     line-height: 1.6;
 }
 
-/* Статистика */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -769,12 +737,8 @@ body.spacex-body {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #ffffff;
+    color: var(--text-heading);
     margin-bottom: 8px;
-}
-
-.light-theme .stat-label {
-    color: #0f172a;
 }
 
 .stat-card p {
@@ -783,7 +747,6 @@ body.spacex-body {
     line-height: 1.5;
 }
 
-/* Двухколоночный макет */
 .layout-grid {
     display: grid;
     grid-template-columns: 1fr 380px;
@@ -793,12 +756,8 @@ body.spacex-body {
 .text-body {
     font-size: 1rem;
     line-height: 1.7;
-    color: #cbd5e1;
+    color: var(--text-body);
     margin-bottom: 20px;
-}
-
-.light-theme .text-body {
-    color: #334155;
 }
 
 .conditions-box {
@@ -835,7 +794,6 @@ body.spacex-body {
     color: var(--accent-gold);
 }
 
-/* ТАЙМЛАЙН ОПЫТА */
 .timeline {
     position: relative;
     padding-left: 28px;
@@ -883,12 +841,8 @@ body.spacex-body {
 .timeline-title {
     font-size: 1.15rem;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text-heading);
     margin-bottom: 4px;
-}
-
-.light-theme .timeline-title {
-    color: #0f172a;
 }
 
 .timeline-subtitle {
@@ -909,7 +863,6 @@ body.spacex-body {
     margin-bottom: 6px;
 }
 
-/* ПРОЕКТЫ */
 .project-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -939,11 +892,7 @@ body.spacex-body {
 .project-header h3 {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #ffffff;
-}
-
-.light-theme .project-header h3 {
-    color: #0f172a;
+    color: var(--text-heading);
 }
 
 .project-link {
@@ -1062,29 +1011,23 @@ body.spacex-body {
     color: #64748b;
 }
 
-/* КОМПЕТЕНЦИИ & НАВЫКИ */
 .skill-group {
     margin-bottom: 22px;
 }
 
 .skill-group h4 {
     font-size: 0.95rem;
-    color: #ffffff;
+    color: var(--text-heading);
     margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.light-theme .skill-group h4 {
-    color: #0f172a;
-}
-
 .skill-group h4 i {
     color: var(--accent-gold);
 }
 
-/* ОБРАЗОВАНИЕ И КОНТАКТЫ */
 .edu-item {
     margin-bottom: 18px;
     padding-bottom: 14px;
@@ -1214,7 +1157,6 @@ a.contact-item:hover {
     border-radius: var(--radius-md);
 }
 
-/* ЧАТ-ВИДЖЕТ ФАБ */
 .action-fab {
     position: fixed;
     bottom: 30px;
@@ -1240,7 +1182,6 @@ a.contact-item:hover {
     box-shadow: 0 12px 30px var(--accent-gold);
 }
 
-/* ФУТЕР & ПРОГРЕСС БАР */
 .spacex-footer {
     border-top: 1px solid var(--border-dark);
     background: rgba(7, 8, 12, 0.9);
@@ -1291,7 +1232,6 @@ a.contact-item:hover {
     .spacex-sidebar {
         top: auto;
         bottom: 0;
-        left: 0;
         width: 100%;
         height: 60px;
         border-right: none;
@@ -1338,10 +1278,7 @@ a.contact-item:hover {
         font-size: 2.3rem;
     }
 
-    .layout-grid {
-        grid-template-columns: 1fr;
-    }
-
+    .layout-grid,
     .expertise-strip {
         grid-template-columns: 1fr;
     }
@@ -1408,6 +1345,5 @@ a.contact-item:hover {
     .spacex-footer-row {
         flex-direction: column;
         align-items: flex-start;
-        gap: 20px;
     }
 }
