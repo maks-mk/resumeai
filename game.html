@@ -27,25 +27,25 @@
             --color-5: #fb7185; /* Розовый */
         }
 
-        /* Светлая тема */
+        /* Светлая тема — мягкая молочно-кофейная палитра */
         body.light-theme {
-            --bg-color: #f8fafc;
-            --surface-bg: #ffffff;
-            --board-bg: #e2e8f0;
-            --cell-bg: #ffffff;
-            --cell-border: rgba(15, 23, 42, 0.18);
-            --cell-hover: #f1f5f9;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --accent-primary: #d97706;
-            --accent-secondary: #f59e0b;
+            --bg-color: #f6f0e8;
+            --surface-bg: #fbf7f1;
+            --board-bg: #e9ddcf;
+            --cell-bg: #fffaf3;
+            --cell-border: rgba(91, 65, 43, 0.18);
+            --cell-hover: #eee4d8;
+            --text-main: #3f3026;
+            --text-muted: #796353;
+            --accent-primary: #95602c;
+            --accent-secondary: #b47d46;
             
-            /* Яркие, контрастные цвета шариков для светлой темы */
-            --color-1: #d97706; /* Янтарный */
-            --color-2: #0284c7; /* Синий */
-            --color-3: #16a34a; /* Зеленый */
-            --color-4: #9333ea; /* Фиолетовый */
-            --color-5: #e11d48; /* Красный */
+            /* Контрастные, но приглушенные цвета шариков */
+            --color-1: #a66e39; /* Карамельный */
+            --color-2: #4f7f89; /* Пыльно-синий */
+            --color-3: #66845b; /* Шалфейный */
+            --color-4: #856a8d; /* Пыльно-фиолетовый */
+            --color-5: #a85f60; /* Терракотовый */
         }
 
         * {
@@ -157,6 +157,14 @@
         }
         .cell:hover { background: var(--cell-hover); }
 
+        body.light-theme #game-wrapper {
+            box-shadow: 0 15px 40px rgba(79, 55, 36, 0.13);
+        }
+
+        body.light-theme #board {
+            box-shadow: inset 0 2px 8px rgba(79, 55, 36, 0.12);
+        }
+
         .ball {
             position: absolute;
             top: 50%; left: 50%;
@@ -172,6 +180,12 @@
         .c3 { background: radial-gradient(circle at 30% 30%, #dcfce7, var(--color-3)); }
         .c4 { background: radial-gradient(circle at 30% 30%, #f3e8ff, var(--color-4)); }
         .c5 { background: radial-gradient(circle at 30% 30%, #ffe4e6, var(--color-5)); }
+
+        body.light-theme .c1 { background: radial-gradient(circle at 30% 30%, #f3dfc6, var(--color-1)); }
+        body.light-theme .c2 { background: radial-gradient(circle at 30% 30%, #dce8e6, var(--color-2)); }
+        body.light-theme .c3 { background: radial-gradient(circle at 30% 30%, #e1e9da, var(--color-3)); }
+        body.light-theme .c4 { background: radial-gradient(circle at 30% 30%, #e8dfe8, var(--color-4)); }
+        body.light-theme .c5 { background: radial-gradient(circle at 30% 30%, #eedbd7, var(--color-5)); }
 
         .bonus-ball::after {
             content: '★'; position: absolute;
@@ -206,6 +220,15 @@
             transform: translateY(-2px); 
             opacity: 0.95;
             box-shadow: 0 6px 18px rgba(217, 119, 6, 0.4);
+        }
+
+        body.light-theme .btn {
+            color: #fffaf3;
+            box-shadow: 0 4px 14px rgba(149, 96, 44, 0.28);
+        }
+
+        body.light-theme .btn:hover {
+            box-shadow: 0 6px 18px rgba(149, 96, 44, 0.36);
         }
 
         .combo-text {

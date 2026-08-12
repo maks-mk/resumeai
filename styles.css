@@ -39,27 +39,28 @@
     --shadow-hover: 0 25px 60px rgba(200, 138, 42, 0.16), 0 0 0 1px var(--accent-gold);
 }
 
-/* Светлая тема (Высокий контраст кнопок и элементов) */
+/* Светлая тема — мягкая молочно-кофейная палитра */
 .light-theme {
-    --bg-dark: #f8fafc;
-    --bg-dark-card: #ffffff;
-    --bg-dark-subtle: #f1f5f9;
+    --bg-dark: #f6f0e8;
+    --bg-dark-card: #fbf7f1;
+    --bg-dark-subtle: #eee4d8;
     
-    --border-dark: rgba(15, 23, 42, 0.15);
-    --border-accent: rgba(184, 116, 18, 0.35);
+    --border-dark: rgba(91, 65, 43, 0.16);
+    --border-accent: rgba(149, 96, 44, 0.32);
     
-    --text-main: #0f172a;
-    --text-muted: #475569;
-    --text-heading: #0f172a; /* Автоматически меняет цвет заголовков */
-    --text-body: #334155;    /* Автоматически меняет цвет текста */
+    --text-main: #3f3026;
+    --text-muted: #796353;
+    --text-dim: #927865;
+    --text-heading: #35271f; /* Автоматически меняет цвет заголовков */
+    --text-body: #5a4638;    /* Автоматически меняет цвет текста */
 
-    --accent-gold: #b87412;
-    --accent-gold-bright: #d89b3d;
-    --accent-gold-glow: rgba(184, 116, 18, 0.18);
-    --accent-gold-soft: rgba(184, 116, 18, 0.08);
+    --accent-gold: #95602c;
+    --accent-gold-bright: #b47d46;
+    --accent-gold-glow: rgba(149, 96, 44, 0.18);
+    --accent-gold-soft: rgba(149, 96, 44, 0.09);
 
-    --shadow-card: 0 15px 35px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.1);
-    --shadow-hover: 0 20px 45px rgba(184, 116, 18, 0.16), 0 0 0 1px var(--accent-gold);
+    --shadow-card: 0 15px 35px rgba(79, 55, 36, 0.09), 0 0 0 1px rgba(91, 65, 43, 0.09);
+    --shadow-hover: 0 20px 45px rgba(149, 96, 44, 0.16), 0 0 0 1px var(--accent-gold);
 }
 
 * {
@@ -113,7 +114,12 @@ body.spacex-body {
 }
 
 .light-theme .stars-layer {
-    opacity: 0.15;
+    opacity: 0.1;
+    filter: sepia(1);
+}
+
+.light-theme .orb-1 {
+    background: radial-gradient(circle, rgba(180, 125, 70, 0.12) 0%, transparent 70%);
 }
 
 .rocket-glow {
@@ -165,9 +171,9 @@ body.spacex-body {
 }
 
 .light-theme .spacex-header {
-    background: rgba(255, 255, 255, 0.92);
-    border-bottom: 1px solid rgba(15, 23, 42, 0.12);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    background: rgba(246, 240, 232, 0.92);
+    border-bottom: 1px solid rgba(91, 65, 43, 0.13);
+    box-shadow: 0 4px 20px rgba(79, 55, 36, 0.06);
 }
 
 .header-container {
@@ -199,10 +205,10 @@ body.spacex-body {
 }
 
 .light-theme .logo-mk-badge {
-    background: linear-gradient(135deg, #b87412 0%, #b45309 100%);
+    background: linear-gradient(135deg, #b47d46 0%, #815126 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 4px rgba(184, 116, 18, 0.18));
+    filter: drop-shadow(0 2px 4px rgba(149, 96, 44, 0.18));
 }
 
 .logo-divider {
@@ -245,8 +251,8 @@ body.spacex-body {
 }
 
 .light-theme .control-btn {
-    background: rgba(15, 23, 42, 0.05);
-    border: 1px solid rgba(15, 23, 42, 0.14);
+    background: rgba(149, 96, 44, 0.07);
+    border: 1px solid rgba(91, 65, 43, 0.16);
     box-shadow: none;
 }
 
@@ -259,7 +265,7 @@ body.spacex-body {
 }
 
 .light-theme .control-btn:hover {
-    color: #ffffff !important;
+    color: #fffaf3 !important;
 }
 
 .control-btn[data-tooltip]::before {
@@ -306,8 +312,8 @@ body.spacex-body {
 }
 
 .light-theme .spacex-sidebar {
-    background: rgba(255, 255, 255, 0.6);
-    border-right: 1px solid rgba(15, 23, 42, 0.1);
+    background: rgba(251, 247, 241, 0.68);
+    border-right: 1px solid rgba(91, 65, 43, 0.11);
 }
 
 .sidebar-inner {
@@ -447,7 +453,7 @@ body.spacex-body {
 }
 
 .light-theme .photo-bottom-wedge {
-    background: linear-gradient(to top, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.5) 60%, transparent 100%);
+    background: linear-gradient(to top, rgba(251, 247, 241, 0.98) 0%, rgba(246, 240, 232, 0.5) 60%, transparent 100%);
 }
 
 .info-column {
@@ -558,7 +564,7 @@ body.spacex-body {
 }
 
 .light-theme .spacex-signature-svg {
-    color: rgba(15, 23, 42, 0.65);
+    color: rgba(63, 48, 38, 0.68);
 }
 
 .spacex-actions-group {
@@ -590,9 +596,9 @@ body.spacex-body {
 }
 
 .light-theme .spacex-social-links a {
-    background: rgba(184, 116, 18, 0.08);
-    border: 1px solid rgba(184, 116, 18, 0.18);
-    color: #b87412;
+    background: rgba(149, 96, 44, 0.09);
+    border: 1px solid rgba(149, 96, 44, 0.2);
+    color: #95602c;
 }
 
 .spacex-social-links a:hover {
@@ -601,6 +607,10 @@ body.spacex-body {
     border-color: var(--accent-gold);
     transform: translateY(-2px);
     box-shadow: 0 6px 15px var(--accent-gold-glow);
+}
+
+.light-theme .spacex-social-links a:hover {
+    color: #fffaf3 !important;
 }
 
 .spacex-slider-nav {
@@ -626,10 +636,10 @@ body.spacex-body {
 }
 
 .light-theme .slider-arrow {
-    background: #ffffff;
-    border: 1px solid rgba(15, 23, 42, 0.2);
-    color: #b87412;
-    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+    background: #fbf7f1;
+    border: 1px solid rgba(91, 65, 43, 0.2);
+    color: #95602c;
+    box-shadow: 0 2px 6px rgba(79, 55, 36, 0.07);
 }
 
 .slider-arrow:hover {
@@ -638,6 +648,10 @@ body.spacex-body {
     border-color: var(--accent-gold);
     box-shadow: 0 4px 15px var(--accent-gold-glow);
     transform: translateY(-2px);
+}
+
+.light-theme .slider-arrow:hover {
+    color: #fffaf3 !important;
 }
 
 /* ==========================================================================
@@ -968,8 +982,8 @@ body.spacex-body {
 }
 
 .light-theme .project-screenshot {
-    background: #f8fafc;
-    border-color: #cbd5e1;
+    background: #f6f0e8;
+    border-color: #d8c8b8;
 }
 
 .tech-stack {
@@ -990,9 +1004,9 @@ body.spacex-body {
 }
 
 .light-theme .tech-stack span {
-    background: #f1f5f9;
-    border-color: #cbd5e1;
-    color: #334155;
+    background: #eee4d8;
+    border-color: #d8c8b8;
+    color: #5a4638;
 }
 
 .skill-tags span {
@@ -1008,7 +1022,7 @@ body.spacex-body {
 }
 
 .light-theme .skill-tags span i {
-    color: #64748b;
+    color: #927865;
 }
 
 .skill-group {
@@ -1190,8 +1204,8 @@ a.contact-item:hover {
 }
 
 .light-theme .spacex-footer {
-    background: #ffffff;
-    border-top: 1px solid rgba(15, 23, 42, 0.12);
+    background: #fbf7f1;
+    border-top: 1px solid rgba(91, 65, 43, 0.13);
 }
 
 .footer-container {
@@ -1237,6 +1251,11 @@ a.contact-item:hover {
         border-right: none;
         border-top: 1px solid var(--border-dark);
         background: rgba(7, 8, 12, 0.95);
+    }
+
+    .light-theme .spacex-sidebar {
+        background: rgba(251, 247, 241, 0.95);
+        border-top-color: rgba(91, 65, 43, 0.13);
     }
 
     .sidebar-inner {

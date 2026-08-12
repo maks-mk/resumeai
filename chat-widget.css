@@ -45,9 +45,9 @@
 
 /* Светлая тема для чата */
 .light-theme #chat-widget {
-    background: #ffffff;
-    border: 1px solid rgba(15, 23, 42, 0.18);
-    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
+    background: #fbf7f1;
+    border: 1px solid rgba(91, 65, 43, 0.18);
+    box-shadow: 0 20px 50px rgba(79, 55, 36, 0.14);
 }
 
 #chat-widget.active {
@@ -66,9 +66,9 @@
 }
 
 .light-theme #chat-header {
-    background: #f8fafc;
-    border-bottom: 1px solid rgba(15, 23, 42, 0.1);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    background: #f6f0e8;
+    border-bottom: 1px solid rgba(91, 65, 43, 0.11);
+    box-shadow: 0 2px 10px rgba(79, 55, 36, 0.06);
 }
 
 .chat-title {
@@ -77,7 +77,7 @@
 }
 
 .light-theme .chat-title {
-    color: #0f172a;
+    color: #35271f;
 }
 
 .chat-title i { color: var(--accent-gold, #ff9d00); font-size: 1.2rem; }
@@ -92,6 +92,10 @@
     border-radius: 50%; box-shadow: 0 0 8px #10b981;
 }
 
+.light-theme .status-indicator {
+    color: #927865;
+}
+
 #chat-close {
     background: rgba(255, 255, 255, 0.08); border: none; color: #94a3b8;
     width: 32px; height: 32px; border-radius: 50%;
@@ -100,8 +104,8 @@
 }
 
 .light-theme #chat-close {
-    background: #e2e8f0;
-    color: #475569;
+    background: #e9ddcf;
+    color: #796353;
 }
 
 #chat-close:hover { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
@@ -118,6 +122,7 @@
 #chat-messages::-webkit-scrollbar { width: 4px; }
 #chat-messages::-webkit-scrollbar-track { background: transparent; }
 #chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+.light-theme #chat-messages::-webkit-scrollbar-thumb { background: rgba(149, 96, 44, 0.2); }
 
 /* Пузыри сообщений */
 .msg-wrapper { 
@@ -147,6 +152,15 @@
 .bot-avatar { background: var(--accent-gold, #ff9d00); color: #ffffff; font-weight: bold; }
 .user-avatar { background: #6366f1; color: #ffffff; font-weight: bold; }
 
+.light-theme .bot-avatar,
+.light-theme .user-avatar {
+    color: #fffaf3;
+}
+
+.light-theme .user-avatar {
+    background: #8b684d;
+}
+
 .chat-bubble {
     padding: 11px 16px;
     border-radius: 18px;
@@ -165,9 +179,9 @@
 }
 
 .light-theme .user-bubble {
-    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(217, 119, 6, 0.25);
+    background: linear-gradient(135deg, #a66e39 0%, #815126 100%);
+    color: #fffaf3;
+    box-shadow: 0 4px 15px rgba(129, 81, 38, 0.24);
 }
 
 .bot-bubble {
@@ -178,9 +192,9 @@
 }
 
 .light-theme .bot-bubble {
-    background: #f1f5f9;
-    color: #0f172a;
-    border: 1px solid rgba(15, 23, 42, 0.12);
+    background: #eee4d8;
+    color: #3f3026;
+    border: 1px solid rgba(91, 65, 43, 0.13);
 }
 
 /* Индикатор печатания */
@@ -190,6 +204,10 @@
     background: #94a3b8;
     animation: bounce 1.4s infinite ease-in-out both;
 }
+.light-theme .typing-indicator span {
+    background: #a68b76;
+}
+
 .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
 .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
 @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
@@ -203,8 +221,8 @@
 }
 
 .light-theme #chat-input-area {
-    background: #f8fafc;
-    border-top: 1px solid rgba(15, 23, 42, 0.1);
+    background: #f6f0e8;
+    border-top: 1px solid rgba(91, 65, 43, 0.11);
 }
 
 #chat-input {
@@ -220,9 +238,9 @@
 }
 
 .light-theme #chat-input {
-    background: #ffffff;
-    border: 1px solid rgba(15, 23, 42, 0.2);
-    color: #0f172a;
+    background: #fffaf3;
+    border: 1px solid rgba(91, 65, 43, 0.2);
+    color: #3f3026;
 }
 
 #chat-input:focus { 
@@ -231,11 +249,12 @@
 }
 
 .light-theme #chat-input:focus {
-    border-color: #d97706;
-    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2);
+    border-color: #95602c;
+    box-shadow: 0 0 0 3px rgba(149, 96, 44, 0.18);
 }
 
 #chat-input::placeholder { color: #94a3b8; }
+.light-theme #chat-input::placeholder { color: #a08773; }
 
 #chat-send {
     width: 42px; height: 42px;
@@ -250,11 +269,12 @@
 }
 
 .light-theme #chat-send {
-    background: #d97706;
-    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+    background: #95602c;
+    box-shadow: 0 4px 12px rgba(149, 96, 44, 0.3);
 }
 
 #chat-send:hover { transform: scale(1.08); background: #f59e0b; }
+.light-theme #chat-send:hover { background: #b47d46; }
 
 @media (max-width: 480px) {
     #chat-widget {
