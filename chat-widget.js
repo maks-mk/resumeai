@@ -6,6 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendBtn = document.getElementById('chat-send');
     const input = document.getElementById('chat-input');
     const msgs = document.getElementById('chat-messages');
+
+    // Блокировка отправки, пока не пришел ответ
+    let isWaiting = false;
+
+    function setWaiting(state) {
+        isWaiting = state;
+        input.disabled = state;
+        sendBtn.disabled = state;
+        sendBtn.innerHTML = state
+            ? '<i class="fas fa-spinner fa-spin"></i>'
+            : '<i class="fas fa-paper-plane"></i>';
+        input.placeholder = state
+            ? 'Ассистент печатает...'
+            : 'Спросите о моем опыте...';
+    }
   
     // Открытие/закрытие
     function closeChat() {
@@ -36,9 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function sendMessage() {
+        if (isWaiting) return;
         const text = input.value.trim();
         if (!text) return;
 
+        setWaiting(true);
         appendMessage('user', text);
         input.value = '';
 
@@ -91,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (msgs.contains(loadingEl)) msgs.removeChild(loadingEl);
             appendMessage('bot', '<span style="color: #ef4444;">Ошибка подключения. AI сервер временно недоступен.</span>');
             console.error(error);
+        } finally {
+            setWaiting(false);
+            input.focus();
         }
         scrollToBottom();
     }

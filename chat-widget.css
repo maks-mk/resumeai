@@ -45,7 +45,7 @@
 
 /* Светлая тема для чата */
 .light-theme #chat-widget {
-    background: #fbf7f1;
+    background: #FCFCFA;
     border: 1px solid rgba(91, 65, 43, 0.18);
     box-shadow: 0 20px 50px rgba(79, 55, 36, 0.14);
 }
@@ -66,7 +66,7 @@
 }
 
 .light-theme #chat-header {
-    background: #f6f0e8;
+    background: #F6F5F2;
     border-bottom: 1px solid rgba(91, 65, 43, 0.11);
     box-shadow: 0 2px 10px rgba(79, 55, 36, 0.06);
 }
@@ -104,7 +104,7 @@
 }
 
 .light-theme #chat-close {
-    background: #e9ddcf;
+    background: #E4E2DC;
     color: #796353;
 }
 
@@ -192,7 +192,7 @@
 }
 
 .light-theme .bot-bubble {
-    background: #eee4d8;
+    background: #ECEAE4;
     color: #3f3026;
     border: 1px solid rgba(91, 65, 43, 0.13);
 }
@@ -221,7 +221,7 @@
 }
 
 .light-theme #chat-input-area {
-    background: #f6f0e8;
+    background: #F6F5F2;
     border-top: 1px solid rgba(91, 65, 43, 0.11);
 }
 
@@ -275,6 +275,24 @@
 
 #chat-send:hover { transform: scale(1.08); background: #f59e0b; }
 .light-theme #chat-send:hover { background: #b47d46; }
+
+/* Состояние ожидания ответа: кнопка и ввод заблокированы */
+#chat-send:disabled {
+    background: #64748b;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+.light-theme #chat-send:disabled {
+    background: #b0a392;
+}
+
+#chat-input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 
 @media (max-width: 480px) {
     #chat-widget {
