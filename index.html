@@ -1,563 +1,192 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Резюме | Колесников Максим — MK Style</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=11">
-    <meta name="description" content="Резюме MK Style: Колесников Максим — IT-специалист / Системный администратор с 25+ летним опытом">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Максим Колесников — системный администратор</title>
+  <meta name="description" content="Максим Колесников — IT-специалист и системный администратор. 25+ лет опыта: инфраструктура, Linux и Windows Server, безопасность, автоматизация и AI.">
+  <meta name="theme-color" content="#f4f0e7" id="theme-color">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23773c35'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia' font-size='30' fill='%23f4f0e7'%3EMK%3C/text%3E%3C/svg%3E">
+  <script>
+    (() => {
+      let saved;
+      try { saved = localStorage.getItem('mk-resume-theme') || localStorage.getItem('theme'); } catch (_) {}
+      document.documentElement.dataset.theme = saved === 'dark' || saved === 'light' ? saved : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.classList.add('js');
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css?v=game2">
+  <link rel="stylesheet" href="chat-widget.css">
+  <script src="script.js?v=game2" defer></script>
+  <script src="chat-widget.js" defer></script>
 </head>
-<body class="spacex-body light-theme">
-    <!-- Фоновый контекст космического запуска -->
-    <div class="space-bg">
-        <div class="stars-layer"></div>
-        <div class="rocket-glow"></div>
-        <div class="ambient-glow orb-1"></div>
-        <div class="ambient-glow orb-2"></div>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-theme" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v16"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 0 1-8 8H5l-3 2v-10a9 9 0 0 1 18 0Z"/><path d="M7 10h8M7 14h5"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m3 3 19 9-19 9 4-9-4-9ZM7 12h15"/></symbol>
+    <symbol id="i-game" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="M6 12h6M9 9v6M16 10h.01M18 14h.01"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V3H4v13h4"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M5 5l14 14M5 19 19 5"/></symbol>
+    <symbol id="i-turn" viewBox="0 0 24 24"><path d="M5 4v10a3 3 0 0 0 3 3h12m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></symbol>
+  </svg>
+  <a class="skip-link" href="#main">К содержанию</a>
+  <div class="reading-progress" aria-hidden="true"><span id="progressBar"></span></div>
+  <header class="site-header">
+    <div class="header-inner container">
+      <a class="brand" href="#hero" aria-label="Максим Колесников — начало страницы">
+        <span class="brand-mark" aria-hidden="true">MK<span>.</span></span>
+        <span class="brand-copy">Максим Колесников<small>Инфраструктура. Безопасность. AI.</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Основная навигация">
+        <a href="#profile" data-nav>Профиль</a><a href="#experience" data-nav>Опыт</a><a href="#projects" data-nav>Проекты</a><a href="#skills" data-nav>Навыки</a>
+      </nav>
+      <div class="header-actions">
+        <button id="openGameHeader" class="game-launcher" type="button" data-open-game aria-label="Открыть игру MK Nodes" aria-haspopup="dialog" aria-controls="gameModal" aria-expanded="false"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-game"/></svg><span>Игра</span></button>
+        <button id="chat-toggle" class="chat-launcher" type="button" aria-label="Открыть AI-ассистента" title="Спросить AI об опыте Максима" aria-controls="chat-widget" aria-expanded="false"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg><span>Спросить AI</span></button>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="Включить тёмную тему" aria-pressed="false" title="Сменить тему"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-theme"/></svg></button>
+        <a class="header-contact" href="#contacts">Связаться <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+        <button class="icon-button menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-controls="mobile-menu" aria-expanded="false"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg></button>
+      </div>
     </div>
-
-    <!-- Верхний бар (Логотип MK + Панель управления) -->
-    <header class="spacex-header">
-        <div class="header-container">
-            <a href="#hero" class="spacex-logo" aria-label="MK / Колесников Максим">
-                <span class="logo-mk-badge">MK</span>
-                <span class="logo-divider"></span>
-                <span class="logo-sub">KOLESNIKOV</span>
-            </a>
-
-            <div class="header-controls">
-                <button class="control-btn" id="openGame" aria-label="Мини-игра" data-tooltip="Мини-игра" title="Мини-игра">
-                    <i class="fas fa-gamepad"></i>
-                </button>
-                <a href="resume.pdf" download="resume.pdf" class="control-btn" id="download-resume-btn" aria-label="Скачать резюме PDF" data-tooltip="Скачать резюме PDF" title="Скачать резюме PDF">
-                    <i class="fas fa-file-arrow-down"></i>
-                </a>
-                <button class="control-btn icon-btn" id="theme-toggle" aria-label="Сменить тему" data-tooltip="Сменить тему" title="Сменить тему">
-                    <i class="fas fa-sun"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Боковая левая вертикальная навигация в стиле MK / SpaceX -->
-    <nav class="spacex-sidebar" aria-label="Главное меню">
-        <div class="sidebar-inner">
-            <a href="#hero" class="nav-item active" data-slide="0">
-                <span class="nav-text">Главная</span>
-                <span class="active-bar"></span>
-            </a>
-            <a href="#profile" class="nav-item">
-                <span class="nav-text">Профиль</span>
-                <span class="active-bar"></span>
-            </a>
-            <a href="#experience" class="nav-item">
-                <span class="nav-text">Опыт</span>
-                <span class="active-bar"></span>
-            </a>
-            <a href="#projects" class="nav-item">
-                <span class="nav-text">Проекты</span>
-                <span class="active-bar"></span>
-            </a>
-            <a href="#skills" class="nav-item">
-                <span class="nav-text">Навыки</span>
-                <span class="active-bar"></span>
-            </a>
-            <a href="#contacts" class="nav-item">
-                <span class="nav-text">Контакты</span>
-                <span class="active-bar"></span>
-            </a>
-        </div>
+    <nav class="mobile-menu container" id="mobile-menu" aria-label="Мобильная навигация" hidden>
+      <a href="#profile">01 <span>Профиль</span> ↗</a><a href="#experience">02 <span>Опыт работы</span> ↗</a><a href="#projects">03 <span>Проекты</span> ↗</a><a href="#skills">04 <span>Навыки</span> ↗</a><a href="#contacts">05 <span>Контакты</span> ↗</a>
     </nav>
-
-    <!-- Основной контент -->
-    <main class="spacex-app-wrapper">
-        <!-- Главная плашка-карточка в стиле MK / Elon Musk -->
-        <section id="hero" class="spacex-hero-section">
-            <div class="spacex-hero-card" itemscope itemtype="http://schema.org/Person">
-                <!-- Левый блок с фотографией и желтым угловым акцентом -->
-                <div class="photo-column">
-                    <div class="photo-wrapper">
-                        <!-- Желтый/оранжевый срезанный плашка-акцент вверху слева -->
-                        <div class="photo-accent-ribbon"></div>
-                        
-                        <img itemprop="image" class="spacex-profile-img" src="face.jpg" alt="Колесников Максим">
-                        
-                        <!-- Темная скошенная тень снизу фотографии -->
-                        <div class="photo-bottom-wedge"></div>
-                    </div>
-                </div>
-
-                <!-- Правый блок с описанием и контактами -->
-                <div class="info-column">
-                    <!-- Слайд 1: Основная информация -->
-                    <div class="spacex-slide active" id="slide-0">
-                        <div class="title-dash"></div>
-                        <h1 itemprop="name" class="spacex-person-name">Колесников Максим</h1>
-                        <div itemprop="jobTitle" class="spacex-person-role">IT-Специалист / Системный Администратор</div>
-                        
-                        <p class="spacex-bio-text">
-                            25+ лет в сфере IT-инфраструктуры, системного администрирования и безопасности. Специализируюсь на проектировании, защите и поддержке серверов, ЛВС/СКС, а также на разработке автономных AI-агентов и скриптов автоматизации.
-                        </p>
-
-                        <div class="spacex-cta-row">
-                            <a href="#profile" class="spacex-more-btn">Подробнее <i class="fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Слайд 2: Ключевые компетенции -->
-                    <div class="spacex-slide" id="slide-1">
-                        <div class="title-dash"></div>
-                        <h2 class="spacex-person-name">Инфраструктура & AI</h2>
-                        <div class="spacex-person-role">Ключевой фокус и стек</div>
-                        
-                        <p class="spacex-bio-text">
-                            Комплексный контроль IT-систем: Linux (Debian, Ubuntu, Alt Linux), Windows Server (AD, GPO, DNS, DHCP), виртуализация Hyper-V/VMware, защита данных по 152-ФЗ, VipNet, CryptoPro. Автоматизация на Python, Bash, LangGraph.
-                        </p>
-
-                        <div class="spacex-cta-row">
-                            <a href="#experience" class="spacex-more-btn">Смотреть опыт <i class="fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Нижняя строка: Подпись + Группа со ссылками и стрелками (БЕЗ НАЛЕЗАНИЯ) -->
-                    <div class="spacex-footer-row">
-                        <!-- Подпись -->
-                        <div class="spacex-signature-wrapper" aria-label="Подпись">
-                            <svg class="spacex-signature-svg" viewBox="0 0 240 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 45 C 25 15, 35 12, 48 42 C 55 58, 62 50, 70 28 C 82 10, 95 18, 105 38 C 115 20, 125 15, 138 35 C 148 22, 160 20, 172 38 Q 185 10, 200 32 T 225 28" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M 45 42 Q 85 46, 180 36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-                            </svg>
-                        </div>
-
-                        <!-- Правый блок: соцсети + навигация слайдера рядом -->
-                        <div class="spacex-actions-group">
-                            <div class="spacex-social-links">
-                                <a href="tel:+79185515207" aria-label="Телефон" title="+7 (918) 551-52-07"><i class="fas fa-phone"></i></a>
-                                <a href="mailto:maks_k77@mail.ru" aria-label="Email" title="maks_k77@mail.ru"><i class="fas fa-envelope"></i></a>
-                                <a href="https://github.com/maks-mk" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><i class="fab fa-github"></i></a>
-                                <a href="https://t.me/Maxinik" target="_blank" rel="noopener" aria-label="Telegram @Maxinik" title="@Maxinik"><i class="fab fa-telegram"></i></a>
-                            </div>
-
-                            <div class="spacex-slider-nav">
-                                <button class="slider-arrow prev-slide" aria-label="Предыдущий слайд" title="Назад"><i class="fas fa-chevron-left"></i></button>
-                                <button class="slider-arrow next-slide" aria-label="Следующий слайд" title="Вперед"><i class="fas fa-chevron-right"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Карточки ключевых направлений -->
-        <section class="expertise-strip" aria-label="Ключевые направления">
-            <article class="expertise-card spacex-card">
-                <div class="card-glow"></div>
-                <i class="fas fa-network-wired card-icon"></i>
-                <h3>Инфраструктура</h3>
-                <p>Серверы, рабочие станции, СКС, ЛВС и отказоустойчивая поддержка пользователей.</p>
-            </article>
-            <article class="expertise-card spacex-card">
-                <div class="card-glow"></div>
-                <i class="fas fa-shield-halved card-icon"></i>
-                <h3>Безопасность</h3>
-                <p>Защищенные каналы, регламенты, CryptoPro, VipNet и практики защиты данных (152-ФЗ).</p>
-            </article>
-            <article class="expertise-card spacex-card">
-                <div class="card-glow"></div>
-                <i class="fas fa-terminal card-icon"></i>
-                <h3>Автоматизация & AI</h3>
-                <p>Python, Bash, LangGraph и AI-инструменты для ускорения системных процессов.</p>
-            </article>
-        </section>
-
-        <!-- Статистика -->
-        <section id="key-achievements" class="stats-grid">
-            <div class="stat-card spacex-card">
-                <div class="stat-number" data-count="25">0</div>
-                <div class="stat-label">Лет опыта</div>
-                <p>От госструктур до частной практики и проектирования IT-сетей.</p>
-            </div>
-            <div class="stat-card spacex-card">
-                <div class="stat-number" data-count="100">0</div>
-                <div class="stat-label">Рабочих станций</div>
-                <p>Поддержка ЛВС, серверов, маршрутизаторов и пользователей.</p>
-            </div>
-            <div class="stat-card spacex-card">
-                <div class="stat-number" data-count="3">0</div>
-                <div class="stat-label">Инструмента автоматизации</div>
-                <p>Python, Bash и LangGraph для автоматизации административных рутин.</p>
-            </div>
-            <div class="stat-card spacex-card">
-                <div class="stat-number" data-count="100">0</div>
-                <div class="stat-label">Фокус на стабильность</div>
-                <p>Регламенты, предсказуемая поддержка и надежная работа систем.</p>
-            </div>
-        </section>
-
-        <div class="layout-grid">
-            <!-- Левая колонка -->
-            <div class="main-column">
-                <section id="profile" class="spacex-card">
-                    <h2 class="section-title"><i class="fas fa-user-astronaut"></i> Профессиональный профиль</h2>
-                    <p class="text-body">Системный администратор с <strong>25+ годами опыта</strong>. Специализация: IT-инфраструктура, Linux/Windows, информационная безопасность, автоматизация процессов. Имею обширный опыт работы как в государственном секторе, так и в проектной практике. Отличные навыки поддержки пользователей, технического обслуживания и внедрения современных IT-решений.</p>
-                    
-                    <div class="conditions-box">
-                        <strong><i class="fas fa-sliders"></i> Условия работы:</strong>
-                        <ul class="checklist">
-                            <li><i class="fas fa-check"></i> Полная / Частичная занятость</li>
-                            <li><i class="fas fa-check"></i> Удаленная работа / Гибкий график</li>
-                            <li><i class="fas fa-check"></i> Готов к командировкам / переезду</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section id="experience" class="spacex-card">
-                    <h2 class="section-title"><i class="fas fa-briefcase"></i> Опыт работы</h2>
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">12.2018 — Наст. время</div>
-                            <h3 class="timeline-title">ИП / Частная практика / Фриланс</h3>
-                            <ul class="timeline-list">
-                                <li>Развертывание, настройка и сопровождение серверной инфраструктуры (Windows Server, Linux).</li>
-                                <li>Проектирование, монтаж и настройка СКС и ЛВС, конфигурирование сетевого оборудования.</li>
-                                <li>Разработка и внедрение скриптов автоматизации на Python и Bash, внедрение ИИ.</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">11.2021 — 03.2022</div>
-                            <h3 class="timeline-title">Администрация города Шахты</h3>
-                            <div class="timeline-subtitle">Главный специалист отдела ИС и технологий</div>
-                            <ul class="timeline-list">
-                                <li>Комплексное обслуживание IT-инфраструктуры (Windows, Linux), своевременное обновление ОС.</li>
-                                <li>Администрирование систем видеоконференцсвязи (ВКС).</li>
-                            </ul>
-                        </div>
-
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">10.2017 — 04.2018</div>
-                            <h3 class="timeline-title">ГУП РО "УРСВ" (Водоснабжение)</h3>
-                            <div class="timeline-subtitle">Инженер-программист</div>
-                            <ul class="timeline-list">
-                                <li>Системное администрирование Windows Server (AD, DNS, DHCP, GPO, WSUS) и Linux.</li>
-                                <li>Обслуживание ЛВС, настройка маршрутизаторов, коммутаторов (Kerio, VipNet).</li>
-                            </ul>
-                        </div>
-
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">07.1996 — 09.2017 (21 год)</div>
-                            <h3 class="timeline-title">Департамент труда и социального развития города Шахты</h3>
-                            <div class="timeline-subtitle">Заместитель начальника ИТ отдела / Системный администратор</div>
-                            <ul class="timeline-list">
-                                <li>Полный цикл обслуживания IT-инфраструктуры. Руководство IT-отделом.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="projects" class="spacex-card">
-                    <h2 class="section-title"><i class="fas fa-code-branch"></i> Проекты & Разработка</h2>
-                    <div class="project-grid">
-                        <div class="project-card spacex-inner-card">
-                            <div class="project-header">
-                                <h3>KGB|Agent</h3>
-                                <a href="https://github.com/maks-mk/kgbagent" target="_blank" rel="noopener" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-                            </div>
-                            <div class="project-subtitle">Knowledge & Goal-Based Agent</div>
-                            <p class="text-body text-sm">Knowledge & Goal-Based Agent — автономный AI-агент на базе графов знаний и целеполагания. Работает как единый portable-файл без зависимостей. Поддерживает работу с файлами, shell, веб-поиск, MCP-серверы и имеет встроенный контроль безопасности (approvals).</p>
-                            <button class="project-screenshot" type="button" id="openAgentScreenshot" aria-label="Увеличить скриншот интерфейса KGB|Agent">
-                                <img src="output.webp" alt="KGB|Agent" loading="lazy">
-                            </button>
-                            <div class="tech-stack">
-                                <span>Python</span><span>LangGraph</span><span>PySide6</span><span>MCP</span><span>PyInstaller</span>
-                            </div>
-                        </div>
-                        <div class="project-card spacex-inner-card">
-                            <div class="project-header">
-                                <h3>ОДЦ "Город будущего"</h3>
-                            </div>
-                            <p class="text-body text-sm">Проектирование IT-инфраструктуры центра «с нуля». Развертывание серверов, сети, видеонаблюдения и защищенных каналов связи.</p>
-                            <div class="tech-stack">
-                                <span>Инфраструктура</span><span>СКС</span><span>CCTV</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- Правая колонка -->
-            <div class="side-column">
-                <section id="skills" class="spacex-card">
-                    <h2 class="section-title"><i class="fas fa-laptop-code"></i> Компетенции</h2>
-                    <div class="skill-group">
-                        <h4><i class="fas fa-server"></i> ОС & Сети</h4>
-                        <div class="tech-stack skill-tags">
-                            <span><i class="fab fa-linux" aria-hidden="true"></i> Linux (Debian, Ubuntu)</span><span><i class="fas fa-terminal" aria-hidden="true"></i> Alt Linux</span><span><i class="fab fa-windows" aria-hidden="true"></i> Windows Server (AD, GPO)</span><span><i class="fas fa-network-wired" aria-hidden="true"></i> СКС/ЛВС</span><span><i class="fas fa-router" aria-hidden="true"></i> Kerio Control</span>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h4><i class="fas fa-shield-alt"></i> Безопасность</h4>
-                        <div class="tech-stack skill-tags">
-                            <span><i class="fas fa-scale-balanced" aria-hidden="true"></i> 152-ФЗ</span><span><i class="fas fa-shield-halved" aria-hidden="true"></i> VipNet</span><span><i class="fas fa-key" aria-hidden="true"></i> CryptoPro</span><span><i class="fas fa-usb" aria-hidden="true"></i> ruToken</span>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h4><i class="fas fa-cloud"></i> Виртуализация & БД</h4>
-                        <div class="tech-stack skill-tags">
-                            <span><i class="fas fa-cubes" aria-hidden="true"></i> Hyper-V</span><span><i class="fas fa-cubes" aria-hidden="true"></i> VMware</span><span><i class="fas fa-database" aria-hidden="true"></i> PostgreSQL</span>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h4><i class="fas fa-code"></i> Автоматизация</h4>
-                        <div class="tech-stack skill-tags">
-                            <span><i class="fab fa-python" aria-hidden="true"></i> Python</span><span><i class="fas fa-terminal" aria-hidden="true"></i> Bash</span><span><i class="fas fa-diagram-project" aria-hidden="true"></i> LangGraph</span>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="education" class="spacex-card">
-                    <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Образование</h2>
-                    <div class="edu-item">
-                        <div class="edu-year">2006</div>
-                        <div class="edu-title">Прикладная информатика (Высшее)</div>
-                        <div class="edu-school">ЮРГТУ (НПИ)</div>
-                    </div>
-                    <div class="edu-item">
-                        <div class="edu-year">1996</div>
-                        <div class="edu-title">Электромеханика (СПО)</div>
-                        <div class="edu-school">Шахтинский горнотехнический колледж</div>
-                    </div>
-                </section>
-
-                <section id="about" class="spacex-card">
-                    <h2 class="section-title"><i class="fas fa-info-circle"></i> Обо мне</h2>
-                    <ul class="checklist">
-                        <li><i class="fas fa-check"></i> Аналитическое мышление</li>
-                        <li><i class="fas fa-check"></i> Системный подход</li>
-                        <li><i class="fas fa-check"></i> Английский: B1 (Чтение тех. док.)</li>
-                    </ul>
-                </section>
-
-                <section id="contacts" class="spacex-card">
-                    <h2 class="section-title"><i class="fas fa-address-card"></i> Контакты</h2>
-                    <div class="contact-list">
-                        <a href="tel:+79185515207" class="contact-item"><i class="fas fa-phone"></i> +7 (918) 551-52-07</a>
-                        <a href="mailto:maks_k77@mail.ru" class="contact-item"><i class="fas fa-envelope"></i> maks_k77@mail.ru</a>
-                        <a href="https://t.me/Maxinik" target="_blank" rel="noopener" class="contact-item"><i class="fab fa-telegram"></i> @Maxinik</a>
-                        <div class="contact-item"><i class="fas fa-location-dot"></i> г. Шахты, Ростовская обл.</div>
-                        <a href="https://github.com/maks-mk" target="_blank" rel="noopener" class="contact-item"><i class="fab fa-github"></i> github.com/maks-mk</a>
-                    </div>
-                </section>
-            </div>
+  </header>
+  <main id="main">
+    <section id="hero" class="hero container" aria-labelledby="hero-title" itemscope itemtype="https://schema.org/Person">
+      <div class="hero-copy">
+        <div class="eyebrow hero-eyebrow"><span class="small-square" aria-hidden="true"></span> IT-специалист / Системный администратор</div>
+        <h1 id="hero-title" itemprop="name">Максим<br> <em>Колесников</em><span class="name-dot">.</span></h1>
+        <p class="hero-lead">Надёжная инфраструктура.<br> Продуманная автоматизация.</p>
+        <p class="hero-description">Проектирую, защищаю и поддерживаю IT-системы. От серверов и локальных сетей — до скриптов автоматизации и автономных AI-агентов.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#contacts">Обсудить задачу <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          <a class="button button-secondary" id="download-resume-btn" href="resume.pdf" download="resume.pdf">Скачать резюме <span class="file-label">PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-down"/></svg></a>
         </div>
-    </main>
+        <div class="hero-meta"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg> Шахты, Ростовская область</span><span class="meta-separator" aria-hidden="true">/</span><span>Удалённо и на месте</span></div>
+        <span class="sr-only" itemprop="jobTitle">IT-специалист / Системный администратор</span>
+      </div>
+      <div class="portrait-column">
+        <figure class="portrait-sheet">
+          <div class="sheet-heading"><span class="eyebrow">Личное дело / MK</span><span class="sheet-corner" aria-hidden="true">↗</span></div>
+          <div class="portrait-media">
+            <div class="portrait-fallback" aria-hidden="true"><span class="fallback-initials">МК</span><span class="fallback-caption">Системный подход.<br> С 1996 года.</span></div>
+            <!-- Сохранён исходный файл фотографии. Положите face.jpg рядом с index.html. -->
+            <img itemprop="image" class="portrait-image" src="face.jpg" alt="Максим Колесников" fetchpriority="high" data-optional-image>
+          </div>
+          <figcaption class="portrait-footer"><span><strong>25+</strong><span>лет в IT</span></span><p>Опыт, который<br> держит систему.</p></figcaption>
+        </figure>
+        <p class="portrait-note"><span class="small-square" aria-hidden="true"></span> От инфраструктуры — к интеллектуальным системам</p>
+      </div>
+    </section>
 
-    <!-- Модалка игры -->
-    <div class="modal" id="gameModal">
-        <div class="modal-content spacex-card">
-            <button class="close-modal" id="closeModal" aria-label="Закрыть"><i class="fas fa-times"></i></button>
-            <iframe id="gameFrame" src="game.html" title="Мини-игра"></iframe>
-        </div>
+    <div class="proof-strip container" role="group" aria-label="Ключевые направления опыта">
+      <div class="proof-item"><span class="proof-number">100<span>+</span></span><p>рабочих станций<small>Сети, серверы и поддержка пользователей</small></p></div>
+      <div class="proof-item"><span class="proof-symbol" aria-hidden="true">↔</span><p>Linux & Windows<small>Единый взгляд на инфраструктуру</small></p></div>
+      <div class="proof-item"><span class="proof-symbol proof-asterisk" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-spark"/></svg></span><p>Автоматизация & AI<small>Python, Bash, LangGraph</small></p></div>
     </div>
 
-    <!-- Модалка скриншота KGB|Agent -->
-    <div class="modal screenshot-modal" id="agentScreenshotModal" aria-hidden="true">
-        <div class="screenshot-modal-content spacex-card" role="dialog" aria-modal="true" aria-label="Скриншот интерфейса KGB|Agent">
-            <button class="close-modal" id="closeAgentScreenshot" aria-label="Закрыть"><i class="fas fa-times"></i></button>
-            <img src="output.webp" alt="Увеличенный скриншот интерфейса KGB|Agent">
+    <section id="profile" class="section container" aria-labelledby="profile-title">
+      <div class="section-heading"><span class="eyebrow section-index">01 / Профиль</span><h2 id="profile-title">За технологиями —<br> <em>системный подход.</em></h2></div>
+      <div class="profile-grid">
+        <div class="profile-copy">
+          <p class="large-copy">25+ лет работаю с IT-инфраструктурой: от полного сопровождения систем в государственных организациях до частной практики и разработки собственных решений.</p>
+          <p>Специализируюсь на Linux и Windows, информационной безопасности и автоматизации процессов. Проектирую серверную инфраструктуру и сети, поддерживаю пользователей, внедряю современные IT-инструменты.</p>
+          <div class="approach-note"><span aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-turn"/></svg></span><p>Мой приоритет — стабильная работа систем, понятные регламенты и предсказуемая поддержка.</p></div>
         </div>
-    </div>
-
-    <!-- Кнопка вызова чата -->
-    <button id="chat-toggle" class="action-fab chat-fab" title="AI Ассистент">
-        <i class="fas fa-comment-dots"></i>
-    </button>
-
-    <div id="chat-backdrop" aria-hidden="true"></div>
-    <div id="chat-widget" class="spacex-card">
-        <div id="chat-header">
-            <div class="chat-title"><i class="fas fa-robot"></i> AI Ассистент</div>
-            <button id="chat-close"><i class="fas fa-chevron-down"></i></button>
+        <div class="profile-facts">
+          <h3 class="eyebrow">Как я работаю</h3>
+          <dl class="facts-list">
+            <div><dt>Занятость</dt><dd>Полная или частичная</dd></div>
+            <div><dt>Формат</dt><dd>Удалённая работа,<br> гибкий график</dd></div>
+            <div><dt>Мобильность</dt><dd>Готов к командировкам<br> и переезду</dd></div>
+            <div><dt>Подход</dt><dd>Аналитическое мышление,<br> системность</dd></div>
+            <div><dt>Английский</dt><dd>B1 · чтение технической<br> документации</dd></div>
+          </dl>
         </div>
-        <div id="chat-messages"></div>
-        <div id="chat-input-area">
-            <input type="text" id="chat-input" placeholder="Спросите о моем опыте...">
-            <button id="chat-send"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </section>
+
+    <section id="experience" class="section container" aria-labelledby="experience-title">
+      <div class="section-heading"><span class="eyebrow section-index">02 / Опыт работы</span><div><h2 id="experience-title">От первого сервера<br> <em>до сложных систем.</em></h2><p class="section-intro">Государственный сектор, частная практика, собственные проекты.</p></div></div>
+      <div class="career-list">
+        <article class="career-entry">
+          <div class="career-date"><span class="current-label">Сейчас</span><p><time datetime="2018-12">12.2018</time> — наст. время</p></div>
+          <div class="career-body"><h3>Частная практика</h3><p class="career-role">ИП / Фриланс</p><ul><li>Развёртывание, настройка и сопровождение серверной инфраструктуры на Windows Server и Linux.</li><li>Проектирование, монтаж и настройка СКС и ЛВС, конфигурирование сетевого оборудования.</li><li>Разработка и внедрение скриптов автоматизации на Python и Bash, внедрение ИИ.</li></ul></div>
+        </article>
+        <article class="career-entry">
+          <div class="career-date"><p><time datetime="2021-11">11.2021</time> — <time datetime="2022-03">03.2022</time></p></div>
+          <div class="career-body"><h3>Администрация города Шахты</h3><p class="career-role">Главный специалист отдела ИС и технологий</p><ul><li>Комплексное обслуживание IT-инфраструктуры на Windows и Linux, своевременное обновление ОС.</li><li>Администрирование систем видеоконференцсвязи.</li></ul></div>
+        </article>
+        <article class="career-entry">
+          <div class="career-date"><p><time datetime="2017-10">10.2017</time> — <time datetime="2018-04">04.2018</time></p></div>
+          <div class="career-body"><h3>ГУП РО «УРСВ»</h3><p class="career-role">Инженер-программист · Водоснабжение</p><ul><li>Системное администрирование Windows Server: AD, DNS, DHCP, GPO, WSUS — и Linux.</li><li>Обслуживание ЛВС, настройка маршрутизаторов и коммутаторов, работа с Kerio и VipNet.</li></ul></div>
+        </article>
+        <article class="career-entry">
+          <div class="career-date"><p><time datetime="1996-07">07.1996</time> — <time datetime="2017-09">09.2017</time></p><span class="tenure">21 год практики</span></div>
+          <div class="career-body"><h3>Департамент труда и социального развития города Шахты</h3><p class="career-role">Заместитель начальника ИТ-отдела / Системный администратор</p><ul><li>Полный цикл обслуживания IT-инфраструктуры.</li><li>Руководство ИТ-отделом.</li></ul></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="section container" aria-labelledby="projects-title">
+      <div class="section-heading"><span class="eyebrow section-index">03 / Проекты</span><h2 id="projects-title">Не только поддерживать.<br> <em>Создавать новое.</em></h2></div>
+      <article class="featured-project">
+        <div class="project-copy">
+          <div class="project-kicker"><span class="eyebrow">01 / Автономный AI-агент</span><span class="project-index" aria-hidden="true">↗</span></div>
+          <h3>KGB<span>|</span>Agent</h3><p class="project-subtitle">Knowledge & Goal-Based Agent</p>
+          <p>Автономный AI-агент на базе графов знаний и целеполагания. Единый portable-файл без зависимостей — с доступом к инструментам и встроенным контролем безопасности.</p>
+          <div class="tech-tags" role="group" aria-label="Технологии проекта"><span>Python</span><span>LangGraph</span><span>PySide6</span><span>MCP</span><span>PyInstaller</span></div>
+          <a class="text-link" href="https://github.com/maks-mk/kgbagent" target="_blank" rel="noopener noreferrer">Открыть проект на GitHub <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          <details class="project-details"><summary>Что умеет агент <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></summary><p>Работа с файлами и shell, веб-поиск, подключение MCP-серверов. Встроенные подтверждения действий — approvals — дают контроль над использованием инструментов.</p></details>
         </div>
-    </div>
-
-    <link rel="stylesheet" href="chat-widget.css">
-    <script src="chat-widget.js"></script>
-	
-    <footer class="spacex-footer">
-        <div class="footer-container">
-            <p>© <span id="currentYear"></span> Колесников Максим. Системный администратор / IT-Специалист.</p>
-            <div class="footer-brand">MK RESUME EDITION</div>
+        <div class="project-visual">
+          <!-- Сохранён исходный скриншот и возможность открыть его целиком. -->
+          <button class="project-screenshot" type="button" id="openAgentScreenshot" aria-label="Увеличить скриншот интерфейса KGB Agent" hidden><img src="output.webp" alt="Интерфейс KGB Agent" loading="lazy" data-optional-image><span class="screenshot-hint">Посмотреть интерфейс <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-expand"/></svg></span></button>
+          <div class="agent-map" id="agentMap" role="group" aria-label="Возможности KGB Agent">
+            <span class="eyebrow map-label">Карта возможностей</span><div class="map-input">Ваша задача</div><div class="map-connector" aria-hidden="true"></div><div class="map-core"><span class="eyebrow">Знания + целеполагание</span><strong>KGB|Agent</strong></div><div class="map-connector" aria-hidden="true"></div><div class="map-tools"><span>Файлы</span><span>Shell</span><span>Веб-поиск</span><span>MCP</span></div><div class="map-approval"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg> Действия — под вашим контролем</div>
+          </div>
+          <div class="project-visual-caption"><span>Один файл. Набор инструментов.</span><span aria-hidden="true">MK / 01</span></div>
         </div>
-    </footer>
+      </article>
+      <article class="infrastructure-project"><div><span class="eyebrow">02 / Инфраструктура с нуля</span><h3>«Город будущего»</h3><p>Проектирование IT-инфраструктуры ОДЦ: развёртывание серверов, сети, видеонаблюдения и защищённых каналов связи.</p></div><div class="infrastructure-scope"><span>Серверы <span aria-hidden="true">↗</span></span><span>СКС и локальная сеть <span aria-hidden="true">↗</span></span><span>Видеонаблюдение <span aria-hidden="true">↗</span></span><span>Защищённая связь <span aria-hidden="true">↗</span></span></div></article>
+    </section>
 
-    <!-- Прогресс бар скролла -->
-    <div class="progress-bar" id="progressBar"></div>
+    <section id="skills" class="section container" aria-labelledby="skills-title">
+      <div class="section-heading"><span class="eyebrow section-index">04 / Компетенции</span><h2 id="skills-title">Инструменты<br> <em>для реальных задач.</em></h2></div>
+      <div class="skills-table">
+        <div class="skill-row"><h3><span>01</span> ОС и сети</h3><div class="skill-items"><span>Linux · Debian, Ubuntu</span><span>Alt Linux</span><span>Windows Server</span><span>AD / GPO / DNS / DHCP / WSUS</span><span>СКС / ЛВС</span><span>Kerio Control</span></div></div>
+        <div class="skill-row"><h3><span>02</span> Безопасность</h3><div class="skill-items"><span>152-ФЗ</span><span>VipNet</span><span>CryptoPro</span><span>ruToken</span></div></div>
+        <div class="skill-row"><h3><span>03</span> Виртуализация и БД</h3><div class="skill-items"><span>Hyper-V</span><span>VMware</span><span>PostgreSQL</span></div></div>
+        <div class="skill-row"><h3><span>04</span> Автоматизация</h3><div class="skill-items"><span>Python</span><span>Bash</span><span>LangGraph</span></div></div>
+      </div>
+      <div id="education" class="education-block"><div class="education-heading"><h3>Образование</h3><span class="eyebrow">Фундамент профессии</span></div><div class="education-grid"><article class="education-item"><span class="education-year">2006</span><div><h4>Прикладная информатика</h4><p>ЮРГТУ (НПИ)</p><span>Высшее образование</span></div></article><article class="education-item"><span class="education-year">1996</span><div><h4>Электромеханика</h4><p>Шахтинский горнотехнический колледж</p><span>Среднее профессиональное</span></div></article></div></div>
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Год в футере
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            // Переключение темы
-            const themeToggle = document.getElementById('theme-toggle');
-            const icon = themeToggle.querySelector('i');
-            const gameFrame = document.getElementById('gameFrame');
+    <section id="contacts" class="contact-section" aria-labelledby="contacts-title">
+      <div class="container"><div class="contact-heading"><div><span class="eyebrow">05 / На связи</span><h2 id="contacts-title">Сложная задача?<br> <em>Давайте разберёмся.</em></h2></div><a class="button contact-cta" href="https://t.me/Maxinik" target="_blank" rel="noopener noreferrer">Написать в Telegram <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div>
+      <div class="contact-grid"><div class="contact-cell"><span class="eyebrow">Email</span><div class="contact-email-row"><a href="mailto:maks_k77@mail.ru">maks_k77@mail.ru</a><button type="button" class="icon-button copy-email" id="copy-email" aria-label="Скопировать email" title="Скопировать email"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg></button></div></div><div class="contact-cell"><span class="eyebrow">Телефон</span><a href="tel:+79185515207">+7 (918) 551-52-07 <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div><div class="contact-cell"><span class="eyebrow">Telegram</span><a href="https://t.me/Maxinik" target="_blank" rel="noopener noreferrer">@Maxinik <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div><div class="contact-cell"><span class="eyebrow">GitHub</span><a href="https://github.com/maks-mk" target="_blank" rel="noopener noreferrer">maks-mk <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div></div>
+      <div class="contact-bottom"><span>г. Шахты, Ростовская область</span><span>Командировки и переезд — обсуждаемы</span></div></div>
+    </section>
+  </main>
+  <footer class="site-footer container"><p>© <span id="currentYear">2026</span> Максим Колесников</p><div class="footer-actions"><button class="text-link" id="openGame" type="button" data-open-game aria-haspopup="dialog" aria-controls="gameModal" aria-expanded="false"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-game"/></svg> Небольшая пауза? MK Nodes</button><a class="back-top" href="#hero" aria-label="Вернуться к началу">Наверх ↑</a></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-            function syncGameTheme() {
-                if (gameFrame && gameFrame.contentWindow) {
-                    const isLight = document.body.classList.contains('light-theme');
-                    gameFrame.contentWindow.postMessage({ theme: isLight ? 'light' : 'dark' }, '*');
-                }
-            }
+  <dialog class="game-dialog" id="gameModal" aria-labelledby="game-dialog-title"><div class="dialog-header"><div><span class="eyebrow">Небольшая системная пауза</span><h2 id="game-dialog-title">MK Nodes</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Закрыть игру"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-close"/></svg></button></div><iframe id="gameFrame" title="MK Nodes — соберите пять одинаковых узлов в линию"></iframe></dialog>
+  <dialog class="screenshot-dialog" id="agentScreenshotModal" aria-labelledby="screenshot-title"><div class="dialog-header"><h2 id="screenshot-title">KGB|Agent · Интерфейс</h2><button class="icon-button" type="button" data-close-dialog aria-label="Закрыть скриншот"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-close"/></svg></button></div><img data-src="output.webp" alt="Полный скриншот интерфейса KGB Agent"></dialog>
 
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('light-theme');
-                const isLight = document.body.classList.contains('light-theme');
-                icon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
-                syncGameTheme();
-            });
-
-            // Плавная анимация чисел
-            const statsObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-                        const finalValue = parseInt(el.getAttribute('data-count'));
-                        let currentValue = 0;
-                        const duration = 1500;
-                        const stepTime = Math.abs(Math.floor(duration / finalValue));
-                        
-                        const timer = setInterval(() => {
-                            currentValue += 1;
-                            el.textContent = (finalValue === 100 || finalValue === 25) ? currentValue + "+" : currentValue;
-                            if(currentValue >= finalValue) clearInterval(timer);
-                        }, stepTime);
-                        statsObserver.unobserve(el);
-                    }
-                });
-            }, { threshold: 0.3 });
-
-            document.querySelectorAll('.stat-number').forEach(item => statsObserver.observe(item));
-
-            // Прогресс бар скролла
-            const progressBar = document.getElementById('progressBar');
-            window.addEventListener('scroll', () => {
-                const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrollPercentage = totalHeight > 0 ? (document.documentElement.scrollTop / totalHeight) * 100 : 0;
-                progressBar.style.width = scrollPercentage + '%';
-            });
-
-            // Переключение слайдов на карточке Hero
-            const slides = document.querySelectorAll('.spacex-slide');
-            const prevBtn = document.querySelector('.prev-slide');
-            const nextBtn = document.querySelector('.next-slide');
-            let currentSlide = 0;
-
-            function showSlide(index) {
-                slides.forEach((s, idx) => {
-                    s.classList.toggle('active', idx === index);
-                });
-            }
-
-            if (prevBtn && nextBtn && slides.length > 0) {
-                prevBtn.addEventListener('click', () => {
-                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                    showSlide(currentSlide);
-                });
-                nextBtn.addEventListener('click', () => {
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    showSlide(currentSlide);
-                });
-            }
-
-            // Подсветка активного пункта меню при скролле
-            const navItems = document.querySelectorAll('.spacex-sidebar .nav-item');
-            const sections = [...navItems]
-                .map(item => document.querySelector(item.getAttribute('href')))
-                .filter(Boolean);
-
-            function updateActiveNavItem() {
-                let current = 'hero';
-                const scrollPosition = window.scrollY + 200;
-
-                sections.forEach(section => {
-                    if (scrollPosition >= section.offsetTop) {
-                        current = section.id;
-                    }
-                });
-
-                navItems.forEach(item => {
-                    item.classList.toggle('active', item.getAttribute('href') === '#' + current);
-                });
-            }
-
-            window.addEventListener('scroll', updateActiveNavItem);
-            updateActiveNavItem();
-
-            // Логика модального окна игры
-            const gameModal = document.getElementById('gameModal');
-            const openGameBtn = document.getElementById('openGame');
-            const closeGameBtn = document.getElementById('closeModal');
-
-            if (openGameBtn && gameModal && closeGameBtn) {
-                openGameBtn.addEventListener('click', () => {
-                    gameModal.style.display = 'block';
-                    document.body.style.overflow = 'hidden';
-                    syncGameTheme();
-                });
-
-                closeGameBtn.addEventListener('click', () => {
-                    gameModal.style.display = 'none';
-                    document.body.style.overflow = '';
-                });
-
-                gameModal.addEventListener('click', (e) => {
-                    if (e.target === gameModal) {
-                        gameModal.style.display = 'none';
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
-
-            // Увеличение скриншота проекта KGB|Agent
-            const agentScreenshotBtn = document.getElementById('openAgentScreenshot');
-            const agentScreenshotModal = document.getElementById('agentScreenshotModal');
-            const closeAgentScreenshotBtn = document.getElementById('closeAgentScreenshot');
-
-            function closeAgentScreenshot() {
-                agentScreenshotModal.style.display = 'none';
-                agentScreenshotModal.setAttribute('aria-hidden', 'true');
-                document.body.style.overflow = '';
-            }
-
-            if (agentScreenshotBtn && agentScreenshotModal && closeAgentScreenshotBtn) {
-                agentScreenshotBtn.addEventListener('click', () => {
-                    agentScreenshotModal.style.display = 'flex';
-                    agentScreenshotModal.setAttribute('aria-hidden', 'false');
-                    document.body.style.overflow = 'hidden';
-                });
-
-                closeAgentScreenshotBtn.addEventListener('click', closeAgentScreenshot);
-
-                agentScreenshotModal.addEventListener('click', (e) => {
-                    if (e.target === agentScreenshotModal) {
-                        closeAgentScreenshot();
-                    }
-                });
-            }
-        });
-    </script>
+  
+  <dialog id="chat-widget" class="chat-dialog" aria-labelledby="chat-title"><div id="chat-header"><div class="chat-brand-mark" aria-hidden="true">MK</div><div><h2 id="chat-title">AI-ассистент</h2><p id="chat-status">Об опыте, навыках и проектах</p></div><button id="chat-close" class="icon-button" type="button" aria-label="Закрыть чат"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-close"/></svg></button></div><div id="chat-messages" role="log" aria-live="polite" aria-relevant="additions text" aria-label="История переписки"><div class="chat-welcome"><span class="eyebrow">Давайте познакомимся</span><h3>Что хотите<br> <em>узнать о Максиме?</em></h3><p>Спросите про инфраструктуру, опыт работы или разработку AI-агентов.</p></div><div class="chat-suggestions"><button type="button" data-question="Расскажи об опыте работы Максима">Опыт работы <span aria-hidden="true">↗</span></button><button type="button" data-question="С какими технологиями работает Максим?">Технологии и стек <span aria-hidden="true">↗</span></button><button type="button" data-question="Что умеет KGB Agent?">Проект KGB|Agent <span aria-hidden="true">↗</span></button></div></div><form id="chat-input-area"><label class="sr-only" for="chat-input">Сообщение ассистенту</label><input id="chat-input" type="text" placeholder="Ваш вопрос…" autocomplete="off" maxlength="2000" required><button id="chat-send" type="submit" aria-label="Отправить сообщение"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg></button></form><p class="chat-disclaimer">Сообщения отправляются AI-сервису. Не указывайте конфиденциальные данные.</p></dialog>
+  <noscript><p class="noscript-note container">Резюме доступно без JavaScript. Для чата, мини-игры и смены темы включите JavaScript.</p></noscript>
+<script id="mk-game-source" type="application/json">"\u003c!DOCTYPE html\u003e\n\u003chtml lang=\"ru\"\u003e\n\u003chead\u003e\n    \u003cmeta charset=\"UTF-8\"\u003e\n    \u003cmeta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"\u003e\n    \u003ctitle\u003eMK Nodes — системная пауза\u003c/title\u003e\n    \n    \n    \u003cstyle\u003e\n:root{--bg:#fcfaf5;--surface:#f4f0e7;--board:#e5e1d7;--cell:#fcfaf5;--line:#cbc5b7;--ink:#2f3029;--muted:#69665d;--accent:#773c35;--c1:#914536;--c2:#50603d;--c3:#96702b;--c4:#75475f;--c5:#5d584b;color-scheme:light}\n:root[data-theme=dark]{--bg:#2a2c25;--surface:#22231e;--board:#33372c;--cell:#25281f;--line:#727864;--ink:#f1ece1;--muted:#c1bcaf;--accent:#e5ada0;--c1:#914536;--c2:#50603d;--c3:#96702b;--c4:#75475f;--c5:#5d584b;color-scheme:dark}\n*{box-sizing:border-box}html,body{padding:0;margin:0;min-width:0;overflow-x:hidden}body{font:16px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:var(--ink);background:var(--bg)}button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visible,summary:focus-visible,.board-scroll:focus-visible{outline:2px solid var(--accent);outline-offset:2px}button:disabled{cursor:default}h1,h2,p{margin:0}#game-wrapper{padding:16px;max-width:540px;margin:auto}.intro{font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.55}.header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.title{font-family:Georgia,serif;font-weight:400;font-size:22px;line-height:1.2}.score-board{display:flex;gap:20px}.score-box{text-align:right}.score-label{font-size:14px;color:var(--muted);line-height:1.4;margin-bottom:4px}.score-value{font-size:18px;font-variant-numeric:tabular-nums;line-height:1.2;font-weight:500}.score-value.highlight{color:var(--accent)}.board-scroll{overflow:auto;max-width:100%;width:484px;margin:auto;overscroll-behavior-x:contain;border-radius:4px;scrollbar-color:var(--muted) var(--board);scrollbar-width:thin}#board{display:grid;grid-template-columns:repeat(10,44px);gap:4px;padding:4px;width:484px;background:var(--board);position:relative;border-radius:4px}.cell{padding:0;position:relative;background:var(--cell);border:1px solid var(--line);border-radius:3px;min-width:44px;width:44px;min-height:44px;height:44px}.cell:hover{border-color:var(--accent)}.ball{position:absolute;width:32px;height:32px;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;display:grid;place-items:center;color:#fff}.ball:before{font:15px/1 Arial,sans-serif}.c1{background:var(--c1)}.c1:before{content:'●'}.c2{background:var(--c2)}.c2:before{content:'◆'}.c3{background:var(--c3)}.c3:before{content:'▲'}.c4{background:var(--c4)}.c4:before{content:'✚'}.c5{background:var(--c5)}.c5:before{content:'■'}.bonus-ball:before{content:'★'}.ball.selected{outline:2px solid var(--accent);outline-offset:3px}.controls{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:16px}.controls .score-box{text-align:left}.btn{min-height:44px;padding:10px 16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--bg);border:1px solid var(--accent);border-radius:4px;font-size:14px;line-height:1.5;font-weight:500}.btn:hover{filter:brightness(.92)}.quiet-btn{background:transparent;color:var(--ink);border-color:var(--line)}.game-status{font-size:14px;line-height:1.5;color:var(--muted);margin-top:12px;min-height:42px}.utility-row{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:8px}.scroll-help{font-size:14px;color:var(--muted);display:none}.overlay{display:none;position:absolute;inset:0;z-index:10;background:var(--bg);align-items:center;justify-content:center;flex-direction:column;padding:24px;text-align:center;border:1px solid var(--line);border-radius:4px}.overlay.show{display:flex}.overlay h2{font:32px/1.2 Georgia,serif;margin-bottom:12px}.overlay p{font-size:15px;color:var(--muted)}.final-score{font:64px/1.2 Georgia,serif;color:var(--accent);margin:16px 0 24px}.combo-text{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;background:var(--accent);color:var(--bg);font-size:22px;padding:8px 16px;border-radius:4px;pointer-events:none;animation:score-pop .8s ease-out both}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}@keyframes score-pop{from{opacity:1;transform:translate(-50%,-50%)}to{opacity:0;transform:translate(-50%,-90%)}}@media(max-width:520px){#game-wrapper{padding:12px}.header{align-items:flex-start}.title{font-size:20px;max-width:94px}.score-board{gap:16px}.score-label{font-size:14px}.score-value{font-size:17px}.scroll-help{display:block;margin-bottom:10px}.intro{font-size:14px}.controls{gap:12px}.btn{padding:10px 12px}.game-status{font-size:14px}.board-scroll{width:100%}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}\n.overlay{width:min(484px,calc(100vw - 32px));right:auto}@media(max-width:520px){.overlay{width:calc(100vw - 24px)}}\n\u003c/style\u003e\n\u003c/head\u003e\n\u003cbody\u003e\n\n\u003cmain id=\"game-wrapper\"\u003e\n    \u003cp class=\"intro\"\u003eСоберите 5 одинаковых узлов в линию. Выберите узел, затем свободную клетку: между ними должен быть свободный путь.\u003c/p\u003e\n    \u003cdiv class=\"header\"\u003e\n        \u003ch1 class=\"title\"\u003eПять\u003cbr\u003eв линию\u003c/h1\u003e\n        \u003cdiv class=\"score-board\"\u003e\n            \u003cdiv class=\"score-box\"\u003e\n                \u003cdiv class=\"score-label\"\u003eКомбо\u003c/div\u003e\n                \u003cdiv class=\"score-value\" id=\"combo\"\u003ex1\u003c/div\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"score-box\"\u003e\n                \u003cdiv class=\"score-label\"\u003eРекорд\u003c/div\u003e\n                \u003cdiv class=\"score-value\" id=\"high-score\"\u003e0\u003c/div\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"score-box\"\u003e\n                \u003cdiv class=\"score-label\"\u003eОчки\u003c/div\u003e\n                \u003cdiv class=\"score-value highlight\" id=\"score\"\u003e0\u003c/div\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n    \u003c/div\u003e\n\n    \u003cp class=\"scroll-help\"\u003eПоле 10 × 10 · прокручивайте вправо и влево ↔\u003c/p\u003e\n    \u003cdiv class=\"board-scroll\" tabindex=\"0\" role=\"region\" aria-label=\"Прокручиваемое игровое поле\"\u003e\u003cdiv id=\"board\" role=\"group\" aria-label=\"Поле 10 на 10. Стрелки — выбор клетки, Enter — ход.\"\u003e\n        \u003cdiv class=\"overlay\" id=\"gameOver\"\u003e\n            \u003ch2\u003eИгра окончена\u003c/h2\u003e\n            \u003cp\u003eНет свободных узлов сети\u003c/p\u003e\n            \u003cdiv class=\"final-score\" id=\"final-score\"\u003e0\u003c/div\u003e\n            \u003cbutton class=\"btn\" id=\"restart-button\"\u003eНачать заново\u003c/button\u003e\n        \u003c/div\u003e\n    \u003c/div\u003e\n    \n    \u003c/div\u003e\n    \u003cdiv class=\"controls\"\u003e\n        \u003cdiv class=\"score-box\" style=\"text-align: left;\"\u003e\n            \u003cdiv class=\"score-label\"\u003eСобрано линий\u003c/div\u003e\n            \u003cdiv class=\"score-value\" id=\"lines-removed\" style=\"font-size: 1rem;\"\u003e0\u003c/div\u003e\n        \u003c/div\u003e\n        \u003cbutton class=\"btn\" id=\"new-game-button\"\u003eНовая игра\u003c/button\u003e\n    \u003c/div\u003e\n\u003cp id=\"game-status\" class=\"game-status\" role=\"status\" aria-live=\"polite\"\u003eВыберите любой узел, чтобы сделать первый ход.\u003c/p\u003e\u003cdiv class=\"utility-row\"\u003e\u003cbutton class=\"btn quiet-btn\" id=\"sound-toggle\" type=\"button\" aria-pressed=\"false\"\u003eЗвук: выкл.\u003c/button\u003e\u003cspan class=\"score-label\"\u003eСтрелки + Enter\u003cbr\u003eили касание\u003c/span\u003e\u003c/div\u003e\u003c/main\u003e\n\n\u003cscript\u003e\n    function readStorage(key, fallback = null) { try { return localStorage.getItem(key) ?? fallback; } catch (_) { return fallback; } }\n    function writeStorage(key, value) { try { localStorage.setItem(key, String(value)); } catch (_) {} }\n    function applyTheme(theme) { document.documentElement.dataset.theme = theme; }\n    function syncTheme() {\n        let theme = readStorage('mk-resume-theme') || readStorage('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n        try { if (parent !== window \u0026\u0026 parent.document.documentElement.dataset.theme) theme = parent.document.documentElement.dataset.theme; } catch (_) {}\n        applyTheme(theme);\n    }\n    syncTheme();\n    window.addEventListener('storage', syncTheme);\n    window.addEventListener('message', e =\u003e { if (e.source === parent \u0026\u0026 e.data?.type === 'mk-theme' \u0026\u0026 ['light','dark'].includes(e.data.theme)) applyTheme(e.data.theme); });\n    window.addEventListener('keydown', e =\u003e { if (e.key === 'Escape' \u0026\u0026 parent !== window) parent.postMessage({type:'mk-close-game'}, '*'); });\n    if (parent !== window) parent.postMessage({type:'mk-game-ready'}, '*');\n    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;\n    const announce = text =\u003e { document.getElementById('game-status').textContent = text; };\n    let generation = 0;\n    const SoundManager = {\n        ctx: null,\n        enabled: false,\n        init() {\n            if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();\n            if (this.ctx.state === 'suspended') this.ctx.resume();\n        },\n        play(freq, type, duration, volume = 0.1) {\n            if (!this.enabled || !(window.AudioContext || window.webkitAudioContext)) return;\n            try { this.init(); } catch (_) { return; }\n            const osc = this.ctx.createOscillator();\n            const gain = this.ctx.createGain();\n            osc.type = type;\n            osc.frequency.setValueAtTime(freq, this.ctx.currentTime);\n            gain.gain.setValueAtTime(volume, this.ctx.currentTime);\n            gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + duration);\n            osc.connect(gain);\n            gain.connect(this.ctx.destination);\n            osc.start();\n            osc.stop(this.ctx.currentTime + duration);\n        },\n        select() { this.play(440, 'sine', 0.1); },\n        match() { this.play(880, 'sine', 0.2); },\n        combo() { this.play(1200, 'sine', 0.15); },\n        gameOver() { this.play(220, 'sawtooth', 0.5, 0.05); },\n        restart() { this.play(660, 'sine', 0.2); }\n    };\n\n    const board = document.getElementById('board');\n    const overlay = document.getElementById('gameOver');\n    const colors = ['c1', 'c2', 'c3', 'c4', 'c5'];\n    let grid = [];\n    let selectedBall = null;\n    let score = 0;\n    let highScore = Number(readStorage('nodesHighScore', '0')) || 0;\n    let comboMultiplier = 1;\n    let linesRemoved = 0;\n    let lastMoveTime = Date.now();\n    let isMoving = false;\n    const COMBO_TIMEOUT = 5000;\n\n    function init() {\n        document.getElementById('high-score').textContent = highScore;\n        document.getElementById('new-game-button').addEventListener('click', newGame);\n        document.getElementById('restart-button').addEventListener('click', newGame);\n        document.getElementById('sound-toggle').addEventListener('click', e =\u003e { SoundManager.enabled = !SoundManager.enabled; e.currentTarget.setAttribute('aria-pressed', String(SoundManager.enabled)); e.currentTarget.textContent = SoundManager.enabled ? 'Звук: вкл.' : 'Звук: выкл.'; if (SoundManager.enabled) SoundManager.select(); });\n        newGame();\n    }\n\n    function createBoard() {\n        Array.from(board.children).forEach(child =\u003e { if(child.id !== 'gameOver') child.remove(); });\n        \n        for (let i = 0; i \u003c 10; i++) {\n            grid[i] = [];\n            for (let j = 0; j \u003c 10; j++) {\n                grid[i][j] = null;\n                const cell = document.createElement('button');\n                cell.type = 'button';\n                cell.tabIndex = i === 0 \u0026\u0026 j === 0 ? 0 : -1;\n                cell.className = 'cell';\n                cell.dataset.row = i;\n                cell.dataset.col = j;\n                cell.addEventListener('click', handleCellClick);\n                board.appendChild(cell);\n            }\n        }\n    }\n\n    function getRandomEmptyCell() {\n        let emptyCells = [];\n        for (let r=0; r\u003c10; r++) for (let c=0; c\u003c10; c++) if(!grid[r][c]) emptyCells.push({row:r, col:c});\n        if(emptyCells.length === 0) return null;\n        return emptyCells[Math.floor(Math.random() * emptyCells.length)];\n    }\n\n    function placeRandomBall(isBonus = false) {\n        const cellInfo = getRandomEmptyCell();\n        if(!cellInfo) return;\n          \n        const color = colors[Math.floor(Math.random() * colors.length)];\n        const ball = document.createElement('div');\n        ball.className = `ball ${color} ${isBonus ? 'bonus-ball' : ''}`;\n          \n        const cell = board.querySelector(`[data-row=\"${cellInfo.row}\"][data-col=\"${cellInfo.col}\"]`);\n        cell.appendChild(ball);\n        grid[cellInfo.row][cellInfo.col] = { color, element: ball, bonus: isBonus };\n    }\n\n    function handleCellClick(e) {\n        if (isMoving || overlay.classList.contains('show')) return;\n        const r = parseInt(e.currentTarget.dataset.row);\n        const c = parseInt(e.currentTarget.dataset.col);\n\n        if (!grid[r][c]) {\n            if (selectedBall) moveSelectedBall(r, c);\n        } else {\n            selectBall(r, c);\n        }\n    }\n    \n    let animInterval;\n    function selectBall(r, c) {\n        if (selectedBall) stopAnim(selectedBall.row, selectedBall.col);\n        selectedBall = { row: r, col: c };\n        SoundManager.select();\n        \n        const el = grid[r][c].element;\n        el.classList.add('selected');\n        announce('Узел выбран. Выберите свободную клетку для перемещения.');\n        if (reducedMotion) return;\n        el.style.transition = 'none';\n        let scale = 1;\n        let dir = 0.008;\n        animInterval = setInterval(() =\u003e {\n            scale += dir;\n            if(scale \u003e 1.04 || scale \u003c 0.96) dir = -dir;\n            el.style.transform = `translate(-50%, -50%) scale(${scale})`;\n        }, 50);\n    }\n\n    function stopAnim(r, c) {\n        clearInterval(animInterval);\n        board.querySelectorAll('.selected').forEach(el =\u003e el.classList.remove('selected'));\n        if(grid[r] \u0026\u0026 grid[r][c]) {\n            grid[r][c].element.style.transform = `translate(-50%, -50%) scale(1)`;\n        }\n        selectedBall = null;\n    }\n\n    function findPath(sr, sc, er, ec) {\n        const q = [[sr, sc, []]];\n        const visited = new Set([`${sr}-${sc}`]);\n        const moves = [[-1,0], [1,0], [0,-1], [0,1]];\n\n        while (q.length \u003e 0) {\n            const [r, c, path] = q.shift();\n            if (r === er \u0026\u0026 c === ec) return [...path, [er, ec]];\n\n            for (const [dr, dc] of moves) {\n                const nr = r + dr, nc = c + dc;\n                if (nr\u003e=0 \u0026\u0026 nr\u003c10 \u0026\u0026 nc\u003e=0 \u0026\u0026 nc\u003c10 \u0026\u0026 !grid[nr][nc] \u0026\u0026 !visited.has(`${nr}-${nc}`)) {\n                    visited.add(`${nr}-${nc}`);\n                    q.push([nr, nc, [...path, [r, c]]]);\n                }\n            }\n        }\n        return null;\n    }\n\n    async function moveSelectedBall(nr, nc) {\n        const sr = selectedBall.row, sc = selectedBall.col;\n        const path = findPath(sr, sc, nr, nc);\n        if (!path) { announce('Путь занят. Выберите другую свободную клетку.'); return; }\n        const epoch = generation;\n\n        isMoving = true;\n        stopAnim(sr, sc);\n\n        const data = grid[sr][sc];\n        grid[sr][sc] = null;\n\n        for (let i = 1; i \u003c path.length; i++) {\n            if (!reducedMotion) await new Promise(res =\u003e setTimeout(res, 20));\n            if (epoch !== generation) return;\n            const cell = board.querySelector(`[data-row=\"${path[i][0]}\"][data-col=\"${path[i][1]}\"]`);\n            cell.appendChild(data.element);\n        }\n        grid[nr][nc] = data;\n        announce('Ход выполнен. Соберите пять одинаковых узлов в линию.');\n\n        const linePoints = checkLines();\n        if (linePoints \u003e 0) {\n            SoundManager.match();\n            addScore(linePoints + (data.bonus ? 500 : 0));\n        } else {\n            if(Date.now() - lastMoveTime \u003e COMBO_TIMEOUT) comboMultiplier = 1;\n            document.getElementById('combo').textContent = `x${comboMultiplier}`;\n\n            placeRandomBall(); placeRandomBall();\n            if(Math.random() \u003c 0.1) placeRandomBall(true);\n\n            const autoPoints = checkLines();\n            if (autoPoints \u003e 0) {\n                SoundManager.match();\n                addScore(autoPoints);\n            }\n            checkGameOver();\n        }\n        lastMoveTime = Date.now();\n        isMoving = false;\n    }\n\n    function checkLines() {\n        let toRemove = new Set();\n        const checkDir = (r, c, dr, dc) =\u003e {\n            if(!grid[r][c]) return;\n            let line = [`${r}-${c}`];\n            let color = grid[r][c].color;\n            let nr = r + dr, nc = c + dc;\n            \n            while(nr\u003e=0 \u0026\u0026 nr\u003c10 \u0026\u0026 nc\u003e=0 \u0026\u0026 nc\u003c10 \u0026\u0026 grid[nr][nc] \u0026\u0026 grid[nr][nc].color === color) {\n                line.push(`${nr}-${nc}`);\n                nr += dr; nc += dc;\n            }\n            if(line.length \u003e= 5) line.forEach(p =\u003e toRemove.add(p));\n        };\n\n        for(let r=0; r\u003c10; r++) {\n            for(let c=0; c\u003c10; c++) {\n                checkDir(r, c, 0, 1); checkDir(r, c, 1, 0);\n                checkDir(r, c, 1, 1); checkDir(r, c, 1, -1);\n            }\n        }\n\n        if(toRemove.size \u003e 0) {\n            let bonusPoints = 0;\n            toRemove.forEach(p =\u003e {\n                const [r, c] = p.split('-').map(Number);\n                if(grid[r][c].bonus) bonusPoints += 300;\n                const cell = board.querySelector(`[data-row=\"${r}\"][data-col=\"${c}\"]`);\n                cell.innerHTML = '';\n                grid[r][c] = null;\n            });\n            linesRemoved++;\n            document.getElementById('lines-removed').textContent = linesRemoved;\n            return toRemove.size * 100 + bonusPoints;\n        }\n        return 0;\n    }\n\n    function addScore(pts) {\n        if(Date.now() - lastMoveTime \u003c COMBO_TIMEOUT) comboMultiplier++;\n        else comboMultiplier = 1;\n        \n        if(comboMultiplier \u003e 1) SoundManager.combo();\n        \n        const finalPts = pts * comboMultiplier;\n        score += finalPts;\n        \n        const floatText = document.createElement('div');\n        floatText.className = 'combo-text';\n        floatText.textContent = `+${finalPts}`;\n        floatText.style.top = '50%'; floatText.style.left = '50%';\n        board.appendChild(floatText);\n        setTimeout(() =\u003e floatText.remove(), 1000);\n\n        if(score \u003e highScore) {\n            highScore = score;\n            writeStorage('nodesHighScore', highScore);\n        }\n        \n        document.getElementById('score').textContent = score;\n        document.getElementById('high-score').textContent = highScore;\n        document.getElementById('combo').textContent = `x${comboMultiplier}`;\n    }\n\n    function checkGameOver() {\n        let empty = 0;\n        for(let r=0; r\u003c10; r++) for(let c=0; c\u003c10; c++) if(!grid[r][c]) empty++;\n        \n        if (empty \u003c 3) {\n            SoundManager.gameOver();\n            document.getElementById('final-score').textContent = score;\n            overlay.classList.add('show'); board.parentElement.scrollLeft = 0;\n            announce('Игра окончена. Счёт: ' + score);\n            board.querySelectorAll('.cell').forEach(el =\u003e { el.disabled = true; });\n            document.getElementById('restart-button').focus();\n            return true;\n        }\n        return false;\n    }\n\n    function newGame() {\n        generation++;\n        isMoving = false;\n        clearInterval(animInterval);\n        selectedBall = null;\n        lastMoveTime = Date.now();\n        announce('Новая игра. Выберите любой узел, чтобы сделать первый ход.');\n        SoundManager.restart();\n        overlay.classList.remove('show');\n        score = 0; comboMultiplier = 1; linesRemoved = 0;\n        document.getElementById('score').textContent = 0;\n        document.getElementById('combo').textContent = 'x1';\n        document.getElementById('lines-removed').textContent = 0;\n        createBoard();\n        for(let i=0; i\u003c3; i++) placeRandomBall();\n    }\n\n    const colorNames = {c1:'терракотовый круг',c2:'оливковый ромб',c3:'охристый треугольник',c4:'сливовый крест',c5:'графитовый квадрат'};\n    const observer = new MutationObserver(() =\u003e {\n        board.querySelectorAll('.cell').forEach(cell =\u003e {\n            const r = Number(cell.dataset.row), c = Number(cell.dataset.col), data = grid[r]?.[c];\n            cell.setAttribute('aria-label', `Строка ${r+1}, столбец ${c+1}: ${data ? colorNames[data.color] + (data.bonus ? ', бонусный узел' : '') : 'свободно'}`);\n        });\n    });\n    observer.observe(board, {childList:true, subtree:true});\n    board.addEventListener('keydown', e =\u003e {\n        const cell = e.target.closest('.cell'); if (!cell) return;\n        const moves = {ArrowUp:[-1,0],ArrowDown:[1,0],ArrowLeft:[0,-1],ArrowRight:[0,1]};\n        if (!moves[e.key]) return;\n        e.preventDefault(); const [dr,dc] = moves[e.key];\n        const r = Math.max(0,Math.min(9,Number(cell.dataset.row)+dr)); const c = Math.max(0,Math.min(9,Number(cell.dataset.col)+dc));\n        const next = board.querySelector(`[data-row=\"${r}\"][data-col=\"${c}\"]`);\n        cell.tabIndex = -1; next.tabIndex = 0; next.focus();\n    });\n    board.addEventListener('click', e =\u003e { const cell = e.target.closest('.cell'); if (!cell) return; board.querySelectorAll('.cell').forEach(el =\u003e el.tabIndex = el === cell ? 0 : -1); });\n    init();\n\u003c/script\u003e\n\u003c/body\u003e\n\u003c/html\u003e\n"</script>
 </body>
 </html>

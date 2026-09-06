@@ -1,146 +1,63 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const toggleBtn = document.getElementById('chat-toggle');
-    const widget = document.getElementById('chat-widget');
-    const backdrop = document.getElementById('chat-backdrop');
-    const closeBtn = document.getElementById('chat-close');
-    const sendBtn = document.getElementById('chat-send');
-    const input = document.getElementById('chat-input');
-    const msgs = document.getElementById('chat-messages');
-
-    // Блокировка отправки, пока не пришел ответ
-    let isWaiting = false;
-
-    function setWaiting(state) {
-        isWaiting = state;
-        input.disabled = state;
-        sendBtn.disabled = state;
-        sendBtn.innerHTML = state
-            ? '<i class="fas fa-spinner fa-spin"></i>'
-            : '<i class="fas fa-paper-plane"></i>';
-        input.placeholder = state
-            ? 'Ассистент печатает...'
-            : 'Спросите о моем опыте...';
-    }
-  
-    // Открытие/закрытие
-    function closeChat() {
-        widget.classList.remove('active');
-        backdrop.classList.remove('active');
-    }
-
-    toggleBtn.addEventListener('click', () => {
-        widget.classList.add('active');
-        backdrop.classList.add('active');
-        input.focus();
-    });
-    closeBtn.addEventListener('click', closeChat);
-    backdrop.addEventListener('click', closeChat);
-
-    // Добавляем статус-индикатор в заголовок
-    const header = document.getElementById('chat-header');
-    const title = header.querySelector('.chat-title');
-    const status = document.createElement('div');
-    status.className = 'status-indicator';
-    status.innerHTML = `<span class="status-dot"></span> Онлайн`;
-    title.appendChild(status);
-
-    // Отправка
-    sendBtn.addEventListener('click', sendMessage);
-    input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') sendMessage();
-    });
-
-    async function sendMessage() {
-        if (isWaiting) return;
-        const text = input.value.trim();
-        if (!text) return;
-
-        setWaiting(true);
-        appendMessage('user', text);
-        input.value = '';
-
-        // Индикатор набора текста
-        const loadingEl = document.createElement('div');
-        loadingEl.className = 'msg-wrapper bot';
-        loadingEl.innerHTML = `
-            <div class="avatar bot-avatar"><i class="fas fa-robot"></i></div>
-            <div class="chat-bubble bot-bubble typing-indicator"><span></span><span></span><span></span></div>
-        `;
-        msgs.appendChild(loadingEl);
-        scrollToBottom();
-
-        try {
-            const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-                ? 'http://127.0.0.1:8000/chat'
-                : 'https://maksresume.onrender.com/chat';
-
-            const res = await fetch(API_URL, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ message: text })
-            });
-
-            if (!res.ok) throw new Error(`Ошибка сервера: ${res.status}`);
-
-            msgs.removeChild(loadingEl);
-
-            // Создаем блок для стриминга ответа
-            const wrapperEl = document.createElement('div');
-            wrapperEl.className = 'msg-wrapper bot';
-            wrapperEl.innerHTML = `<div class="avatar bot-avatar"><i class="fas fa-robot"></i></div>`;
-            const bubbleEl = document.createElement('div');
-            bubbleEl.className = 'chat-bubble bot-bubble';
-            wrapperEl.appendChild(bubbleEl);
-            msgs.appendChild(wrapperEl);
-
-            const reader = res.body.getReader();
-            const decoder = new TextDecoder("utf-8");
-            let fullResponse = "";
-
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break; 
-                fullResponse += decoder.decode(value, { stream: true });
-                bubbleEl.innerHTML = formatResponse(fullResponse);
-                scrollToBottom();
-            }
-        } catch (error) {
-            if (msgs.contains(loadingEl)) msgs.removeChild(loadingEl);
-            appendMessage('bot', '<span style="color: #ef4444;">Ошибка подключения. AI сервер временно недоступен.</span>');
-            console.error(error);
-        } finally {
-            setWaiting(false);
-            input.focus();
-        }
-        scrollToBottom();
-    }
-
-    function appendMessage(role, text) {
-        const wrapper = document.createElement('div');
-        wrapper.className = `msg-wrapper ${role}`;
-
-        const avatar = document.createElement('div');
-        avatar.className = `avatar ${role}-avatar`;
-        avatar.innerHTML = role === 'bot' ? '<i class="fas fa-robot"></i>' : '<i class="fas fa-user"></i>';
-
-        const bubble = document.createElement('div');
-        bubble.className = `chat-bubble ${role}-bubble`;
-        bubble.innerHTML = formatResponse(text);
-
-        wrapper.appendChild(avatar);
-        wrapper.appendChild(bubble);
-        msgs.appendChild(wrapper);
-    }
-    
-    function scrollToBottom() {
-        msgs.scrollTop = msgs.scrollHeight;
-    }
-    
-    function formatResponse(text) {
-        return text
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/^- (.*$)/gim, '• $1')
-            .replace(/\n/g, '<br>');
-    }
-});
+'use strict';
+(() => {
+  const launcher = document.getElementById('chat-toggle');
+  const widget = document.getElementById('chat-widget');
+  const close = document.getElementById('chat-close');
+  const input = document.getElementById('chat-input');
+  const send = document.getElementById('chat-send');
+  const form = document.getElementById('chat-input-area');
+  const messages = document.getElementById('chat-messages');
+  const status = document.getElementById('chat-status');
+  let waiting = false;
+  let started = false;
+  let activeController;
+  const API_URL = window.MK_CHAT_API_URL || ((location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'http://127.0.0.1:8000/chat' : 'https://maksresume.onrender.com/chat');
+  launcher.addEventListener('click', () => { window.ResumeUI.openDialog(widget); launcher.setAttribute('aria-expanded', 'true'); if (!waiting) input.focus(); });
+  close.addEventListener('click', () => window.ResumeUI.closeDialog(widget));
+  widget.addEventListener('close', () => { launcher.setAttribute('aria-expanded', 'false'); if (!document.querySelector('dialog[open]')) launcher.focus(); });
+  function scrollBottom() { messages.scrollTop = messages.scrollHeight; }
+  function setWaiting(state) { waiting = state; send.disabled = state; input.disabled = state; messages.setAttribute('aria-busy', String(state)); status.textContent = state ? 'Готовлю ответ…' : 'Об опыте, навыках и проектах'; send.setAttribute('aria-label', state ? 'Ожидание ответа' : 'Отправить сообщение'); }
+  function safeFormat(text) { return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>'); }
+  function append(role, text, error = false) {
+    const item = document.createElement('div'); item.className = `chat-message ${role}${error ? ' error' : ''}`;
+    const author = document.createElement('span'); author.className = 'chat-message-author'; author.textContent = role === 'user' ? 'Вы' : (error ? 'Нет подключения' : 'AI-ассистент');
+    const bubble = document.createElement('div'); bubble.className = 'chat-bubble';
+    if (role === 'user') bubble.textContent = text; else bubble.innerHTML = safeFormat(text);
+    item.append(author, bubble); messages.appendChild(item); scrollBottom(); return { item, bubble };
+  }
+  document.querySelectorAll('[data-question]').forEach(button => button.addEventListener('click', () => { input.value = button.dataset.question; sendMessage(); }));
+  form.addEventListener('submit', e => { e.preventDefault(); sendMessage(); });
+  async function sendMessage() {
+    if (waiting) return;
+    const text = input.value.trim(); if (!text) return;
+    if (!started) { messages.replaceChildren(); started = true; }
+    append('user', text); input.value = ''; setWaiting(true);
+    const loading = document.createElement('div'); loading.className = 'chat-loading'; loading.textContent = 'Ассистент готовит ответ…'; messages.appendChild(loading); scrollBottom();
+    const controller = new AbortController(); activeController = controller;
+    const timeout = setTimeout(() => controller.abort(), 45000);
+    let responseBlock;
+    let full = '';
+    try {
+      const response = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text }), signal: controller.signal });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      loading.remove();
+      responseBlock = append('bot', '');
+      const type = response.headers.get('content-type') || '';
+      if (type.includes('application/json')) {
+        const result = await response.json(); full = typeof result === 'string' ? result : (result.response || result.answer || result.message || '');
+        if (typeof full !== 'string') full = '';
+        responseBlock.bubble.innerHTML = safeFormat(full);
+      } else if (response.body) {
+        const reader = response.body.getReader(); const decoder = new TextDecoder('utf-8');
+        while (true) { const { value, done } = await reader.read(); if (done) break; full += decoder.decode(value, { stream: true }); responseBlock.bubble.innerHTML = safeFormat(full); scrollBottom(); }
+        full += decoder.decode(); responseBlock.bubble.innerHTML = safeFormat(full);
+      } else { full = await response.text(); responseBlock.bubble.innerHTML = safeFormat(full); }
+      if (!full.trim()) throw new Error('Empty response');
+    } catch (_) {
+      loading.remove();
+      if (responseBlock && !full.trim()) responseBlock.item.remove();
+      append('bot', full.trim() ? 'Соединение прервалось. Ответ может быть неполным. Попробуйте задать вопрос ещё раз.' : 'Сейчас AI-сервис недоступен. Попробуйте позже или свяжитесь с Максимом напрямую: @Maxinik в Telegram, maks_k77@mail.ru.', true);
+    } finally { clearTimeout(timeout); activeController = null; setWaiting(false); scrollBottom(); if (widget.open) input.focus(); }
+  }
+  addEventListener('pagehide', () => { if (activeController) activeController.abort(); });
+})();
